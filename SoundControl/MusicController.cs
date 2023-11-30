@@ -29,6 +29,14 @@ namespace PracticeAlpha_WPF_Edition.SoundControl
             mediaPlayer.Stop();
         }
 
+        public void SetVolume(double volume)
+        {
+            if (volume >= 0 && volume <= 1)
+            {
+                mediaPlayer.Volume = volume;
+            }
+        }
+
         private void MainMenuLoop(object sender, EventArgs e)
         {
             mediaPlayer.Stop();
