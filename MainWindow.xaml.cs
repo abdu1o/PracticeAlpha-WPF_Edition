@@ -27,13 +27,7 @@ namespace PracticeAlpha_WPF_Edition
 
             menuMusic = new MusicController("Music\\mainMenu.mp3");
             menuMusic.Play();
-
-            musicVolume.ValueChanged += Slider_ValueChanged;
         }
 
-        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            menuMusic.SetVolume(musicVolume.Value);
-        }
     }
 }
