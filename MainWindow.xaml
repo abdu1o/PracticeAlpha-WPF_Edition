@@ -5,8 +5,69 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PracticeAlpha_WPF_Edition"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="1080" Width="1920"
+        WindowStyle="None" WindowState="Maximized">
+    <Grid Background="#121212" RenderTransformOrigin="0.498,0.499">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <!--=================Background=================-->
+        <Label Style="{StaticResource BgLabel}" Margin="2,54,18,22" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="10"/>
+        <Label Style="{StaticResource BgLabel}" Margin="2,56,18,20" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="10"/>
+        <Label Style="{StaticResource BgLabel}" Margin="2,53,18,24" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="10"/>
+        
+        <Label Style="{StaticResource BgLabel}" Margin="-108,35,0,98" Grid.Row="2" Grid.Column="0"  Grid.ColumnSpan="6" Grid.RowSpan="2"></Label>
+        <Label Style="{StaticResource BgLabel}" Margin="-108,35,0,98" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="2"></Label>
+        <Label Style="{StaticResource BgLabel}" Margin="-108,35,0,98" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="2"></Label>
+        <Label Style="{StaticResource BgLabel}" Margin="-108,35,0,0" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"></Label>
+
+        <Label Style="{StaticResource BgLabel}" Margin="0,35,-96,98" Grid.Row="2" Grid.Column="9" Grid.ColumnSpan="6" Grid.RowSpan="2"></Label>
+        <Label Style="{StaticResource BgLabel}" Margin="0,35,-96,98" Grid.Row="3" Grid.Column="10" Grid.ColumnSpan="5" Grid.RowSpan="2"></Label>
+        <Label Style="{StaticResource BgLabel}" Margin="0,35,-96,98" Grid.Row="4" Grid.Column="11" Grid.ColumnSpan="4" Grid.RowSpan="2"></Label>
+        <Label Style="{StaticResource BgLabel}" Margin="0,35,-96,0" Grid.Row="5" Grid.Column="12" Grid.ColumnSpan="3"></Label>
+
+        <Label Style="{StaticResource BgLabel}" Margin="55,98,0,-81" Grid.Row="6" Grid.Column="11" Grid.RowSpan="6"></Label>
+        <Label Style="{StaticResource BgLabel}" Margin="0,98,55,-81" Grid.Row="6" Grid.Column="3" Grid.RowSpan="5"></Label>
+        <!--=================Background=================-->
+
+        <!--For tests-->
+        <Button Background="Red" FontSize="35" Content="Play" Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="3" Margin="94,35,94,98" Grid.RowSpan="2" />
+        <Button Background="Red" FontSize="35" Content="Load" Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="3" Margin="94,34,94,98" Grid.RowSpan="2" />
+        <Button Background="Red" FontSize="35" Content="Settings" Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="3" Margin="94,35,94,98" Grid.RowSpan="2" />
+        
+        
+        
+
 
     </Grid>
 </Window>
