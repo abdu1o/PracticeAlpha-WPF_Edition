@@ -26,7 +26,7 @@ namespace PracticeAlpha_WPF_Edition
         {
             InitializeComponent();
 
-            menuMusic = new MusicController("Resources\\Sounds\\mainMenu.mp3");
+            menuMusic = new MusicController("Music\\mainMenu.mp3"); //не меняй путь
             menuMusic.Play();
         }
 
@@ -34,24 +34,44 @@ namespace PracticeAlpha_WPF_Edition
         //--=========================Button Events========================--
         private void Button_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            ((Button)sender).Effect = new DropShadowEffect
+            Button button = (Button)sender;
+            Mouse.OverrideCursor = Cursors.Hand;
+
+            button.Effect = new DropShadowEffect
             {
+                Direction = 270,
                 Color = Colors.Red,
-                Direction = 320,
                 ShadowDepth = 5,
-                BlurRadius = 10
+                BlurRadius = Math.Max(button.RenderSize.Width, button.RenderSize.Height) / 10
             };
         }
 
         private void Button_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
+            Mouse.OverrideCursor = null;
+
             ((Button)sender).Effect = new DropShadowEffect
             {
-                Color = Colors.Transparent,
-                Direction = 320,
+                Color = Color.FromArgb(0, 99, 0, 0),
                 ShadowDepth = 0,
                 BlurRadius = 0
             };
+        }
+
+        private void CloseClick(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Exit_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Hand;    
+        }
+
+        private void Exit_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Mouse.OverrideCursor = null;
+            ToolTip = null;
         }
         //--=========================Button Events========================--
 

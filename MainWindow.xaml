@@ -8,10 +8,11 @@
         Title="MainWindow" Height="1080" Width="1920"
         WindowStyle="None" WindowState="Maximized">
 
-    
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/PracticeAlpha-WPF_Edition;component/Resources/Backgrounds/bgMenu.png"/>
+        </Grid.Background>
 
-
-    <Grid Background="#121212" RenderTransformOrigin="0.498,0.499">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -27,7 +28,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -43,7 +44,6 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
 
         <!--=================Background=================-->
         <Label Style="{StaticResource BgLabel}" Margin="2,54,18,22" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="10"/>
@@ -64,21 +64,46 @@
         <Label Style="{StaticResource BgLabel}" Margin="0,98,55,-81" Grid.Row="6" Grid.Column="3" Grid.RowSpan="5"></Label>
         <!--=================Background=================-->
 
-        
-        
+
+
         <!--===================Buttons==================-->
+        <Button Style="{StaticResource MenuBtn}" Content="Play" Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" BorderBrush="Black"/>
+        <Button Style="{StaticResource MenuBtn}" Content="Load" Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" BorderBrush="Black"/>
+        <Button Style="{StaticResource MenuBtn}" Content="Settings" Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" BorderBrush="Black"/>
 
-        <Button Style="{StaticResource MenuBtn}" Content="Play" Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
-        <Button Style="{StaticResource MenuBtn}" Content="Load" Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
-        <Button Style="{StaticResource MenuBtn}" Content="Settings" Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
+        <!--====================Items===================-->
+        <!--<Image Grid.Column="8" Margin="0,33,68,28" Grid.Row="2" Source="\Resources\ButtonItems\Knife.png" Stretch="Fill" RenderTransformOrigin="0.524,0.141"/>
+        <Image Grid.Column="6" Margin="95,48,98,2" Grid.Row="3" Source="\Resources\ButtonItems\Scar.png" Stretch="Fill" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-13.135"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Grid.Column="6" Margin="104,86,8,98" Grid.Row="4" Source="\Resources\ButtonItems\Shot.png" Stretch="Fill" RenderTransformOrigin="0.781,0.556" Grid.RowSpan="2" />
+        <Image Grid.Column="8" Margin="0,44,104,33" Grid.Row="4" Source="\Resources\ButtonItems\Shot.png" Stretch="Fill" />-->
+        <!--====================Items===================-->
+
+        <Grid Grid.Column="14">
+            <Image Source="/PracticeAlpha-WPF_Edition;component/Resources/Icons/closeV2.png"
+           Width="90" Height="90" Margin="38,0,0,8" MouseUp="CloseClick" 
+           MouseEnter="Exit_MouseEnter"
+           MouseLeave="Exit_MouseLeave">
+
+                <Image.ToolTip>
+                    <ToolTip Background="Black" BorderBrush="Red">
+                        <StackPanel>
+                            <TextBlock Margin="3" Foreground="White">Exit to main window</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Image.ToolTip>
+
+            </Image>
+        </Grid>
         
-        <!--====================Items===================-->
-        <Image Grid.Column="7" Margin="111,24,64,24" Grid.Row="2" Source="\Resources\ButtonItems\Knife.png" Stretch="Fill" Grid.ColumnSpan="2" RenderTransformOrigin="0.524,0.141"/>
-        <Image Grid.Column="6" Margin="94,35,75,96" Grid.Row="3" Source="\Resources\ButtonItems\Scar.png" Stretch="Fill" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-        <Image Grid.Column="6" Margin="96,63,4,10" Grid.Row="4" Source="\Resources\ButtonItems\Shot.png" Stretch="Fill" />
-        <Image Grid.Column="7" Margin="117,51,94,22" Grid.Row="4" Source="\Resources\ButtonItems\Shot.png" Stretch="Fill" Grid.ColumnSpan="2" />
-        <!--====================Items===================-->
-
         <!--===================Buttons==================-->
 
     </Grid>

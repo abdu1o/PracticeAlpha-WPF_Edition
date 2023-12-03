@@ -83,10 +83,10 @@
 
         <!--===================Buttons==================-->
         <Style TargetType="Button" x:Key="MenuBtn">
-            <Setter Property="Background" Value="#cc0404"/>
-            <Setter Property="Foreground" Value="#3d0109"/>
+            <Setter Property="Background" Value="#590202"/>
+            <Setter Property="Foreground" Value="#210000"/> 
             <Setter Property="Margin" Value="94,35,94,90"/>
-            <Setter Property="FontSize" Value="29"/>
+            <Setter Property="FontSize" Value="35"/>
             <Setter Property="FontFamily" Value="{StaticResource Undertale}"/>
 
 
@@ -111,7 +111,7 @@
                     <ControlTemplate TargetType="Button">
                         <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="10" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                             <Border.Effect>
-                                <DropShadowEffect ShadowDepth="0" Color="Transparent" Opacity="0.5"/>
+                                <DropShadowEffect ShadowDepth="0" Color="#630000" Opacity="1"/>
                             </Border.Effect>
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             <Border.Triggers>
