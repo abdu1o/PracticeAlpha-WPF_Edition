@@ -5,7 +5,7 @@
              StartupUri="MainWindow.xaml">
 
     <Application.Resources>
-        
+
         <Style TargetType="Label" x:Key="BgLabel">
             <Setter Property="Background" Value="#610000"/>
 
@@ -75,8 +75,7 @@
                 </EventTrigger>
             </Style.Triggers>
         </Style>
-        
-        
+
     </Application.Resources>
 
 </Application>

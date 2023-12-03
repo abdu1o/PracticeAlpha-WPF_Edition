@@ -7,8 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="1080" Width="1920"
         WindowStyle="None" WindowState="Maximized">
-    
-    <Grid Background="#121212" RenderTransformOrigin="0.498,0.499">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/PracticeAlpha-WPF_Edition;component/Resources/bgMenu.png"/>
+        </Grid.Background>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
