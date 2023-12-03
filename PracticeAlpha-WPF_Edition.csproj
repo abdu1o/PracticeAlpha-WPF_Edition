@@ -91,9 +91,20 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Resources\ButtonItems\Knife.png" />
+    <Content Include="Resources\Fonts\Undertale-Battle-Font.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ButtonItems\Scar.png" />
+    <Resource Include="Resources\ButtonItems\Shot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Sounds\mainMenu.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

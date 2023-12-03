@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -25,9 +26,34 @@ namespace PracticeAlpha_WPF_Edition
         {
             InitializeComponent();
 
-            menuMusic = new MusicController("Music\\mainMenu.mp3");
+            menuMusic = new MusicController("Resources\\Sounds\\mainMenu.mp3");
             menuMusic.Play();
         }
+
+
+        //--=========================Button Events========================--
+        private void Button_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            ((Button)sender).Effect = new DropShadowEffect
+            {
+                Color = Colors.Red,
+                Direction = 320,
+                ShadowDepth = 5,
+                BlurRadius = 10
+            };
+        }
+
+        private void Button_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            ((Button)sender).Effect = new DropShadowEffect
+            {
+                Color = Colors.Transparent,
+                Direction = 320,
+                ShadowDepth = 0,
+                BlurRadius = 0
+            };
+        }
+        //--=========================Button Events========================--
 
     }
 }
