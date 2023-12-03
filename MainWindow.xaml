@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="1080" Width="1920"
         WindowStyle="None" WindowState="Maximized">
+
+    
+
+
     <Grid Background="#121212" RenderTransformOrigin="0.498,0.499">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -45,7 +49,7 @@
         <Label Style="{StaticResource BgLabel}" Margin="2,54,18,22" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="10"/>
         <Label Style="{StaticResource BgLabel}" Margin="2,56,18,20" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="10"/>
         <Label Style="{StaticResource BgLabel}" Margin="2,53,18,24" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="10"/>
-        
+
         <Label Style="{StaticResource BgLabel}" Margin="-108,35,0,98" Grid.Row="2" Grid.Column="0"  Grid.ColumnSpan="6" Grid.RowSpan="2"></Label>
         <Label Style="{StaticResource BgLabel}" Margin="-108,35,0,98" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="2"></Label>
         <Label Style="{StaticResource BgLabel}" Margin="-108,35,0,98" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="2"></Label>
@@ -60,14 +64,22 @@
         <Label Style="{StaticResource BgLabel}" Margin="0,98,55,-81" Grid.Row="6" Grid.Column="3" Grid.RowSpan="5"></Label>
         <!--=================Background=================-->
 
-        <!--For tests-->
-        <Button Background="Red" FontSize="35" Content="Play" Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="3" Margin="94,35,94,98" Grid.RowSpan="2" />
-        <Button Background="Red" FontSize="35" Content="Load" Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="3" Margin="94,34,94,98" Grid.RowSpan="2" />
-        <Button Background="Red" FontSize="35" Content="Settings" Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="3" Margin="94,35,94,98" Grid.RowSpan="2" />
         
         
-        
+        <!--===================Buttons==================-->
 
+        <Button Style="{StaticResource MenuBtn}" Content="Play" Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
+        <Button Style="{StaticResource MenuBtn}" Content="Load" Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
+        <Button Style="{StaticResource MenuBtn}" Content="Settings" Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
+        
+        <!--====================Items===================-->
+        <Image Grid.Column="7" Margin="111,24,64,24" Grid.Row="2" Source="\Resources\ButtonItems\Knife.png" Stretch="Fill" Grid.ColumnSpan="2" RenderTransformOrigin="0.524,0.141"/>
+        <Image Grid.Column="6" Margin="94,35,75,96" Grid.Row="3" Source="\Resources\ButtonItems\Scar.png" Stretch="Fill" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Image Grid.Column="6" Margin="96,63,4,10" Grid.Row="4" Source="\Resources\ButtonItems\Shot.png" Stretch="Fill" />
+        <Image Grid.Column="7" Margin="117,51,94,22" Grid.Row="4" Source="\Resources\ButtonItems\Shot.png" Stretch="Fill" Grid.ColumnSpan="2" />
+        <!--====================Items===================-->
+
+        <!--===================Buttons==================-->
 
     </Grid>
 </Window>
