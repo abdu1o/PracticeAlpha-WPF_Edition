@@ -56,12 +56,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="LevelSelector.xaml.cs">
+      <DependentUpon>LevelSelector.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SoundControl\MusicController.cs" />
+    <Page Include="LevelSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -108,6 +115,10 @@
     <Resource Include="Resources\Backgrounds\bgMenu.png" />
     <Resource Include="Resources\Icons\close.png" />
     <Resource Include="Resources\Icons\closeV2.png" />
+    <Resource Include="Resources\Icons\switch.png" />
+    <Resource Include="Resources\LevelsPicture\Level2.png" />
+    <Resource Include="Resources\LevelsPicture\Level1.png" />
+    <Resource Include="Resources\LevelsPicture\Level3.png" />
     <Content Include="Resources\Sounds\mainMenu.mp3" />
   </ItemGroup>
   <ItemGroup />

@@ -75,5 +75,16 @@ namespace PracticeAlpha_WPF_Edition
         }
         //--=========================Button Events========================--
 
+        //--=========================Click Play===========================--
+
+        private void ClickPlay(object sender, RoutedEventArgs e)
+        {
+            var levelSelector = new LevelSelector();
+            Application.Current.MainWindow = levelSelector;
+            this.Close();
+            levelSelector.Show();
+        }
+
+        //--=========================Click Play===========================--
     }
 }
