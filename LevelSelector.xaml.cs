@@ -58,6 +58,7 @@ namespace PracticeAlpha_WPF_Edition
         }
 
         // --============ Buttons ============--
+        
         private void NextLevel(object sender, RoutedEventArgs e)
         {
             if (_currentLevel + 1 >= _countLevel)
@@ -106,5 +107,22 @@ namespace PracticeAlpha_WPF_Edition
         {
             // Code...
         }
+
+
+        // --============= Exit ==============--
+
+        private void Window_Exit(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape) 
+            {
+                var mainWindow = new MainWindow();
+                App.Current.MainWindow = mainWindow;
+                this.Close();
+                mainWindow.Show();
+            }
+        }
+
+        // --============= Exit ==============--
+
     }
 }

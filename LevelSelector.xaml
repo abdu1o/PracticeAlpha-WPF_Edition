@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PracticeAlpha_WPF_Edition"
         mc:Ignorable="d"
         Title="LevelSelector" Height="1080" Width="1920"
-        WindowStyle="None" WindowState="Maximized">
+        WindowStyle="None" WindowState="Maximized" KeyDown="Window_Exit">
 
     <Grid >
         <Grid.Background>
