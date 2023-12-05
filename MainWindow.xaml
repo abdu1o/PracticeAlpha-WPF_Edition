@@ -67,7 +67,7 @@
 
 
         <!--===================Buttons==================-->
-        <Button Style="{StaticResource MenuBtn}" Content="Play" Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" BorderBrush="Black"/>
+        <Button Name="Play" Style="{StaticResource MenuBtn}" Content="Play" Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" BorderBrush="Black" Click="ClickPlay"/>
         <Button Style="{StaticResource MenuBtn}" Content="Load" Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" BorderBrush="Black"/>
         <Button Style="{StaticResource MenuBtn}" Content="Settings" Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" BorderBrush="Black"/>
 

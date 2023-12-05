@@ -1,0 +1,65 @@
+﻿<Window x:Class="PracticeAlpha_WPF_Edition.LevelSelector"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PracticeAlpha_WPF_Edition"
+        mc:Ignorable="d"
+        Title="LevelSelector" Height="1080" Width="1920"
+        WindowStyle="None" WindowState="Maximized">
+
+    <Grid >
+        <Grid.Background>
+            <ImageBrush ImageSource="/PracticeAlpha-WPF_Edition;component/Resources/Backgrounds/bgMenu.png"/>
+        </Grid.Background>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0.3*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--============Buttons Select Level============-->
+        <Button Name="PreviousButton" Grid.Column="0" Style="{StaticResource SelectLevel}" RenderTransformOrigin="0.5,0.5" Click="PreviousLevel">
+            
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-180"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+
+                <Image Source="Resources/Icons/switch.png" Stretch="Uniform"/>
+            
+            <!--<Grid>
+                <Polygon Points="0,0 80,35 0,80" Fill="Black"  Margin="80, 0, 0 , 0"/>
+                <Rectangle Width="80" Height="30" Fill="Black" Margin="0, -5, 50 , 0"/>
+            </Grid>-->
+        </Button>
+
+        <Button Name="NextButton" Grid.Column="3" Style="{StaticResource SelectLevel}" Click="NextLevel">
+            
+            <Image Source="Resources/Icons/switch.png" Stretch="Uniform"/>
+            
+            <!--<Grid>
+                <Polygon Points="0, 0, 80,35 0,80" Fill="Black"  Margin="80, 0, 0 , 0"/>
+                <Rectangle Width="80" Height="30" Fill="Black" Margin="0, -5, 50 , 0"/>
+            </Grid>-->
+            
+        </Button>
+        <!--============Buttons Select Level============-->
+
+        
+        
+        <!--================Level Selector===============-->
+
+        <Button Name="Selector" Style="{StaticResource SelectLevel}" Grid.Column="1" Margin="0" Click="ChooseLevel">
+            <Image Name="LevelImage" Source="Resources/LevelsPicture/Level1.png" Stretch="Uniform"/>
+        </Button>
+
+        <!--================Level Selector===============-->
+
+    </Grid>
+</Window>
