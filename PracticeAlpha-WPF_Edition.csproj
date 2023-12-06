@@ -65,6 +65,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SoundControl\MusicController.cs" />
+    <Compile Include="SoundControl\SoundController.cs" />
     <Page Include="LevelSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -119,6 +120,7 @@
     <Resource Include="Resources\LevelsPicture\Level2.png" />
     <Resource Include="Resources\LevelsPicture\Level1.png" />
     <Resource Include="Resources\LevelsPicture\Level3.png" />
+    <Resource Include="Resources\Sounds\button_click.mp3" />
     <Content Include="Resources\Sounds\mainMenu.mp3" />
   </ItemGroup>
   <ItemGroup />

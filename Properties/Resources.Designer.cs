@@ -71,6 +71,16 @@ namespace PracticeAlpha_WPF_Edition.Properties {
         }
         
         /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] button_click {
+            get {
+                object obj = ResourceManager.GetObject("button_click", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap close {

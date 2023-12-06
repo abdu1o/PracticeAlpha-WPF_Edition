@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PracticeAlpha_WPF_Edition.SoundControl;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,18 +16,18 @@ using System.Windows.Shapes;
 
 namespace PracticeAlpha_WPF_Edition
 {
-    /// <summary>
-    /// Логика взаимодействия для LevelSelector.xaml
-    /// </summary>
     public partial class LevelSelector : Window
     {
+        private SoundController buttonSound;
         private List<string> _levelsPicture = new List<string>();
         private int _countLevel;
         private int _currentLevel;
+
         public LevelSelector()
         {
             _countLevel = 3;
-            _currentLevel = 1;           
+            _currentLevel = 1;
+            buttonSound = new SoundController("Sounds\\button_click.mp3");
 
             InitializeComponent();
             InitializeLevelsPicture();
@@ -60,6 +61,8 @@ namespace PracticeAlpha_WPF_Edition
         // --============ Buttons ============--
         private void NextLevel(object sender, RoutedEventArgs e)
         {
+            buttonSound.Play();
+
             if (_currentLevel + 1 >= _countLevel)
             {
                 var button = (Button)sender;
@@ -82,6 +85,8 @@ namespace PracticeAlpha_WPF_Edition
 
         private void PreviousLevel(object sender, RoutedEventArgs e)
         {
+            buttonSound.Play();
+
             if (_currentLevel - 1 <= 1)
             {
                 var button = (Button)sender;
