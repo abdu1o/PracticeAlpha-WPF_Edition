@@ -88,6 +88,7 @@ namespace PracticeAlpha_WPF_Edition
         {
             buttonSound.Play();
 
+
             if (_currentLevel - 1 <= 1)
             {
                 var button = (Button)sender;
