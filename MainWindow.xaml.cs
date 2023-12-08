@@ -1,4 +1,5 @@
-﻿using PracticeAlpha_WPF_Edition.SoundControl;
+﻿using PracticeAlpha_WPF_Edition.Levels;
+using PracticeAlpha_WPF_Edition.SoundControl;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,10 +87,13 @@ namespace PracticeAlpha_WPF_Edition
         {
             buttonSound.Play();
 
-            var levelSelector = new LevelSelector();
-            Application.Current.MainWindow = levelSelector;
+            //var levelSelector = new LevelSelector();
+            //Application.Current.MainWindow = levelSelector;
+
+            var level1 = new Level1();
+            Application.Current.MainWindow = level1;
             this.Close();
-            levelSelector.Show();
+            level1.Show();
         }
 
         //--=========================Click Play===========================--
