@@ -28,12 +28,11 @@ namespace PracticeAlpha_WPF_Edition
         {
             InitializeComponent();
 
-            //menuMusic = new MusicController("Music\\mainMenu.mp3"); //не меняй путь
-            //menuMusic.Play();
+            menuMusic = new MusicController("Music\\mainMenu.mp3"); //не меняй путь
+            menuMusic.Play();
 
             buttonSound = new SoundController("Sounds\\button_click.mp3");
         }
-
 
         //--=========================Button Events========================--
         private void Button_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
@@ -86,14 +85,13 @@ namespace PracticeAlpha_WPF_Edition
         private void ClickPlay(object sender, RoutedEventArgs e)
         {
             buttonSound.Play();
+            menuMusic.Stop();
 
-            //var levelSelector = new LevelSelector();
-            //Application.Current.MainWindow = levelSelector;
+            var levelSelector = new LevelSelector();
+            Application.Current.MainWindow = levelSelector;
 
-            var level1 = new Level1();
-            Application.Current.MainWindow = level1;
             this.Close();
-            level1.Show();
+            levelSelector.Show();
         }
 
         //--=========================Click Play===========================--

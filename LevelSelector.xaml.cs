@@ -1,6 +1,8 @@
-﻿using PracticeAlpha_WPF_Edition.SoundControl;
+﻿using PracticeAlpha_WPF_Edition.Levels;
+using PracticeAlpha_WPF_Edition.SoundControl;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -31,6 +33,12 @@ namespace PracticeAlpha_WPF_Edition
 
             InitializeComponent();
             InitializeLevelsPicture();
+
+            MouseEnter += Button_MouseEnter;
+            MouseLeave += Button_MouseLeave;
+
+            MouseEnter += Arrow_MouseEnter;
+            MouseLeave += Arrow_MouseLeave;
 
             CheckEnable();
 
@@ -82,6 +90,7 @@ namespace PracticeAlpha_WPF_Edition
             bitmapImage.EndInit();
 
             LevelImage.Source = bitmapImage;
+            LevelText.Text = "STAGE " + _currentLevel.ToString();
         }
 
         private void PreviousLevel(object sender, RoutedEventArgs e)
@@ -106,12 +115,38 @@ namespace PracticeAlpha_WPF_Edition
             bitmapImage.EndInit();
 
             LevelImage.Source = bitmapImage;
+            LevelText.Text = "STAGE " + _currentLevel.ToString();
         }
 
+        private void Button_MouseEnter(object sender, RoutedEventArgs e)
+        {
+            LevelText.Foreground = new SolidColorBrush(Colors.Red);
+            Mouse.OverrideCursor = Cursors.Hand;
+        }
+
+        private void Button_MouseLeave(object sender, RoutedEventArgs e)
+        {
+            LevelText.Foreground = new SolidColorBrush(Colors.White);
+            Mouse.OverrideCursor = null;
+        }
+
+        private void Arrow_MouseEnter(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Hand;
+        }
+
+        private void Arrow_MouseLeave(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = null;
+        }
 
         private void ChooseLevel(object sender, RoutedEventArgs e)
         {
-            // Code...
+            var level1 = new Level1();
+            Application.Current.MainWindow = level1;
+
+            this.Close();
+            level1.Show();
         }
 
 

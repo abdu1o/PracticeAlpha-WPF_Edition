@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PracticeAlpha_WPF_Edition.EntitiesController;
+using PracticeAlpha_WPF_Edition.SoundControl;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,30 +13,150 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace PracticeAlpha_WPF_Edition.Levels
 {
     public partial class Level1 : Window
     {
+        //Stats
+        private double playerSpeed = 2;
+        private double bulletSpeed = 20;
+        private double shootSpeed = 200;
+
+
         private Player player;
         private bool isMovingUp, isMovingDown, isMovingLeft, isMovingRight;
-        private double playerSpeed = 20;
+
+        private DispatcherTimer timer;
+        private DispatcherTimer shootingTimer;
+        private List<Bullet> bullets = new List<Bullet>();
+
+        private MusicController levelMusic;
 
         public Level1()
         {
             InitializeComponent();
 
-            player = new Player(950, 100, 30, 30);
-            mainCanvas.Children.Add(player.Rectangle);
+            levelMusic = new MusicController("Music\\level1.mp3");
+            levelMusic.Play();
 
-            Canvas.SetLeft(player.Rectangle, player.X);
-            Canvas.SetTop(player.Rectangle, player.Y);
+            shootingTimer = new DispatcherTimer();
+            shootingTimer.Interval = TimeSpan.FromMilliseconds(shootSpeed);
+            shootingTimer.Tick += ShootingTimer_Tick;
 
-            player.Rectangle.RenderTransformOrigin = new Point(0.5, 0.5);
+            //--====Player initialization====--
+            player = new Player(950, 100, 48, 36);
+            mainCanvas.Children.Add(player.PlayerImage);
+
+            Canvas.SetLeft(player.PlayerImage, player.X);
+            Canvas.SetTop(player.PlayerImage, player.Y);
+
+            player.PlayerImage.RenderTransformOrigin = new Point(0.5, 0.5);
 
             mainCanvas.MouseMove += Window_MouseMove;
+            mainCanvas.MouseDown += Window_MouseDown;
+            mainCanvas.MouseUp += Window_MouseUp;
+
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(1); 
+            timer.Tick += Timer_Tick;
+            timer.Start();
         }
 
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            UpdatePlayerMovement();
+            UpdateBullets();
+        }
+
+
+        //--====Shooting====--
+        private void StartShooting()
+        {
+            shootingTimer.Start();
+        }
+
+        private void StopShooting()
+        {
+            shootingTimer.Stop();
+        }
+
+        private void ShootingTimer_Tick(object sender, EventArgs e)
+        {
+            Shoot();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                Shoot();
+                StartShooting();
+            }
+        }
+
+        private void Window_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Released)
+            {
+                StopShooting();
+            }
+        }
+
+        private void Shoot()
+        {
+            Point mousePosition = Mouse.GetPosition(mainCanvas);
+
+            double angle = Math.Atan2(mousePosition.Y - (player.Y + player.Height / 2),
+                                       mousePosition.X - (player.X + player.Width / 2));
+
+            Bullet bullet = new Bullet(0, 0, 10, 10, bulletSpeed);
+            bullet.Angle = angle;
+
+            RotatePoint(player.X + player.Width / 2, player.Y + player.Height / 2, player.X + player.Width / 2, player.Y + player.Height / 2, player.Rotation, out double rotatedX, out double rotatedY);
+
+            bullet.X = rotatedX;
+            bullet.Y = rotatedY;
+
+            bullets.Add(bullet);
+            mainCanvas.Children.Add(bullet.BulletImage);
+
+            Canvas.SetLeft(bullet.BulletImage, bullet.X);
+            Canvas.SetTop(bullet.BulletImage, bullet.Y);
+        }
+
+        private void RotatePoint(double x, double y, double centerX, double centerY, double angle, out double rotatedX, out double rotatedY)
+        {
+            double cos = Math.Cos(angle);
+            double sin = Math.Sin(angle);
+
+            rotatedX = cos * (x - centerX) - sin * (y - centerY) + centerX;
+            rotatedY = sin * (x - centerX) + cos * (y - centerY) + centerY;
+        }
+
+        private void UpdateBullets()
+        {
+            for (int i = bullets.Count - 1; i >= 0; i--)
+            {
+                Bullet bullet = bullets[i];
+                bullet.X += bullet.Speed * Math.Cos(bullet.Angle);
+                bullet.Y += bullet.Speed * Math.Sin(bullet.Angle);
+
+                Canvas.SetLeft(bullet.BulletImage, bullet.X);
+                Canvas.SetTop(bullet.BulletImage, bullet.Y);
+
+                if (bullet.X > mainCanvas.ActualWidth || bullet.Y > mainCanvas.ActualHeight
+                    || bullet.X < 0 || bullet.Y < 0)
+                {
+                    bullets.RemoveAt(i);
+                    mainCanvas.Children.Remove(bullet.BulletImage);
+                }
+            }
+        }
+
+
+        //--====Movement====--
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             HandleKeyPress(e.Key, true);
@@ -88,8 +210,11 @@ namespace PracticeAlpha_WPF_Edition.Levels
                 player.X += playerSpeed;
             }
 
-            Canvas.SetLeft(player.Rectangle, player.X);
-            Canvas.SetTop(player.Rectangle, player.Y);
+            Canvas.SetLeft(player.PlayerImage, player.X);
+            Canvas.SetTop(player.PlayerImage, player.Y);
+
+            player.Rotation = Math.Atan2(Mouse.GetPosition(mainCanvas).Y - (player.Y + player.Height / 2),
+                                Mouse.GetPosition(mainCanvas).X - (player.X + player.Width / 2));
         }
 
         private void Window_MouseMove(object sender, MouseEventArgs e)
@@ -98,7 +223,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
             double angle = CalculateAngle(player.X + player.Width / 2, player.Y + player.Height / 2, currentPosition.X, currentPosition.Y);
 
             RotateTransform rotateTransform = new RotateTransform(angle);
-            player.Rectangle.RenderTransform = rotateTransform;
+            player.PlayerImage.RenderTransform = rotateTransform;
         }
 
         private double CalculateAngle(double x1, double y1, double x2, double y2)

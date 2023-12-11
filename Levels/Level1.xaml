@@ -11,7 +11,7 @@
     
     <Canvas x:Name="mainCanvas">
         <Canvas.Background>
-            <ImageBrush ImageSource="/PracticeAlpha-WPF_Edition;component/Resources/Backgrounds/bgMenu.png"/>
+            <ImageBrush ImageSource="/PracticeAlpha-WPF_Edition;component/Resources/Backgrounds/level1.png"/>
         </Canvas.Background>
     </Canvas>
     
