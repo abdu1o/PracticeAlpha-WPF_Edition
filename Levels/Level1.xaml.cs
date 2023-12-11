@@ -34,6 +34,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
         private MusicController levelMusic;
         private SoundController shoot;
+        private string shootSound = "Sounds\\shoot4.mp3";
 
         public Level1()
         {
@@ -94,10 +95,12 @@ namespace PracticeAlpha_WPF_Edition.Levels
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 Shoot();
+
+                shoot = new SoundController(shootSound);
+                shoot.PlayAsync();
+                Task.Delay(TimeSpan.FromMilliseconds(shootSpeed));
                 StartShooting();
 
-                shoot = new SoundController("Sounds\\shoot.mp3");
-                shoot.PlayAsync();
             }
         }
 
@@ -111,7 +114,8 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
         private void Shoot()
         {
-
+            shoot = new SoundController(shootSound);
+            shoot.PlayAsync();
 
             Point mousePosition = Mouse.GetPosition(mainCanvas);
 
@@ -200,6 +204,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
         private void UpdatePlayerMovement()
         {
+            //????????????????????????????????????????????????????
             if (isMovingUp)
             {
                 player.Y -= playerSpeed;
@@ -216,6 +221,24 @@ namespace PracticeAlpha_WPF_Edition.Levels
             {
                 player.X += playerSpeed;
             }
+
+            if (player.X < 0)
+            {
+                player.X = 0;
+            }
+            if (player.Y < 0)
+            {
+                player.Y = 0;
+            }
+            if (player.X + player.Width > mainCanvas.ActualWidth)
+            {
+                player.X = mainCanvas.ActualWidth - player.Width;
+            }
+            if (player.Y + player.Height > mainCanvas.ActualHeight)
+            {
+                player.Y = mainCanvas.ActualHeight - player.Height;
+            }
+            //????????????????????????????????????????????????????
 
             Canvas.SetLeft(player.PlayerImage, player.X);
             Canvas.SetTop(player.PlayerImage, player.Y);

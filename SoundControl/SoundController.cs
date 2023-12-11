@@ -7,7 +7,7 @@ namespace PracticeAlpha_WPF_Edition.SoundControl
 {
     public class SoundController
     {
-        private IWavePlayer waveOutDevice;
+        private IWavePlayer player;
         private AudioFileReader audioFileReader;
         private string sound;
 
@@ -19,32 +19,32 @@ namespace PracticeAlpha_WPF_Edition.SoundControl
 
         private void InitializeAudio()
         {
-            waveOutDevice = new WaveOutEvent();
-            waveOutDevice.PlaybackStopped += (sender, args) =>
+            player = new WaveOutEvent();
+            player.PlaybackStopped += (sender, args) =>
             {
-                waveOutDevice.Stop();
+                player.Stop();
                 audioFileReader.Position = 0;
             };
 
             audioFileReader = new AudioFileReader(this.sound);
-            waveOutDevice.Init(audioFileReader);
+            player.Init(audioFileReader);
         }
 
         public async Task PlayAsync()
         {
-            await Task.Run(() => waveOutDevice.Play());
+            await Task.Run(() => player.Play());
         }
 
         public void Stop()
         {
-            waveOutDevice.Stop();
+            player.Stop();
         }
 
         public void SetVolume(double volume)
         {
             if (volume >= 0 && volume <= 1)
             {
-                waveOutDevice.Volume = (float)volume;
+                player.Volume = (float)volume;
             }
         }
     }
