@@ -63,7 +63,7 @@ namespace PracticeAlpha_WPF_Edition
 
         private async void CloseClick(object sender, MouseButtonEventArgs e)
         {
-            buttonSound.Play();
+            buttonSound.PlayAsync();
             await Task.Delay(300);
             this.Close();
         }
@@ -84,7 +84,7 @@ namespace PracticeAlpha_WPF_Edition
 
         private void ClickPlay(object sender, RoutedEventArgs e)
         {
-            buttonSound.Play();
+            buttonSound.PlayAsync();
             menuMusic.Stop();
 
             var levelSelector = new LevelSelector();

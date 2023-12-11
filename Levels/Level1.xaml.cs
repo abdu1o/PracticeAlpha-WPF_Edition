@@ -33,12 +33,14 @@ namespace PracticeAlpha_WPF_Edition.Levels
         private List<Bullet> bullets = new List<Bullet>();
 
         private MusicController levelMusic;
+        private SoundController shoot;
 
         public Level1()
         {
             InitializeComponent();
 
             levelMusic = new MusicController("Music\\level1.mp3");
+
             levelMusic.Play();
 
             shootingTimer = new DispatcherTimer();
@@ -93,6 +95,9 @@ namespace PracticeAlpha_WPF_Edition.Levels
             {
                 Shoot();
                 StartShooting();
+
+                shoot = new SoundController("Sounds\\shoot.mp3");
+                shoot.PlayAsync();
             }
         }
 
@@ -106,6 +111,8 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
         private void Shoot()
         {
+
+
             Point mousePosition = Mouse.GetPosition(mainCanvas);
 
             double angle = Math.Atan2(mousePosition.Y - (player.Y + player.Height / 2),
