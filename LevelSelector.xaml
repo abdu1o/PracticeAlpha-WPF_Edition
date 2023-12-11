@@ -19,9 +19,15 @@
             <ColumnDefinition Width="0.3*"/>
         </Grid.ColumnDefinitions>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0.6*"/>
+        </Grid.RowDefinitions>
+
         <!--============Buttons Select Level============-->
-        <Button Name="PreviousButton" Grid.Column="0" Style="{StaticResource SelectLevel}" RenderTransformOrigin="0.5,0.5" Click="PreviousLevel">
-            
+        <Button Name="PreviousButton" Grid.Column="0" Grid.Row="1" Style="{StaticResource SelectLevel}" RenderTransformOrigin="0.5,0.5" Click="PreviousLevel" MouseEnter="Arrow_MouseEnter" MouseLeave="Arrow_MouseLeave">
+
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -31,33 +37,37 @@
                 </TransformGroup>
             </Button.RenderTransform>
 
-                <Image Source="Resources/Icons/switch.png" Stretch="Uniform"/>
-            
+            <Image Source="Resources/Icons/switch.png" Stretch="Uniform"/>
+
             <!--<Grid>
                 <Polygon Points="0,0 80,35 0,80" Fill="Black"  Margin="80, 0, 0 , 0"/>
                 <Rectangle Width="80" Height="30" Fill="Black" Margin="0, -5, 50 , 0"/>
             </Grid>-->
         </Button>
 
-        <Button Name="NextButton" Grid.Column="3" Style="{StaticResource SelectLevel}" Click="NextLevel">
-            
+        <Button Name="NextButton" Grid.Column="3" Grid.Row="1" Style="{StaticResource SelectLevel}" Click="NextLevel" MouseEnter="Arrow_MouseEnter" MouseLeave="Arrow_MouseLeave">
+
             <Image Source="Resources/Icons/switch.png" Stretch="Uniform"/>
-            
+
             <!--<Grid>
                 <Polygon Points="0, 0, 80,35 0,80" Fill="Black"  Margin="80, 0, 0 , 0"/>
                 <Rectangle Width="80" Height="30" Fill="Black" Margin="0, -5, 50 , 0"/>
             </Grid>-->
-            
+
         </Button>
         <!--============Buttons Select Level============-->
 
-        
-        
+
+
         <!--================Level Selector===============-->
 
-        <Button Name="Selector" Style="{StaticResource SelectLevel}" Grid.Column="1" Margin="0" Click="ChooseLevel">
-            <Image Name="LevelImage" Source="Resources/LevelsPicture/Level1.png" Stretch="Uniform"/>
+        <Button Name="Selector" Style="{StaticResource SelectLevel}" Grid.Column="1" Grid.Row="1" Margin="0" Click="ChooseLevel" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave">
+            <Grid>
+                <Image Name="LevelImage" Source="Resources/LevelsPicture/Level1.png" Width="617" Height="564"/>
+                <TextBlock Name="LevelText" Text="STAGE 1" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="White" FontSize="125" FontWeight="Bold" FontFamily="{StaticResource Undertale}" Margin="0,30,0,0"/>
+            </Grid>
         </Button>
+
 
         <!--================Level Selector===============-->
 
