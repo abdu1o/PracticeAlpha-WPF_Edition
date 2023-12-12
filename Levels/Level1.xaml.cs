@@ -24,13 +24,13 @@ namespace PracticeAlpha_WPF_Edition.Levels
         private double bulletSpeed = 20;
         private double shootSpeed = 200;
 
-        private double EnemySpeed = 2;
 
         private Player player;
         private bool isMovingUp, isMovingDown, isMovingLeft, isMovingRight;
 
         private Enemy enemy;
-        private DispatcherTimer enemyTimer;
+        private double EnemySpeed = 2;
+
 
         private DispatcherTimer timer;
         private DispatcherTimer shootingTimer;
