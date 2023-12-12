@@ -57,6 +57,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="EntitiesController\Bullet.cs" />
+    <Compile Include="EntitiesController\Enemy.cs" />
     <Compile Include="LevelSelector.xaml.cs">
       <DependentUpon>LevelSelector.xaml</DependentUpon>
     </Compile>
@@ -130,9 +131,14 @@
     <Resource Include="Resources\LevelsPicture\Level1.png" />
     <Resource Include="Resources\LevelsPicture\Level3.png" />
     <Resource Include="Resources\Sounds\button_click.mp3" />
-    <Resource Include="Resources\Entities\player.png" />
+    <Resource Include="Resources\Entities\enemy.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Backgrounds\level1.png" />
     <Resource Include="Resources\Entities\bullet.png" />
+    <Resource Include="Resources\Entities\player.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Resources\Sounds\mainMenu.mp3" />
   </ItemGroup>
   <ItemGroup />

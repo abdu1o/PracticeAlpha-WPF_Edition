@@ -24,9 +24,13 @@ namespace PracticeAlpha_WPF_Edition.Levels
         private double bulletSpeed = 20;
         private double shootSpeed = 200;
 
+        private double EnemySpeed = 2;
 
         private Player player;
         private bool isMovingUp, isMovingDown, isMovingLeft, isMovingRight;
+
+        private Enemy enemy;
+        private DispatcherTimer enemyTimer;
 
         private DispatcherTimer timer;
         private DispatcherTimer shootingTimer;
@@ -58,14 +62,27 @@ namespace PracticeAlpha_WPF_Edition.Levels
             mainCanvas.MouseDown += Window_MouseDown;
             mainCanvas.MouseUp += Window_MouseUp;
 
+           
+
+            //--====Enemy initialization====--
+            enemy = new Enemy(500, 500, 48, 36);
+            mainCanvas.Children.Add(enemy.EnemyImage);
+
+            Canvas.SetLeft(enemy.EnemyImage, enemy.X);
+            Canvas.SetTop(enemy.EnemyImage, enemy.Y);
+
+            enemy.EnemyImage.RenderTransformOrigin = new Point(0.5, 0.5);
+
+
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(1); 
+            timer.Interval = TimeSpan.FromMilliseconds(1);
             timer.Tick += Timer_Tick;
             timer.Start();
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
+            UpdateEnemyMovement();
             UpdatePlayerMovement();
             UpdateBullets();
         }
@@ -231,5 +248,40 @@ namespace PracticeAlpha_WPF_Edition.Levels
             double angleRad = Math.Atan2(y2 - y1, x2 - x1);
             return angleRad * (180 / Math.PI);
         }
+
+
+        // Enemy Methods
+
+        private void UpdateEnemyMovement()
+        {
+            ChangeEnemyPosition();
+            double angle = CalculateAngle(enemy.X + enemy.Width / 2, enemy.Y + enemy.Height / 2, player.X, player.Y);
+            RotateTransform rotateTransform = new RotateTransform(angle);
+            enemy.EnemyImage.RenderTransform = rotateTransform;
+
+            Canvas.SetLeft(enemy.EnemyImage, enemy.X);
+            Canvas.SetTop(enemy.EnemyImage, enemy.Y);
+
+        }
+
+        private void ChangeEnemyPosition()
+        {
+            if (enemy.X != player.X || enemy.Y != player.Y)
+            {
+                double deltaX = player.X - enemy.X;
+                double deltaY = player.Y - enemy.Y;
+
+                double distance = Math.Sqrt(deltaX * deltaX + deltaY * deltaY);
+
+                if (distance > player.Width)
+                {
+                    double ratio = EnemySpeed / distance;
+
+                    enemy.X += ratio * deltaX;
+                    enemy.Y += ratio * deltaY;
+                }
+            }
+        }
+
     }
 }
