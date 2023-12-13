@@ -37,8 +37,9 @@ namespace PracticeAlpha_WPF_Edition.Levels
         private List<Bullet> bullets = new List<Bullet>();
 
         private MusicController levelMusic;
-        private SoundController shoot;
+        private SoundController sound;
         private string shootSound = "Sounds\\shoot4.mp3";
+        private string deathSound = "Sounds\\enemy_death.mp3";
 
         public Level1()
         {
@@ -126,8 +127,8 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
         private void Shoot()
         {
-            shoot = new SoundController(shootSound);
-            shoot.PlayAsync();
+            sound = new SoundController(shootSound);
+            sound.PlayAsync();
 
             Point mousePosition = Mouse.GetPosition(mainCanvas);
 
@@ -179,8 +180,13 @@ namespace PracticeAlpha_WPF_Edition.Levels
                 {
                     if (IsCollision(bullet, enemy))
                     {
+                        sound = new SoundController(deathSound);
+                        sound.PlayAsync();
+
                         bullets.RemoveAt(i);
                         mainCanvas.Children.Remove(bullet.BulletImage);
+
+                        //need fix (delete enemy from level)
                         mainCanvas.Children.Remove(enemy.EnemyImage);
                     }
                 }
