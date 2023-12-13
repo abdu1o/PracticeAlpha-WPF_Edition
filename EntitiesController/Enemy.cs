@@ -20,6 +20,8 @@ namespace PracticeAlpha_WPF_Edition.EntitiesController
         public double Height { get; set; }
         public double Rotation { get; set; }
 
+        public double Speed { get; set; }
+
         public Enemy(double x, double y, double width, double height)
         {
             X = x;

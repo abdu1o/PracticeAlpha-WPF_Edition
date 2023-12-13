@@ -28,8 +28,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
         private Player player;
         private bool isMovingUp, isMovingDown, isMovingLeft, isMovingRight;
 
-        private Enemy enemy;
-        private double EnemySpeed = 2;
+        private List<Enemy> enemies = new List<Enemy>();
 
 
         private DispatcherTimer timer;
@@ -37,6 +36,10 @@ namespace PracticeAlpha_WPF_Edition.Levels
         private List<Bullet> bullets = new List<Bullet>();
 
         private MusicController levelMusic;
+
+        private Spawn spawn;
+        private int countOfLocation = 8;
+        private int timeStart = 0;
 
         public Level1()
         {
@@ -62,16 +65,12 @@ namespace PracticeAlpha_WPF_Edition.Levels
             mainCanvas.MouseDown += Window_MouseDown;
             mainCanvas.MouseUp += Window_MouseUp;
 
-           
+
 
             //--====Enemy initialization====--
-            enemy = new Enemy(500, 500, 48, 36);
-            mainCanvas.Children.Add(enemy.EnemyImage);
+            spawn = new Spawn();
 
-            Canvas.SetLeft(enemy.EnemyImage, enemy.X);
-            Canvas.SetTop(enemy.EnemyImage, enemy.Y);
-
-            enemy.EnemyImage.RenderTransformOrigin = new Point(0.5, 0.5);
+            SetEnemySpawn();
 
 
             timer = new DispatcherTimer();
@@ -82,7 +81,13 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            UpdateEnemyMovement();
+            SetSpawnTimer(300);
+
+            foreach (Enemy enemy in enemies)
+            {
+                UpdateEnemyMovement(enemy);
+            }
+            
             UpdatePlayerMovement();
             UpdateBullets();
         }
@@ -172,7 +177,6 @@ namespace PracticeAlpha_WPF_Edition.Levels
             }
         }
 
-
         //--====Movement====--
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
@@ -252,9 +256,9 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
         // Enemy Methods
 
-        private void UpdateEnemyMovement()
+        private void UpdateEnemyMovement(Enemy enemy)
         {
-            ChangeEnemyPosition();
+            ChangeEnemyPosition(enemy);
             double angle = CalculateAngle(enemy.X + enemy.Width / 2, enemy.Y + enemy.Height / 2, player.X, player.Y);
             RotateTransform rotateTransform = new RotateTransform(angle);
             enemy.EnemyImage.RenderTransform = rotateTransform;
@@ -264,7 +268,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
         }
 
-        private void ChangeEnemyPosition()
+        private void ChangeEnemyPosition(Enemy enemy)
         {
             if (enemy.X != player.X || enemy.Y != player.Y)
             {
@@ -275,7 +279,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
                 if (distance > player.Width)
                 {
-                    double ratio = EnemySpeed / distance;
+                    double ratio = enemy.Speed / distance;
 
                     enemy.X += ratio * deltaX;
                     enemy.Y += ratio * deltaY;
@@ -283,5 +287,140 @@ namespace PracticeAlpha_WPF_Edition.Levels
             }
         }
 
+        private Enemy CreateEnemy(Spawn spawn , int location)
+        {
+            double x = 0;
+            double y = 0;
+            
+
+            switch (location)
+            {
+                case 1:
+                    x = spawn.LeftTop().Item1;
+                    y = spawn.LeftTop().Item2;
+                    break;
+
+                case 2:
+                    x = spawn.LeftMidl().Item1;
+                    y = spawn.LeftMidl().Item2;
+                    break;
+
+                case 3:
+                    x = spawn.LeftBottom().Item1;
+                    y = spawn.LeftBottom().Item2;
+                    break;
+
+                case 4:
+                    x = spawn.TopMidl().Item1;
+                    y = spawn.TopMidl().Item2;
+                    break;
+
+                case 5:
+                    x = spawn.BottomMidl().Item1;
+                    y = spawn.BottomMidl().Item2;
+                    break;
+
+                case 6:
+                    x = spawn.RightTop().Item1;
+                    y = spawn.RightTop().Item2;
+                    break;
+
+                case 7:
+                    x = spawn.RightMidl().Item1;
+                    y = spawn.RightMidl().Item2;
+                    break;
+
+                case 8:
+                    x = spawn.RightBottom().Item1;
+                    y = spawn.RightBottom().Item2;
+                    break;
+            }
+
+            Enemy enemy = new Enemy(x, y, 48, 36);
+            enemy.Speed = 2;
+            mainCanvas.Children.Add(enemy.EnemyImage);
+
+            Canvas.SetLeft(enemy.EnemyImage, enemy.X);
+            Canvas.SetTop(enemy.EnemyImage, enemy.Y);
+
+            enemy.EnemyImage.RenderTransformOrigin = new Point(0.5, 0.5);
+
+            return enemy;
+        }
+
+        private void SetEnemySpawn()
+        {
+            for (int location = 1; location <= countOfLocation; location++)
+            {
+                enemies.Add(CreateEnemy(spawn, location));
+            }
+        }
+
+        private void SetSpawnTimer(int timer)
+        {
+            timeStart++;
+            if (timeStart == timer) 
+            {
+                SetEnemySpawn();
+                timeStart = 0;
+            }
+        }
+
     }
+
+    public class Spawn
+    {
+        public Tuple<double, double> LeftTop()
+        {
+            Tuple<double, double> coords = Tuple.Create(0d, 0d);
+            return coords;
+        }
+
+        public Tuple<double, double> LeftMidl()
+        {
+            Tuple<double, double> coords = Tuple.Create(0d, 450d);
+            return coords;
+        }
+
+        public Tuple<double, double> LeftBottom()
+        {
+            Tuple<double, double> coords = Tuple.Create(0d, 900d);
+            return coords;
+        }
+
+
+
+        public Tuple<double, double> TopMidl()
+        {
+            Tuple<double, double> coords = Tuple.Create(820d, 0d);
+            return coords;
+        }
+
+        public Tuple<double, double> BottomMidl()
+        {
+            Tuple<double, double> coords = Tuple.Create(820d, 900d);
+            return coords;
+        }
+
+
+
+        public Tuple<double, double> RightTop()
+        {
+            Tuple<double, double> coords = Tuple.Create(1630d, 0d);
+            return coords;
+        }
+
+        public Tuple<double, double> RightMidl()
+        {
+            Tuple<double, double> coords = Tuple.Create(1630d, 450d);
+            return coords;
+        }
+
+        public Tuple<double, double> RightBottom()
+        {
+            Tuple<double, double> coords = Tuple.Create(1630d, 900d);
+            return coords;
+        }
+    }
+
 }
