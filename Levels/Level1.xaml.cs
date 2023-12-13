@@ -22,7 +22,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
         //Stats
         private double playerSpeed = 2;
         private double bulletSpeed = 20;
-        private double shootSpeed = 200;
+        private double shootSpeed = 350;
 
 
         private Player player;
@@ -94,6 +94,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
         //--====Shooting====--
         private void StartShooting()
         {
+            Shoot();
             shootingTimer.Start();
         }
 
@@ -111,13 +112,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                Shoot();
-
-                shoot = new SoundController(shootSound);
-                shoot.PlayAsync();
-                Task.Delay(TimeSpan.FromMilliseconds(shootSpeed));
                 StartShooting();
-
             }
         }
 
@@ -180,9 +175,25 @@ namespace PracticeAlpha_WPF_Edition.Levels
                     bullets.RemoveAt(i);
                     mainCanvas.Children.Remove(bullet.BulletImage);
                 }
+                else
+                {
+                    if (IsCollision(bullet, enemy))
+                    {
+                        bullets.RemoveAt(i);
+                        mainCanvas.Children.Remove(bullet.BulletImage);
+                        mainCanvas.Children.Remove(enemy.EnemyImage);
+                    }
+                }
             }
         }
 
+        private bool IsCollision(Bullet bullet, Enemy enemy)
+        {
+            Rect rect1 = new Rect(bullet.X, bullet.Y, bullet.Width, bullet.Height);
+            Rect rect2 = new Rect(enemy.X, enemy.Y, enemy.Width, enemy.Height);
+
+            return rect1.IntersectsWith(rect2);
+        }
 
         //--====Movement====--
         private void Window_KeyDown(object sender, KeyEventArgs e)
