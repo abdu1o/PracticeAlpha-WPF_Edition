@@ -88,7 +88,7 @@
     </ApplicationDefinition>
     <Compile Include="EntitiesController\Bullet.cs" />
     <Compile Include="EntitiesController\Enemy.cs" />
-    <Compile Include="EntitiesController\Spawn.cs" />
+    <Compile Include="EntitiesController\Spawner\Spawn.cs" />
     <Compile Include="LevelSelector.xaml.cs">
       <DependentUpon>LevelSelector.xaml</DependentUpon>
     </Compile>
@@ -155,6 +155,9 @@
     <Resource Include="Resources\ButtonItems\Shot.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Entities\dead_enemy1.png" />
+    <Resource Include="Resources\Entities\dead_enemy2.png" />
+    <Resource Include="Resources\Entities\dead_enemy3.png" />
     <Content Include="Resources\Sounds\shoot.mp3" />
     <Resource Include="Resources\Backgrounds\bgMenu.png" />
     <Resource Include="Resources\Icons\close.png" />

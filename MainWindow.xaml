@@ -96,7 +96,7 @@
                 <Image.ToolTip>
                     <ToolTip Background="Black" BorderBrush="Red">
                         <StackPanel>
-                            <TextBlock Margin="3" Foreground="White">Exit to main window</TextBlock>
+                            <TextBlock Margin="3" FontFamily="{StaticResource Undertale}" Foreground="#6e0000">Exit to main window</TextBlock>
                         </StackPanel>
                     </ToolTip>
                 </Image.ToolTip>

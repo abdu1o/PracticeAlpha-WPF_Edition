@@ -3,6 +3,7 @@ using PracticeAlpha_WPF_Edition.SoundControl;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +13,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
@@ -24,6 +26,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
         private double bulletSpeed = 20;
         private double shootSpeed = 350;
 
+        private double enemySpeed = 0;
 
         private Player player;
         private bool isMovingUp, isMovingDown, isMovingLeft, isMovingRight;
@@ -33,6 +36,11 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
         private DispatcherTimer timer;
         private DispatcherTimer shootingTimer;
+        private DispatcherTimer levelTimer;
+        private DispatcherTimer periodicTimer;
+        
+        private TimeSpan elapsedTime;
+
         private List<Bullet> bullets = new List<Bullet>();
 
         private SoundController sound;
@@ -50,6 +58,16 @@ namespace PracticeAlpha_WPF_Edition.Levels
             MusicController.Initialize("Music\\level1.mp3");
             MusicController.Play();
 
+            levelTimer = new DispatcherTimer();
+            levelTimer.Interval = TimeSpan.FromSeconds(1);
+            levelTimer.Tick += LevelTimer_Tick;
+            levelTimer.Start();
+
+            periodicTimer = new DispatcherTimer();
+            periodicTimer.Interval = TimeSpan.FromSeconds(15);
+            periodicTimer.Tick += PeriodicTimer_Tick;
+            periodicTimer.Start();
+
             shootingTimer = new DispatcherTimer();
             shootingTimer.Interval = TimeSpan.FromMilliseconds(shootSpeed);
             shootingTimer.Tick += ShootingTimer_Tick;
@@ -57,6 +75,8 @@ namespace PracticeAlpha_WPF_Edition.Levels
             //--====Player initialization====--
             player = new Player(950, 100, 48, 36);
             mainCanvas.Children.Add(player.PlayerImage);
+            Canvas.SetZIndex(player.PlayerImage, 100);
+
 
             Canvas.SetLeft(player.PlayerImage, player.X);
             Canvas.SetTop(player.PlayerImage, player.Y);
@@ -72,16 +92,31 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
             SetEnemySpawn();
 
-
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(1);
             timer.Tick += Timer_Tick;
             timer.Start();
         }
 
+        private void LevelTimer_Tick(object sender, EventArgs e)
+        {
+            elapsedTime = elapsedTime.Add(TimeSpan.FromSeconds(1));
+            UpdateTimerText();
+        }
+
+        private void UpdateTimerText()
+        {
+            timerText.Text = $"{elapsedTime.Minutes:D2}:{elapsedTime.Seconds:D2}";
+        }
+
+        private void PeriodicTimer_Tick(object sender, EventArgs e)
+        {
+            enemySpeed += 0.5;
+        }
+
         private void Timer_Tick(object sender, EventArgs e)
         {
-            SetSpawnTimer(555);
+            SetSpawnTimer(333);
 
             foreach (Enemy enemy in enemies)
             {
@@ -171,6 +206,15 @@ namespace PracticeAlpha_WPF_Edition.Levels
                 Canvas.SetLeft(bullet.BulletImage, bullet.X);
                 Canvas.SetTop(bullet.BulletImage, bullet.Y);
 
+                foreach (Enemy enemy in enemies)
+                {
+                    if (IsCollision(bullet, enemy))
+                    {
+                        HandleBulletCollision(bullet, enemy);
+                        break; 
+                    }
+                }
+
                 if (bullet.X > mainCanvas.ActualWidth || bullet.Y > mainCanvas.ActualHeight
                     || bullet.X < 0 || bullet.Y < 0)
                 {
@@ -178,6 +222,48 @@ namespace PracticeAlpha_WPF_Edition.Levels
                     mainCanvas.Children.Remove(bullet.BulletImage);
                 }
             }
+        }
+
+        private bool IsCollision(Bullet bullet, Enemy enemy)
+        {
+            Rect rect1 = new Rect(bullet.X, bullet.Y, bullet.Width, bullet.Height);
+            Rect rect2 = new Rect(enemy.X, enemy.Y, enemy.Width, enemy.Height);
+
+            return rect1.IntersectsWith(rect2);
+        }
+
+        private void HandleBulletCollision(Bullet bullet, Enemy enemy)
+        {
+            bullets.Remove(bullet);
+            mainCanvas.Children.Remove(bullet.BulletImage);
+
+            enemies.Remove(enemy);
+
+            Random random = new Random();
+            int randomNumber = random.Next(1, 4);
+
+            switch (randomNumber)
+            {
+                case 1:
+                    enemy.EnemyImage.Width = 70;
+                    enemy.EnemyImage.Height = 60;
+                    enemy.EnemyImage.Source = new BitmapImage(new Uri("/PracticeAlpha-WPF_Edition;component/Resources/Entities/dead_enemy1.png", UriKind.Relative));
+                    break;
+
+                case 2:
+                    enemy.EnemyImage.Width = 80;
+                    enemy.EnemyImage.Height = 50;
+                    enemy.EnemyImage.Source = new BitmapImage(new Uri("/PracticeAlpha-WPF_Edition;component/Resources/Entities/dead_enemy2.png", UriKind.Relative));
+                    break;
+
+                case 3:
+                    enemy.EnemyImage.Width = 95;
+                    enemy.EnemyImage.Height = 35;
+                    enemy.EnemyImage.Source = new BitmapImage(new Uri("/PracticeAlpha-WPF_Edition;component/Resources/Entities/dead_enemy3.png", UriKind.Relative));
+                    break;
+            }
+            sound = new SoundController("Sounds\\enemy_death.mp3");
+            sound.PlayAsync();
         }
 
         //--====Movement====--
@@ -217,6 +303,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
         private void UpdatePlayerMovement()
         {
+            //hz sho s etim delat`
             if (isMovingUp)
             {
                 player.Y -= playerSpeed;
@@ -233,6 +320,23 @@ namespace PracticeAlpha_WPF_Edition.Levels
             {
                 player.X += playerSpeed;
             }
+            if (player.X < 0)
+            {
+                player.X = 0;
+            }
+            if (player.Y < 0)
+            {
+                player.Y = 0;
+            }
+            if (player.X + player.Width > mainCanvas.ActualWidth)
+            {
+                player.X = mainCanvas.ActualWidth - player.Width;
+            }
+            if (player.Y + player.Height > mainCanvas.ActualHeight)
+            {
+                player.Y = mainCanvas.ActualHeight - player.Height;
+            }
+            //?????????????????????????????????????????????????????
 
             Canvas.SetLeft(player.PlayerImage, player.X);
             Canvas.SetTop(player.PlayerImage, player.Y);
@@ -340,8 +444,9 @@ namespace PracticeAlpha_WPF_Edition.Levels
             }
 
             Enemy enemy = new Enemy(x, y, 48, 36);
-            enemy.Speed = 2;
             mainCanvas.Children.Add(enemy.EnemyImage);
+            Canvas.SetZIndex(enemy.EnemyImage, 99);
+            enemy.Speed = 2 + enemySpeed;
 
             Canvas.SetLeft(enemy.EnemyImage, enemy.X);
             Canvas.SetTop(enemy.EnemyImage, enemy.Y);

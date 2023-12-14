@@ -24,8 +24,10 @@ namespace PracticeAlpha_WPF_Edition.EntitiesController
         {
             X = x;
             Y = y;
+
             Width = width;
             Height = height;
+
             EnemyImage = new Image
             {
                 Width = width,
