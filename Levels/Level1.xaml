@@ -8,11 +8,18 @@
         Title="Level1" Height="450" Width="800"
         KeyDown="Window_KeyDown" KeyUp="Window_KeyUp"
         WindowStyle="None" WindowState="Maximized">
-    
-    <Canvas x:Name="mainCanvas">
-        <Canvas.Background>
-            <ImageBrush ImageSource="/PracticeAlpha-WPF_Edition;component/Resources/Backgrounds/level1.png"/>
-        </Canvas.Background>
-    </Canvas>
-    
+
+    <Grid>
+        <Canvas x:Name="mainCanvas">
+            <Canvas.Background>
+                <ImageBrush ImageSource="/PracticeAlpha-WPF_Edition;component/Resources/Backgrounds/level1.png"/>
+            </Canvas.Background>
+        </Canvas>
+
+        <TextBlock x:Name="timerText" FontWeight="Bold" FontFamily="{StaticResource Undertale}" 
+                   FontSize="40" Foreground="Black" 
+                   HorizontalAlignment="Center" VerticalAlignment="Top">
+            00:00
+        </TextBlock>
+    </Grid>
 </Window>
