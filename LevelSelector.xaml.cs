@@ -145,6 +145,7 @@ namespace PracticeAlpha_WPF_Edition
         {
             buttonSound = new SoundController("Sounds\\button_click.mp3");
             buttonSound.PlayAsync();
+            MusicPlayerManager.Stop();
 
             var level1 = new Level1();
             Application.Current.MainWindow = level1;

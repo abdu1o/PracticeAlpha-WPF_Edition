@@ -7,18 +7,18 @@ using System.Windows.Shapes;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Controls;
-
 namespace PracticeAlpha_WPF_Edition.EntitiesController
 {
     internal class Enemy
     {
         public Image EnemyImage { get; set; }
-
         public double X { get; set; }
         public double Y { get; set; }
         public double Width { get; set; }
         public double Height { get; set; }
         public double Rotation { get; set; }
+
+        public double Speed { get; set; }
 
         public Enemy(double x, double y, double width, double height)
         {
@@ -26,7 +26,6 @@ namespace PracticeAlpha_WPF_Edition.EntitiesController
             Y = y;
             Width = width;
             Height = height;
-
             EnemyImage = new Image
             {
                 Width = width,

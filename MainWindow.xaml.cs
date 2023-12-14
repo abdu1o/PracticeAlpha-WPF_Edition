@@ -21,15 +21,14 @@ namespace PracticeAlpha_WPF_Edition
 {
     public partial class MainWindow : Window
     {
-        private MusicController menuMusic;
         private SoundController buttonSound;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            menuMusic = new MusicController("Music\\mainMenu.mp3"); //не меняй путь
-            menuMusic.Play();
+            MusicController.Initialize("Music\\mainMenu.mp3");
+            MusicController.Play();
 
             buttonSound = new SoundController("Sounds\\button_click.mp3");
         }
@@ -81,19 +80,16 @@ namespace PracticeAlpha_WPF_Edition
         //--=========================Button Events========================--
 
         //--=========================Click Play===========================--
-
         private void ClickPlay(object sender, RoutedEventArgs e)
         {
             buttonSound.PlayAsync();
-            menuMusic.Stop();
 
             var levelSelector = new LevelSelector();
             Application.Current.MainWindow = levelSelector;
 
-            this.Close();
+            this.Close();    
             levelSelector.Show();
         }
-
         //--=========================Click Play===========================--
     }
 }

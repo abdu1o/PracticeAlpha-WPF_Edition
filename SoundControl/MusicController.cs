@@ -7,29 +7,33 @@ using System.Windows.Media;
 
 namespace PracticeAlpha_WPF_Edition.SoundControl
 {
-    public class MusicController
+    public static class MusicController
     {
-        private MediaPlayer mediaPlayer = new MediaPlayer();
-        private string music;
+        private static MediaPlayer mediaPlayer = new MediaPlayer();
+        private static string music;
 
-        public MusicController(string music)
+        static MusicController()
         {
-            this.music = music;
             mediaPlayer.MediaEnded += MainMenuLoop;
-            mediaPlayer.Open(new Uri(this.music, UriKind.Relative));
         }
 
-        public void Play()
+        public static void Initialize(string musicPath)
+        {
+            music = musicPath;
+            mediaPlayer.Open(new Uri(music, UriKind.Relative));
+        }
+
+        public static void Play()
         {
             mediaPlayer.Play();
         }
 
-        public void Stop()
+        public static void Stop()
         {
             mediaPlayer.Stop();
         }
 
-        public void SetVolume(double volume)
+        public static void SetVolume(double volume)
         {
             if (volume >= 0 && volume <= 1)
             {
@@ -37,7 +41,7 @@ namespace PracticeAlpha_WPF_Edition.SoundControl
             }
         }
 
-        private void MainMenuLoop(object sender, EventArgs e)
+        private static void MainMenuLoop(object sender, EventArgs e)
         {
             mediaPlayer.Stop();
             mediaPlayer.Position = TimeSpan.Zero;

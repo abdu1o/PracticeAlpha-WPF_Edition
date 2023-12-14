@@ -8,10 +8,11 @@ using System.Windows;
 
 namespace PracticeAlpha_WPF_Edition
 {
-    /// <summary>
-    /// Логика взаимодействия для App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        public static Window[] GetOpenWindows()
+        {
+            return Current.Windows.OfType<Window>().ToArray();
+        }
     }
 }
