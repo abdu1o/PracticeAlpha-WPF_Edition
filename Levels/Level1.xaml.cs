@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
+using System.Windows.Resources;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
@@ -27,12 +28,12 @@ namespace PracticeAlpha_WPF_Edition.Levels
         private double shootSpeed = 350;
 
         private double enemySpeed = 0;
+        private double spawnTime = 400;
 
         private Player player;
         private bool isMovingUp, isMovingDown, isMovingLeft, isMovingRight;
 
         private List<Enemy> enemies = new List<Enemy>();
-
 
         private DispatcherTimer timer;
         private DispatcherTimer shootingTimer;
@@ -55,6 +56,14 @@ namespace PracticeAlpha_WPF_Edition.Levels
         {
             InitializeComponent();
 
+            Uri cursorUri = new Uri("pack://application:,,,/PracticeAlpha-WPF_Edition;component/Resources/Icons/cursor.cur");
+            StreamResourceInfo streamInfo = Application.GetResourceStream(cursorUri);
+
+            //Custom cursor
+            Cursor customCursor = new Cursor(streamInfo.Stream);
+            this.Cursor = customCursor;
+
+
             MusicController.Initialize("Music\\level1.mp3");
             MusicController.Play();
 
@@ -64,7 +73,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
             levelTimer.Start();
 
             periodicTimer = new DispatcherTimer();
-            periodicTimer.Interval = TimeSpan.FromSeconds(15);
+            periodicTimer.Interval = TimeSpan.FromSeconds(10);
             periodicTimer.Tick += PeriodicTimer_Tick;
             periodicTimer.Start();
 
@@ -73,7 +82,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
             shootingTimer.Tick += ShootingTimer_Tick;
 
             //--====Player initialization====--
-            player = new Player(950, 100, 48, 36);
+            player = new Player(925, 500, 48, 36);
             mainCanvas.Children.Add(player.PlayerImage);
             Canvas.SetZIndex(player.PlayerImage, 100);
 
@@ -111,12 +120,29 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
         private void PeriodicTimer_Tick(object sender, EventArgs e)
         {
-            enemySpeed += 0.5;
+            if(enemySpeed < 12)
+            {
+                enemySpeed += 0.5;
+            }
+            else
+            {
+                enemySpeed = 11;
+            }
+            
+            if(spawnTime > 100)
+            {
+                spawnTime -= 20;
+            }
+            else
+            {
+                spawnTime = 100;
+            }
+
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            SetSpawnTimer(333);
+            SetSpawnTimer(spawnTime);
 
             foreach (Enemy enemy in enemies)
             {
@@ -262,7 +288,9 @@ namespace PracticeAlpha_WPF_Edition.Levels
                     enemy.EnemyImage.Source = new BitmapImage(new Uri("/PracticeAlpha-WPF_Edition;component/Resources/Entities/dead_enemy3.png", UriKind.Relative));
                     break;
             }
-            sound = new SoundController("Sounds\\enemy_death.mp3");
+
+            sound = new SoundController(deathSound);
+            sound.SetVolume(0.3);
             sound.PlayAsync();
         }
 
@@ -446,7 +474,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
             Enemy enemy = new Enemy(x, y, 48, 36);
             mainCanvas.Children.Add(enemy.EnemyImage);
             Canvas.SetZIndex(enemy.EnemyImage, 99);
-            enemy.Speed = 2 + enemySpeed;
+            enemy.Speed = 1 + enemySpeed;
 
             Canvas.SetLeft(enemy.EnemyImage, enemy.X);
             Canvas.SetTop(enemy.EnemyImage, enemy.Y);
@@ -464,7 +492,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
             }
         }
 
-        private void SetSpawnTimer(int timer)
+        private void SetSpawnTimer(double timer)
         {
             timeStart++;
             if (timeStart == timer)
