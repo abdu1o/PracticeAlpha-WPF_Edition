@@ -169,9 +169,9 @@
 
 
         <!--============Button Close Settings============-->
-        
-        
-        <ImageBrush x:Key="stng" ImageSource="C:/Users/Admin/source/repos/PracticeAlpha-WPF_Edition/Resources/Icons/closeV2.png"/>
+
+
+        <ImageBrush x:Key="stng" ImageSource="/PracticeAlpha-WPF_Edition;component/Resources/Icons/closeV2.png"/>
 
         <Style x:Key="SetngCloseBut" TargetType="Button">
             <Setter Property="Width" Value="40"/>
