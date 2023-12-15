@@ -114,7 +114,7 @@
         <Popup x:Name="SettingsPopUp" StaysOpen="false" MinHeight="570" MinWidth="970" Placement="Center" AllowsTransparency="false" Focusable="True" Closed="CloseSettings">
             <Grid>
                 <Grid.Background>
-                    <ImageBrush ImageSource="C:/Users/Admin/Source/Repos/PracticeAlpha-WPF_Edition/Resources/Backgrounds/bgOptions.png"/>
+                    <ImageBrush ImageSource="/PracticeAlpha-WPF_Edition;component/Resources/Backgrounds/bgOptions.png"/>
                 </Grid.Background>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
