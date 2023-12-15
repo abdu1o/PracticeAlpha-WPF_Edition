@@ -1,0 +1,72 @@
+﻿<Window x:Class="PracticeAlpha_WPF_Edition.Levels.YouDead"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PracticeAlpha_WPF_Edition.Levels"
+        mc:Ignorable="d"
+        Title="YouDead" Height="350" Width="500" Name="GameOverWindow"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style TargetType="Border" x:Key="HoverBorderStyle">
+            <Style.Triggers>
+
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="Red" Duration="0:0:0.1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="Black" Duration="0:0:0.1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Label" x:Key="HoverLabelStyle">
+            <Style.Triggers>
+
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Label.Foreground).(SolidColorBrush.Color)" To="Red" Duration="0:0:0.1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Label.Foreground).(SolidColorBrush.Color)" To="Black" Duration="0:0:0.1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Label Style="{StaticResource DeadLabel}" Content="YOU DEAD" Foreground="Red" FontSize="70" FontWeight="Bold" FontFamily="{StaticResource Undertale}" Margin="75,10,75,235"/>
+
+        <Border BorderThickness="3" BorderBrush="Black" Margin="150,161,150,119" Background="#303030" Name="BorderTryAgain" Style="{StaticResource HoverBorderStyle}">
+            <Label Name="TryAgain" Content="Try again" Foreground="Black" FontSize="30" 
+                   FontWeight="Normal" FontFamily="{StaticResource Undertale}" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   MouseLeftButtonDown="TryAgain_Click" Style="{StaticResource HoverLabelStyle}" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave"/>
+        </Border>
+
+        <Border Name="BorderExit" BorderBrush="Black" BorderThickness="3" Margin="50,267,50,10" Background="#303030" Style="{StaticResource HoverBorderStyle}">
+            <Label Name="Exit" Content="Exit to main menu" Foreground="Black" FontSize="30" 
+                   FontWeight="Normal" FontFamily="{StaticResource Undertale}" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   MouseLeftButtonDown="Exit_Click" Style="{StaticResource HoverLabelStyle}" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave"/>
+        </Border>
+    </Grid>
+</Window>

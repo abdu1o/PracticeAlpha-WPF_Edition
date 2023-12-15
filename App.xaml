@@ -166,7 +166,55 @@
 
         
         <!--============Buttons Select Level============-->
-        
+
+
+        <Style TargetType="Label" x:Key="DeadLabel">
+            
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="0" Color="Red" Opacity="0"/>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Setter.Value>
+            </Setter>
+            
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Label.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard RepeatBehavior="Forever">
+
+                            <DoubleAnimation Storyboard.TargetProperty="Effect.ShadowDepth" To="0" Duration="0:0:0.25"/>
+                            <DoubleAnimation Storyboard.TargetProperty="Effect.BlurRadius" To="60" Duration="0:0:0.25"/>
+                            <DoubleAnimation Storyboard.TargetProperty="Effect.Opacity" To="1" Duration="0:0:0.25"/>
+                            <DoubleAnimation Storyboard.TargetProperty="Effect.BlurRadius" To="0" Duration="0:0:0.25"/>
+                            <DoubleAnimation Storyboard.TargetProperty="Effect.Opacity" To="0" Duration="0:0:0.25"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(Label.RenderTransform).(ScaleTransform.ScaleX)" To="1.2" Duration="0:0:0.25"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(Label.RenderTransform).(ScaleTransform.ScaleY)" To="1.3" Duration="0:0:0.25"/>
+
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.5" BeginTime="0:0:0.25"/>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0"/>
+                            <DoubleAnimation Storyboard.TargetProperty="Effect.BlurRadius" To="0" Duration="0:0:0"/>
+                            <DoubleAnimation Storyboard.TargetProperty="Effect.ShadowDepth" To="0" Duration="0:0:0"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(Label.RenderTransform).(ScaleTransform.ScaleX)" To="1.2" Duration="0:0:0"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(Label.RenderTransform).(ScaleTransform.ScaleY)" To="1.3" Duration="0:0:0"/>
+
+                            <DoubleAnimation Storyboard.TargetProperty="Effect.ShadowDepth" To="0" Duration="0:0:0.25" BeginTime="0:0:0.25"/>
+                            <DoubleAnimation Storyboard.TargetProperty="Effect.BlurRadius" To="60" Duration="0:0:0.25" BeginTime="0:0:0.25"/>
+                            <DoubleAnimation Storyboard.TargetProperty="Effect.Opacity" To="1" Duration="0:0:0.25" BeginTime="0:0:0.25"/>
+                            <DoubleAnimation Storyboard.TargetProperty="Effect.BlurRadius" To="0" Duration="0:0:0.25" BeginTime="0:0:0.25"/>
+                            <DoubleAnimation Storyboard.TargetProperty="Effect.Opacity" To="0" Duration="0:0:0.25" BeginTime="0:0:0.25"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(Label.RenderTransform).(ScaleTransform.ScaleX)" To="1" Duration="0:0:0.25" BeginTime="0:0:0.25"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(Label.RenderTransform).(ScaleTransform.ScaleY)" To="1" Duration="0:0:0.25" BeginTime="0:0:0.25"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
 
     </Application.Resources>
 

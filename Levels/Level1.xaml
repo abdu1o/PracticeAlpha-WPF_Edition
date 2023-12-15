@@ -21,5 +21,6 @@
                    HorizontalAlignment="Center" VerticalAlignment="Top">
             00:00
         </TextBlock>
+
     </Grid>
 </Window>
