@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
@@ -39,12 +40,15 @@ namespace PracticeAlpha_WPF_Edition.Levels
         private MusicController levelMusic;
         private SoundController shoot;
         private string shootSound = "Sounds\\shoot4.mp3";
+        public double musicVol = 40;
+        public double soundVol = 40;
 
         public Level1()
         {
             InitializeComponent();
 
             levelMusic = new MusicController("Music\\level1.mp3");
+            levelMusic.SetVolume(musicVol);
 
             levelMusic.Play();
 
@@ -127,6 +131,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
         private void Shoot()
         {
             shoot = new SoundController(shootSound);
+            shoot.SetVolume(soundVol);
             shoot.PlayAsync();
 
             Point mousePosition = Mouse.GetPosition(mainCanvas);

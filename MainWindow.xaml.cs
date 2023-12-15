@@ -23,15 +23,19 @@ namespace PracticeAlpha_WPF_Edition
     {
         private MusicController menuMusic;
         private SoundController buttonSound;
+        public double soundVol = 0.5;
+        public double musicVol = 0.5;
 
         public MainWindow()
         {
             InitializeComponent();
 
             menuMusic = new MusicController("Music\\mainMenu.mp3"); //не меняй путь
+            menuMusic.SetVolume(musicVol);
             menuMusic.Play();
 
             buttonSound = new SoundController("Sounds\\button_click.mp3");
+            buttonSound.SetVolume(soundVol);
         }
 
         //--=========================Button Events========================--
@@ -70,7 +74,7 @@ namespace PracticeAlpha_WPF_Edition
 
         private void Exit_MouseEnter(object sender, MouseEventArgs e)
         {
-            Mouse.OverrideCursor = Cursors.Hand;    
+            Mouse.OverrideCursor = Cursors.Hand;
         }
 
         private void Exit_MouseLeave(object sender, MouseEventArgs e)
@@ -88,6 +92,8 @@ namespace PracticeAlpha_WPF_Edition
             menuMusic.Stop();
 
             var levelSelector = new LevelSelector();
+            levelSelector.soundVol = soundVol;
+            levelSelector.musicVol = musicVol;
             Application.Current.MainWindow = levelSelector;
 
             this.Close();
@@ -95,5 +101,87 @@ namespace PracticeAlpha_WPF_Edition
         }
 
         //--=========================Click Play===========================--
+
+        //--=========================Settings===========================--
+
+        private void ApplyEffect(Window win)
+        {
+            System.Windows.Media.Effects.BlurEffect objBlur = new System.Windows.Media.Effects.BlurEffect();
+            objBlur.Radius = 10;
+            win.Effect = objBlur;
+        }
+
+        private void ClearEffect(Window win)
+        {
+            win.Effect = null;
+        }
+
+        private void ClickSettings(object sender, RoutedEventArgs e)
+        {
+            buttonSound.PlayAsync();
+            SettingsPopUp.IsOpen = true;
+            ApplyEffect(this);
+        }
+
+        private void CloseSettings(object sender, EventArgs e)
+        {
+            buttonSound.PlayAsync();
+            ClearEffect(this);
+        }
+
+        private void GenVolChng(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (Mute.IsChecked == false)
+            {
+                musicVol = ((double)((MusVol.Value / 100) * (GenVol.Value / 100)));
+                menuMusic.SetVolume(musicVol);
+                soundVol = ((double)((SoundVol.Value / 100) * (GenVol.Value / 100)));
+                buttonSound.SetVolume(soundVol);
+            }
+        }
+
+        private void MusVolChng(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (Mute.IsChecked == false)
+            {
+                musicVol = ((double)((MusVol.Value / 100) * (GenVol.Value / 100)));
+                menuMusic.SetVolume(musicVol);
+            }
+        }
+
+        private void SoundVolChng(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (Mute.IsChecked == false)
+            {
+                soundVol = ((double)((SoundVol.Value / 100) * (GenVol.Value / 100)));
+                buttonSound.SetVolume(soundVol);
+                buttonSound.PlayAsync();
+            }
+        }
+
+        private void MuteSet(object sender, RoutedEventArgs e)
+        {
+            musicVol = 0.0001;
+            menuMusic.SetVolume(musicVol);
+            soundVol = 0.0001;
+            buttonSound.SetVolume(soundVol);
+        }
+
+        private void MuteUnSet(object sender, RoutedEventArgs e)
+        {
+            musicVol = ((double)((MusVol.Value / 100) * (GenVol.Value / 100)));
+            menuMusic.SetVolume(musicVol);
+            soundVol = ((double)((SoundVol.Value / 100) * (GenVol.Value / 100)));
+            buttonSound.SetVolume(soundVol);
+        }
+
+        private void SettingsClose(object sender, RoutedEventArgs e)
+        {
+            SettingsPopUp.IsOpen = false;
+        }
+
+        //--=========================Settings===========================--
+
+
     }
 }

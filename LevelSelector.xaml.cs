@@ -21,6 +21,8 @@ namespace PracticeAlpha_WPF_Edition
     public partial class LevelSelector : Window
     {
         private SoundController buttonSound;
+        public double soundVol = 40;
+        public double musicVol = 40;
         private List<string> _levelsPicture = new List<string>();
         private int _countLevel;
         private int _currentLevel;
@@ -70,6 +72,7 @@ namespace PracticeAlpha_WPF_Edition
         private void NextLevel(object sender, RoutedEventArgs e)
         {
             buttonSound = new SoundController("Sounds\\button_click.mp3");
+            buttonSound.SetVolume(soundVol);
             buttonSound.PlayAsync();
 
             if (_currentLevel + 1 >= _countLevel)
@@ -96,6 +99,7 @@ namespace PracticeAlpha_WPF_Edition
         private void PreviousLevel(object sender, RoutedEventArgs e)
         {
             buttonSound = new SoundController("Sounds\\button_click.mp3");
+            buttonSound.SetVolume(soundVol);
             buttonSound.PlayAsync();
 
 
@@ -144,11 +148,14 @@ namespace PracticeAlpha_WPF_Edition
         private void ChooseLevel(object sender, RoutedEventArgs e)
         {
             buttonSound = new SoundController("Sounds\\button_click.mp3");
+            buttonSound.SetVolume(soundVol);
             buttonSound.PlayAsync();
 
             var level1 = new Level1();
+            level1.soundVol = soundVol;
+            level1.musicVol = musicVol;
             Application.Current.MainWindow = level1;
-
+            
             this.Close();
             level1.Show();
         }
@@ -161,6 +168,8 @@ namespace PracticeAlpha_WPF_Edition
             if (e.Key == Key.Escape) 
             {
                 var mainWindow = new MainWindow();
+                mainWindow.musicVol = musicVol;
+                mainWindow.soundVol = soundVol;
                 App.Current.MainWindow = mainWindow;
                 this.Close();
                 mainWindow.Show();
