@@ -29,6 +29,7 @@ namespace PracticeAlpha_WPF_Edition
 
             MusicController.Initialize("Music\\mainMenu.mp3");
             MusicController.Play();
+            MusicController.SetVolume(0.5);
 
             buttonSound = new SoundController("Sounds\\button_click.mp3");
         }

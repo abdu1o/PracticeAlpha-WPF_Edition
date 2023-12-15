@@ -23,7 +23,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
     public partial class Level1 : Window
     {
         //Stats
-        private double playerSpeed = 2;
+        private double playerSpeed = 3;
         private double bulletSpeed = 20;
         private double shootSpeed = 350;
 
@@ -47,7 +47,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
         private SoundController sound;
         private string shootSound = "Sounds\\shoot4.mp3";
         private string deathSound = "Sounds\\enemy_death.mp3";
-        private string playerDeath = "Sounds\\player_death.mp3";
+        //private string playerDeath = "Sounds\\player_death.mp3";
 
         private Spawn spawn;
         private int countOfLocation = 8;
@@ -251,6 +251,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
         private void Shoot()
         {
             sound = new SoundController(shootSound);
+            sound.SetVolume(1.5);
             sound.PlayAsync();
 
             Point mousePosition = Mouse.GetPosition(mainCanvas);
