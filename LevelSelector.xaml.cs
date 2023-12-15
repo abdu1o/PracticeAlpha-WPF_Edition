@@ -143,14 +143,17 @@ namespace PracticeAlpha_WPF_Edition
 
         private void ChooseLevel(object sender, RoutedEventArgs e)
         {
-            buttonSound = new SoundController("Sounds\\button_click.mp3");
-            buttonSound.PlayAsync();
+            if(_currentLevel == 1)
+            {
+                buttonSound = new SoundController("Sounds\\button_click.mp3");
+                buttonSound.PlayAsync();
 
-            var level1 = new Level1();
-            Application.Current.MainWindow = level1;
+                var level1 = new Level1();
+                Application.Current.MainWindow = level1;
 
-            this.Close();
-            level1.Show();
+                this.Close();
+                level1.Show();
+            }
         }
 
 

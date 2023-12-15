@@ -47,6 +47,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
         private SoundController sound;
         private string shootSound = "Sounds\\shoot4.mp3";
         private string deathSound = "Sounds\\enemy_death.mp3";
+        private string playerDeath = "Sounds\\player_death.mp3";
 
         private Spawn spawn;
         private int countOfLocation = 8;
@@ -63,9 +64,9 @@ namespace PracticeAlpha_WPF_Edition.Levels
             Cursor customCursor = new Cursor(streamInfo.Stream);
             this.Cursor = customCursor;
 
-
             MusicController.Initialize("Music\\level1.mp3");
             MusicController.Play();
+            MusicController.SetVolume(0.4);
 
             levelTimer = new DispatcherTimer();
             levelTimer.Interval = TimeSpan.FromSeconds(1);
@@ -120,28 +121,27 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
         private void PeriodicTimer_Tick(object sender, EventArgs e)
         {
-            if(enemySpeed < 12)
+            enemySpeed += 0.5;
+            spawnTime -= 20;
+
+            if(enemySpeed > 12)
             {
-                enemySpeed += 0.5;
+                enemySpeed = 12;
             }
-            else
-            {
-                enemySpeed = 11;
-            }
-            
-            if(spawnTime > 100)
-            {
-                spawnTime -= 20;
-            }
-            else
+            if(spawnTime < 100)
             {
                 spawnTime = 100;
             }
-
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
+            if (IsPlayerHit())
+            {
+                GameOver();
+                return;
+            }
+
             SetSpawnTimer(spawnTime);
 
             foreach (Enemy enemy in enemies)
@@ -153,6 +153,67 @@ namespace PracticeAlpha_WPF_Edition.Levels
             UpdateBullets();
         }
 
+        private bool IsPlayerHit()
+        {
+            foreach (Enemy enemy in enemies)
+            {
+                Rect playerRect = new Rect(player.X, player.Y, player.Width, player.Height);
+                Rect enemyRect = new Rect(enemy.X, enemy.Y, enemy.Width, enemy.Height);
+
+                if (playerRect.IntersectsWith(enemyRect))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private void GameOver()
+        {
+            Random random = new Random();
+            int randomNumber = random.Next(1, 4);
+
+            switch (randomNumber)
+            {
+                case 1:
+                    player.PlayerImage.Width = 70;
+                    player.PlayerImage.Height = 60;
+                    player.PlayerImage.Source = new BitmapImage(new Uri("/PracticeAlpha-WPF_Edition;component/Resources/Entities/player_dead1.png", UriKind.Relative));
+                    MusicController.SetVolume(0.07);
+                    break;
+
+                case 2:
+                    player.PlayerImage.Width = 80;
+                    player.PlayerImage.Height = 50;
+                    player.PlayerImage.Source = new BitmapImage(new Uri("/PracticeAlpha-WPF_Edition;component/Resources/Entities/player_dead2.png", UriKind.Relative));
+                    MusicController.SetVolume(0.07);
+                    break;
+            }
+
+            timer.Stop();
+            shootingTimer.Stop();
+            levelTimer.Stop();
+            periodicTimer.Stop();
+ 
+            Rectangle overlay = new Rectangle
+            {
+                Fill = new SolidColorBrush(Color.FromArgb(128, 0, 0, 0)), 
+                Width = this.ActualWidth,
+                Height = this.ActualHeight
+            };
+
+            sound = new SoundController(deathSound);
+            sound.PlayAsync();
+
+            mainCanvas.Children.Add(overlay);
+            Canvas.SetZIndex(overlay, 101);
+
+            YouDead youDeadWindow = new YouDead();
+            youDeadWindow.Owner = this; 
+            youDeadWindow.ShowDialog();
+
+        }
 
         //--====Shooting====--
         private void StartShooting()
