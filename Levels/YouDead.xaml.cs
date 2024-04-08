@@ -40,8 +40,8 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
         private void TryAgain_Click(object sender, MouseButtonEventArgs e)
         {
-            buttonSound = new SoundController("Sounds\\button_click.mp3");
-            buttonSound.PlayAsync();
+            //buttonSound = new SoundController("Sounds\\button_click.mp3");
+            //buttonSound.PlayAsync();
 
             Level1 new_level = new Level1();
             new_level.Show();
@@ -52,8 +52,8 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
         private void Exit_Click(object sender, MouseButtonEventArgs e)
         {
-            buttonSound = new SoundController("Sounds\\button_click.mp3");
-            buttonSound.PlayAsync();
+            //buttonSound = new SoundController("Sounds\\button_click.mp3");
+            //buttonSound.PlayAsync();
 
             MainWindow menu = new MainWindow();
             menu.Show();

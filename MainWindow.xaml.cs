@@ -27,11 +27,11 @@ namespace PracticeAlpha_WPF_Edition
         {
             InitializeComponent();
 
-            MusicController.Initialize("Music\\mainMenu.mp3");
-            MusicController.Play();
-            MusicController.SetVolume(0.5);
+            //MusicController.Initialize("Sounds\\mainMenu.mp3");
+            //MusicController.Play();
+            //MusicController.SetVolume(0.5);
 
-            buttonSound = new SoundController("Sounds\\button_click.mp3");
+            //buttonSound = new SoundController("Sounds\\button_click.mp3");
         }
 
         //--=========================Button Events========================--
@@ -63,7 +63,7 @@ namespace PracticeAlpha_WPF_Edition
 
         private async void CloseClick(object sender, MouseButtonEventArgs e)
         {
-            buttonSound.PlayAsync();
+            //buttonSound.PlayAsync();
             await Task.Delay(300);
             this.Close();
         }
@@ -83,12 +83,25 @@ namespace PracticeAlpha_WPF_Edition
         //--=========================Click Play===========================--
         private void ClickPlay(object sender, RoutedEventArgs e)
         {
-            buttonSound.PlayAsync();
+            //buttonSound.PlayAsync();
 
             var levelSelector = new LevelSelector();
             Application.Current.MainWindow = levelSelector;
 
             this.Close();    
+            levelSelector.Show();
+        }
+        //--=========================Click Play===========================--
+
+        //--=========================Click Play===========================--
+        private void ClickMultiplay(object sender, RoutedEventArgs e)
+        {
+            //buttonSound.PlayAsync();
+
+            var levelSelector = new LevelSelector();
+            Application.Current.MainWindow = levelSelector;
+
+            this.Close();
             levelSelector.Show();
         }
         //--=========================Click Play===========================--

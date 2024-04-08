@@ -44,9 +44,9 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
         private List<Bullet> bullets = new List<Bullet>();
 
-        private SoundController sound;
-        private string shootSound = "Sounds\\shoot4.mp3";
-        private string deathSound = "Sounds\\enemy_death.mp3";
+        //private SoundController sound;
+        //private string shootSound = "Sounds\\shoot4.mp3";
+        //private string deathSound = "Sounds\\enemy_death.mp3";
         //private string playerDeath = "Sounds\\player_death.mp3";
 
         private Spawn spawn;
@@ -64,9 +64,9 @@ namespace PracticeAlpha_WPF_Edition.Levels
             Cursor customCursor = new Cursor(streamInfo.Stream);
             this.Cursor = customCursor;
 
-            MusicController.Initialize("Music\\level1.mp3");
-            MusicController.Play();
-            MusicController.SetVolume(0.4);
+            //MusicController.Initialize("Music\\level1.mp3");
+            //MusicController.Play();
+            //MusicController.SetVolume(0.4);
 
             levelTimer = new DispatcherTimer();
             levelTimer.Interval = TimeSpan.FromSeconds(1);
@@ -203,8 +203,8 @@ namespace PracticeAlpha_WPF_Edition.Levels
                 Height = this.ActualHeight
             };
 
-            sound = new SoundController(deathSound);
-            sound.PlayAsync();
+            //sound = new SoundController(deathSound);
+            //sound.PlayAsync();
 
             mainCanvas.Children.Add(overlay);
             Canvas.SetZIndex(overlay, 101);
@@ -250,9 +250,9 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
         private void Shoot()
         {
-            sound = new SoundController(shootSound);
-            sound.SetVolume(1.5);
-            sound.PlayAsync();
+            //sound = new SoundController(shootSound);
+            //sound.SetVolume(1.5);
+            //sound.PlayAsync();
 
             Point mousePosition = Mouse.GetPosition(mainCanvas);
 
@@ -351,9 +351,9 @@ namespace PracticeAlpha_WPF_Edition.Levels
                     break;
             }
 
-            sound = new SoundController(deathSound);
-            sound.SetVolume(0.3);
-            sound.PlayAsync();
+            //sound = new SoundController(deathSound);
+            //sound.SetVolume(0.3);
+            //sound.PlayAsync();
         }
 
         //--====Movement====--

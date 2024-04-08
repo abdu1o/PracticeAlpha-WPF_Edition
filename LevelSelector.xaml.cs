@@ -69,8 +69,8 @@ namespace PracticeAlpha_WPF_Edition
         
         private void NextLevel(object sender, RoutedEventArgs e)
         {
-            buttonSound = new SoundController("Sounds\\button_click.mp3");
-            buttonSound.PlayAsync();
+            //buttonSound = new SoundController("Sounds\\button_click.mp3");
+            //buttonSound.PlayAsync();
 
             if (_currentLevel + 1 >= _countLevel)
             {
@@ -95,8 +95,8 @@ namespace PracticeAlpha_WPF_Edition
 
         private void PreviousLevel(object sender, RoutedEventArgs e)
         {
-            buttonSound = new SoundController("Sounds\\button_click.mp3");
-            buttonSound.PlayAsync();
+            //buttonSound = new SoundController("Sounds\\button_click.mp3");
+            //buttonSound.PlayAsync();
 
 
             if (_currentLevel - 1 <= 1)
@@ -145,8 +145,8 @@ namespace PracticeAlpha_WPF_Edition
         {
             if(_currentLevel == 1)
             {
-                buttonSound = new SoundController("Sounds\\button_click.mp3");
-                buttonSound.PlayAsync();
+                //buttonSound = new SoundController("Sounds\\button_click.mp3");
+                //buttonSound.PlayAsync();
 
                 var level1 = new Level1();
                 Application.Current.MainWindow = level1;
