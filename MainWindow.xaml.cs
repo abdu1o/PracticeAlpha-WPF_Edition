@@ -1,5 +1,6 @@
 ﻿using PracticeAlpha_WPF_Edition.Levels;
 using PracticeAlpha_WPF_Edition.SoundControl;
+using PracticeAlpha_WPF_Edition;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace PracticeAlpha_WPF_Edition
         {
             InitializeComponent();
 
+            
             //MusicController.Initialize("Sounds\\mainMenu.mp3");
             //MusicController.Play();
             //MusicController.SetVolume(0.5);
@@ -93,16 +95,16 @@ namespace PracticeAlpha_WPF_Edition
         }
         //--=========================Click Play===========================--
 
-        //--=========================Click Play===========================--
+        //--=========================Click Multiplay===========================--
         private void ClickMultiplay(object sender, RoutedEventArgs e)
         {
             //buttonSound.PlayAsync();
 
-            var levelSelector = new LevelSelector();
-            Application.Current.MainWindow = levelSelector;
+            var multiplayMenu = new MultiplayMenu();
+            Application.Current.MainWindow = multiplayMenu;
 
             this.Close();
-            levelSelector.Show();
+            multiplayMenu.Show();
         }
         //--=========================Click Play===========================--
     }
