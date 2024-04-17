@@ -34,7 +34,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
         private DispatcherTimer shootingTimer;
         private DispatcherTimer levelTimer;
         private DispatcherTimer periodicTimer;
-        
+
         private TimeSpan elapsedTime;
 
         private List<Bullet> bullets = new List<Bullet>();
@@ -48,27 +48,9 @@ namespace PracticeAlpha_WPF_Edition.Levels
         private int countOfLocation = 8;
         private int timeStart = 0;
 
-        private UdpClient udpClient = new UdpClient();
-        private string serverIP = "127.0.0.1"; // IP адрес сервера
-        private int serverPort = 11000;
-
-        private void InitializeUDPClient()
-        {
-            string message = "Connect";
-            byte[] data = Encoding.ASCII.GetBytes(message);
-            udpClient.Send(data, data.Length, serverIP, serverPort);
-        }
-
-        private void SendMessage(string message)
-        {
-            byte[] data = Encoding.ASCII.GetBytes(message);
-            udpClient.Send(data, data.Length, serverIP, serverPort);
-        }
-
         public Level1()
         {
             InitializeComponent();
-            InitializeUDPClient();
 
             Uri cursorUri = new Uri("pack://application:,,,/PracticeAlpha-WPF_Edition;component/Resources/Icons/cursor.cur");
             StreamResourceInfo streamInfo = Application.GetResourceStream(cursorUri);
@@ -96,7 +78,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
             shootingTimer.Tick += ShootingTimer_Tick;
 
             //--====Player initialization====--
-            player = new Player(925, 500, 48, 36);
+            player = new Player(925, 500, 48, 36, "/PracticeAlpha-WPF_Edition;component/Resources/Entities/player1.png");
             mainCanvas.Children.Add(player.PlayerImage);
             Canvas.SetZIndex(player.PlayerImage, 100);
 
@@ -137,11 +119,11 @@ namespace PracticeAlpha_WPF_Edition.Levels
             enemySpeed += 0.5;
             spawnTime -= 20;
 
-            if(enemySpeed > 12)
+            if (enemySpeed > 12)
             {
                 enemySpeed = 12;
             }
-            if(spawnTime < 100)
+            if (spawnTime < 100)
             {
                 spawnTime = 100;
             }
@@ -208,10 +190,10 @@ namespace PracticeAlpha_WPF_Edition.Levels
             shootingTimer.Stop();
             levelTimer.Stop();
             periodicTimer.Stop();
- 
+
             Rectangle overlay = new Rectangle
             {
-                Fill = new SolidColorBrush(Color.FromArgb(128, 0, 0, 0)), 
+                Fill = new SolidColorBrush(Color.FromArgb(128, 0, 0, 0)),
                 Width = this.ActualWidth,
                 Height = this.ActualHeight
             };
@@ -223,7 +205,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
             Canvas.SetZIndex(overlay, 101);
 
             YouDead youDeadWindow = new YouDead();
-            youDeadWindow.Owner = this; 
+            youDeadWindow.Owner = this;
             youDeadWindow.ShowDialog();
 
         }
@@ -312,7 +294,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
                     if (IsCollision(bullet, enemy))
                     {
                         HandleBulletCollision(bullet, enemy);
-                        break; 
+                        break;
                     }
                 }
 
@@ -441,16 +423,12 @@ namespace PracticeAlpha_WPF_Edition.Levels
             }
             //?????????????????????????????????????????????????????
 
-            SendMessage(player.Y.ToString());
-            SendMessage(player.X.ToString());
-
             Canvas.SetLeft(player.PlayerImage, player.X);
             Canvas.SetTop(player.PlayerImage, player.Y);
 
             player.Rotation = Math.Atan2(Mouse.GetPosition(mainCanvas).Y - (player.Y + player.Height / 2),
                                 Mouse.GetPosition(mainCanvas).X - (player.X + player.Width / 2));
 
-            SendMessage(player.Rotation.ToString());
         }
 
         private void Window_MouseMove(object sender, MouseEventArgs e)
@@ -470,7 +448,6 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
 
         // Enemy Methods
-
         private void UpdateEnemyMovement(Enemy enemy)
         {
             ChangeEnemyPosition(enemy);

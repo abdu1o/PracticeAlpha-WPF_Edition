@@ -1,5 +1,5 @@
 ﻿using PracticeAlpha_WPF_Edition.SoundControl;
-using PracticeAlpha_WPF_Edition;
+using PracticeAlpha_WPF_Edition.Levels;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
@@ -88,13 +88,13 @@ namespace PracticeAlpha_WPF_Edition
         //--=========================Click Multiplay===========================--
         private void ClickMultiplay(object sender, RoutedEventArgs e)
         {
-            buttonSound.PlayAsync();
+            //buttonSound.PlayAsync();
 
-            //var multiplayMenu = new MultiplayMenu();
-            //Application.Current.MainWindow = multiplayMenu;
+            var level1_Multiplayer = new Level1_Multiplayer();
+            Application.Current.MainWindow = level1_Multiplayer;
 
-            //this.Close();
-            //multiplayMenu.Show();
+            this.Close();
+            level1_Multiplayer.Show();
         }
         //--=========================Click Play===========================--
     }

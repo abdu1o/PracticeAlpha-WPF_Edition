@@ -96,11 +96,11 @@
       <DependentUpon>Level1.xaml</DependentUpon>
     </Compile>
     <Compile Include="EntitiesController\Player.cs" />
+    <Compile Include="Levels\Level1_Multiplayer.xaml.cs">
+      <DependentUpon>Level1_Multiplayer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Levels\YouDead.xaml.cs">
       <DependentUpon>YouDead.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MultiplayMenu.xaml.cs">
-      <DependentUpon>MultiplayMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -114,6 +114,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Levels\Level1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Levels\Level1_Multiplayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -133,10 +137,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MultiplayMenu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -175,6 +175,11 @@
     <Resource Include="Resources\Icons\cursor.cur" />
     <Resource Include="Resources\Entities\player_dead1.png" />
     <Resource Include="Resources\Entities\player_dead2.png" />
+    <Resource Include="Resources\Entities\player2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Entities\player2_dead1.png" />
+    <Resource Include="Resources\Entities\player2_dead2.png" />
     <Content Include="Resources\Sounds\shoot.mp3" />
     <Resource Include="Resources\Backgrounds\bgMenu.png" />
     <Resource Include="Resources\Icons\close.png" />
@@ -194,6 +199,5 @@
     </Resource>
     <Content Include="Resources\Sounds\mainMenu.mp3" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

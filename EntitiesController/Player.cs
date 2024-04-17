@@ -20,18 +20,22 @@ namespace PracticeAlpha_WPF_Edition.Levels
         public double Height { get; set; }
         public double Rotation { get; set; }
 
-        public Player(double x, double y, double width, double height)
+        public string modelPath;
+
+        public Player(double x, double y, double width, double height, string path)
         {
             X = x;
             Y = y;
             Width = width;
             Height = height;
 
+            modelPath = path;
+
             PlayerImage = new Image
             {
                 Width = width,
                 Height = height,
-                Source = new BitmapImage(new Uri("/PracticeAlpha-WPF_Edition;component/Resources/Entities/player.png", UriKind.Relative))
+                Source = new BitmapImage(new Uri(modelPath, UriKind.Relative))
             };
         }
     }
