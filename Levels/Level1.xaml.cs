@@ -2,18 +2,13 @@
 using PracticeAlpha_WPF_Edition.SoundControl;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Media.Media3D;
 using System.Windows.Resources;
 using System.Windows.Shapes;
 using System.Windows.Threading;
@@ -53,9 +48,27 @@ namespace PracticeAlpha_WPF_Edition.Levels
         private int countOfLocation = 8;
         private int timeStart = 0;
 
+        private UdpClient udpClient = new UdpClient();
+        private string serverIP = "127.0.0.1"; // IP адрес сервера
+        private int serverPort = 11000;
+
+        private void InitializeUDPClient()
+        {
+            string message = "Connect";
+            byte[] data = Encoding.ASCII.GetBytes(message);
+            udpClient.Send(data, data.Length, serverIP, serverPort);
+        }
+
+        private void SendMessage(string message)
+        {
+            byte[] data = Encoding.ASCII.GetBytes(message);
+            udpClient.Send(data, data.Length, serverIP, serverPort);
+        }
+
         public Level1()
         {
             InitializeComponent();
+            InitializeUDPClient();
 
             Uri cursorUri = new Uri("pack://application:,,,/PracticeAlpha-WPF_Edition;component/Resources/Icons/cursor.cur");
             StreamResourceInfo streamInfo = Application.GetResourceStream(cursorUri);
@@ -428,11 +441,16 @@ namespace PracticeAlpha_WPF_Edition.Levels
             }
             //?????????????????????????????????????????????????????
 
+            SendMessage(player.Y.ToString());
+            SendMessage(player.X.ToString());
+
             Canvas.SetLeft(player.PlayerImage, player.X);
             Canvas.SetTop(player.PlayerImage, player.Y);
 
             player.Rotation = Math.Atan2(Mouse.GetPosition(mainCanvas).Y - (player.Y + player.Height / 2),
                                 Mouse.GetPosition(mainCanvas).X - (player.X + player.Width / 2));
+
+            SendMessage(player.Rotation.ToString());
         }
 
         private void Window_MouseMove(object sender, MouseEventArgs e)

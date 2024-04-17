@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticeAlpha-WPF_Edition", "PracticeAlpha-WPF_Edition.csproj", "{7BA1E523-8C5D-40ED-B342-67C65D7C6846}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PA_SERVER", "..\PA_SERVER\PA_SERVER.csproj", "{EB357DC7-5E27-4718-96D0-70C6E787B699}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7BA1E523-8C5D-40ED-B342-67C65D7C6846}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BA1E523-8C5D-40ED-B342-67C65D7C6846}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BA1E523-8C5D-40ED-B342-67C65D7C6846}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB357DC7-5E27-4718-96D0-70C6E787B699}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB357DC7-5E27-4718-96D0-70C6E787B699}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB357DC7-5E27-4718-96D0-70C6E787B699}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB357DC7-5E27-4718-96D0-70C6E787B699}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

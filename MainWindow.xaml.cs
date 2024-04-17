@@ -1,22 +1,12 @@
-﻿using PracticeAlpha_WPF_Edition.Levels;
-using PracticeAlpha_WPF_Edition.SoundControl;
+﻿using PracticeAlpha_WPF_Edition.SoundControl;
 using PracticeAlpha_WPF_Edition;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Media;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PracticeAlpha_WPF_Edition
 {
@@ -98,13 +88,13 @@ namespace PracticeAlpha_WPF_Edition
         //--=========================Click Multiplay===========================--
         private void ClickMultiplay(object sender, RoutedEventArgs e)
         {
-            //buttonSound.PlayAsync();
+            buttonSound.PlayAsync();
 
-            var multiplayMenu = new MultiplayMenu();
-            Application.Current.MainWindow = multiplayMenu;
+            //var multiplayMenu = new MultiplayMenu();
+            //Application.Current.MainWindow = multiplayMenu;
 
-            this.Close();
-            multiplayMenu.Show();
+            //this.Close();
+            //multiplayMenu.Show();
         }
         //--=========================Click Play===========================--
     }

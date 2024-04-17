@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PracticeAlpha_WPF_Edition"
         mc:Ignorable="d"
-        Title="MultiplayMenu" Height="1080" Width="1920"
-        WindowStyle="None" WindowState="Maximized" Name="MainMenu">
+        Title="MultiplayMenu" Height="1080" Width="1920" WindowStyle="None" WindowState="Maximized" Name="MainMenu">
 
     <Grid>
         <Grid.Background>
@@ -65,7 +64,7 @@
         <Label  Margin="0,98,0,0" Grid.Row="1" Grid.Column="6" Grid.RowSpan="5" Grid.ColumnSpan="3" Background="#610000"/>
         <!--=================Background=================-->
 
-        <!--<Grid Grid.Column="14">
+        <Grid Grid.Column="14">
             <Image Source="/PracticeAlpha-WPF_Edition;component/Resources/Icons/closeV2.png"
                    Width="90" Height="90" Margin="38,0,0,8" MouseUp="CloseClick" 
                    MouseEnter="Exit_MouseEnter"
@@ -80,7 +79,7 @@
                 </Image.ToolTip>
 
             </Image>
-        </Grid>-->
+        </Grid>
         <Label Margin="10,10,10,10" Grid.Row="2" Grid.Column="6" Grid.RowSpan="4" Grid.ColumnSpan="3" Background="Black"/>
 
     </Grid>

@@ -99,7 +99,7 @@
     <Compile Include="Levels\YouDead.xaml.cs">
       <DependentUpon>YouDead.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Menus\MultiplayMenu.xaml.cs">
+    <Compile Include="MultiplayMenu.xaml.cs">
       <DependentUpon>MultiplayMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -133,7 +133,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Menus\MultiplayMenu.xaml">
+    <Page Include="MultiplayMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
