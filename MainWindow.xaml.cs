@@ -12,18 +12,13 @@ namespace PracticeAlpha_WPF_Edition
 {
     public partial class MainWindow : Window
     {
-        private SoundController buttonSound;
-
         public MainWindow()
         {
             InitializeComponent();
 
-            
-            //MusicController.Initialize("Sounds\\mainMenu.mp3");
-            //MusicController.Play();
-            //MusicController.SetVolume(0.5);
-
-            //buttonSound = new SoundController("Sounds\\button_click.mp3");
+            //norm puti ne rabotayut!!!!!!!!!!!!!!!!!!
+            Music.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\mainMenu.mp3");
+            //norm puti ne rabotayut!!!!!!!!!!!!!!!!!!
         }
 
         //--=========================Button Events========================--
@@ -55,7 +50,7 @@ namespace PracticeAlpha_WPF_Edition
 
         private async void CloseClick(object sender, MouseButtonEventArgs e)
         {
-            //buttonSound.PlayAsync();
+            Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
             await Task.Delay(300);
             this.Close();
         }
@@ -75,7 +70,7 @@ namespace PracticeAlpha_WPF_Edition
         //--=========================Click Play===========================--
         private void ClickPlay(object sender, RoutedEventArgs e)
         {
-            //buttonSound.PlayAsync();
+            Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
             var levelSelector = new LevelSelector();
             Application.Current.MainWindow = levelSelector;
@@ -88,7 +83,7 @@ namespace PracticeAlpha_WPF_Edition
         //--=========================Click Multiplay===========================--
         private void ClickMultiplay(object sender, RoutedEventArgs e)
         {
-            //buttonSound.PlayAsync();
+            Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
             var level1_Multiplayer = new Level1_Multiplayer();
             Application.Current.MainWindow = level1_Multiplayer;
