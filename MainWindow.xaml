@@ -68,7 +68,7 @@
 
         <!--===================Buttons==================-->
         <Button Name="Play" Style="{StaticResource MenuBtn}" Content="Single" Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" BorderBrush="Black" Click="ClickPlay"/>
-        <Button Name="Multiplay" Style="{StaticResource MenuBtn}" Content="Co-op" Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" BorderBrush="Black" Click="ClickMultiplay"/>
+        <Button Name="Multiplay" Style="{StaticResource MenuBtn}" Content="PvP" Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" BorderBrush="Black" Click="ClickMultiplay"/>
         <Button Style="{StaticResource MenuBtn}" Content="Settings" Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" BorderBrush="Black"/>
 
         <!--====================Items===================-->
