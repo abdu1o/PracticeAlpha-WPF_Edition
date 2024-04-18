@@ -19,8 +19,6 @@ namespace PracticeAlpha_WPF_Edition.Levels
 {
     public partial class YouDead : Window
     {
-        private SoundController buttonSound;
-
         public YouDead()
         {
             InitializeComponent();

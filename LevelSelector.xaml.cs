@@ -12,7 +12,6 @@ namespace PracticeAlpha_WPF_Edition
 {
     public partial class LevelSelector : Window
     {
-        private SoundController buttonSound;
         private List<string> _levelsPicture = new List<string>();
         private int _countLevel;
         private int _currentLevel;
@@ -61,8 +60,7 @@ namespace PracticeAlpha_WPF_Edition
         
         private void NextLevel(object sender, RoutedEventArgs e)
         {
-            //buttonSound = new SoundController("Sounds\\button_click.mp3");
-            //buttonSound.PlayAsync();
+            Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
             if (_currentLevel + 1 >= _countLevel)
             {
@@ -87,8 +85,7 @@ namespace PracticeAlpha_WPF_Edition
 
         private void PreviousLevel(object sender, RoutedEventArgs e)
         {
-            //buttonSound = new SoundController("Sounds\\button_click.mp3");
-            //buttonSound.PlayAsync();
+            Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
 
             if (_currentLevel - 1 <= 1)
@@ -137,8 +134,7 @@ namespace PracticeAlpha_WPF_Edition
         {
             if(_currentLevel == 1)
             {
-                //buttonSound = new SoundController("Sounds\\button_click.mp3");
-                //buttonSound.PlayAsync();
+                Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
                 var level1 = new Level1();
                 Application.Current.MainWindow = level1;
