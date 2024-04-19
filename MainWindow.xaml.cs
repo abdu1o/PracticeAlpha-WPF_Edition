@@ -131,8 +131,9 @@ namespace PracticeAlpha_WPF_Edition
                         while (reader.Read())
                         {
                             string Name = reader.GetString(0);
-                            string Score = Convert.ToString(reader.GetValue(1));
-                            arr.Add(Name + "\t\t" + Score);
+                            string Points = Convert.ToString(reader.GetValue(1));
+                            string Time = reader.GetString(2);
+                            arr.Add(Name + "\t\t" + Points + "\t\t" + Time);
                         }
                         ScoreList.ItemsSource = arr;
                     }
