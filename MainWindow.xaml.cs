@@ -18,9 +18,7 @@ namespace PracticeAlpha_WPF_Edition
         {
             InitializeComponent();
 
-            //norm puti ne rabotayut!!!!!!!!!!!!!!!!!!
             Music.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\mainMenu.mp3");
-            //norm puti ne rabotayut!!!!!!!!!!!!!!!!!!
         }
 
         //--=========================Button Events========================--

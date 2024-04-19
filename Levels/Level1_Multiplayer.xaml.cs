@@ -89,6 +89,10 @@ namespace PracticeAlpha_WPF_Edition.Levels
             catch (Exception ex)
             {
                 MessageBox.Show("Error receiving messages from server: " + ex.Message);
+
+                string exePath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+                System.Diagnostics.Process.Start(exePath);
+                Application.Current.Shutdown();
             }
         }
 

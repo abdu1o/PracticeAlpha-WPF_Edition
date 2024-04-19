@@ -16,11 +16,19 @@
             </Canvas.Background>
         </Canvas>
 
-        <TextBlock x:Name="timerText" FontWeight="Bold" FontFamily="{StaticResource Undertale}" 
-                   FontSize="40" Foreground="Black" 
-                   HorizontalAlignment="Center" VerticalAlignment="Top">
-            00:00
-        </TextBlock>
+        <Border BorderBrush="Black" Background="#1a1a1a" BorderThickness="4" HorizontalAlignment="Center" VerticalAlignment="Top" Width="128">
+            <TextBlock x:Name="timerText" FontWeight="Bold" FontFamily="{StaticResource Undertale}" 
+               FontSize="40" Foreground="#8c0013" TextAlignment="Center" HorizontalAlignment="Center" Width="114" Height="48">
+        00:00
+            </TextBlock>
+        </Border>
+
+        <Border BorderBrush="Black" Background="#1a1a1a" BorderThickness="4" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128">
+            <TextBlock x:Name="scoreText" FontWeight="Bold" FontFamily="{StaticResource Undertale}" 
+       FontSize="40" Foreground="#8c0013" TextAlignment="Center" HorizontalAlignment="Center" Width="114" Height="48">
+                00000
+            </TextBlock>
+        </Border>
 
     </Grid>
 </Window>
