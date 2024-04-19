@@ -118,7 +118,7 @@ namespace PracticeAlpha_WPF_Edition
         {
             string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
             //Вот путь Идира я не знаю, так-что этот путь не перепутаете.
-            //string connectionString = "C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version3;";
+            //string connectionString = "Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version3;";
             List<String> arr = new List<string>();
             using (var connection = new SQLiteConnection(connectionString))
             {
