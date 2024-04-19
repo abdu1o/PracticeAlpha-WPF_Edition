@@ -69,8 +69,7 @@
         <!--===================Buttons==================-->
         <Button Name="Play" Style="{StaticResource MenuBtn}" Content="Single" Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" BorderBrush="Black" Click="ClickPlay"/>
         <Button Name="Multiplay" Style="{StaticResource MenuBtn}" Content="PvP" Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" BorderBrush="Black" Click="ClickMultiplay"/>
-        <Button Style="{StaticResource MenuBtn}" Content="Settings" Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" BorderBrush="Black"/>
-
+        <Button Name="Score" Style="{StaticResource MenuBtn}" Content="Score" Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" BorderBrush="Black" Click="ClickScore"/>
         <!--====================Items===================-->
         <!--<Image Grid.Column="8" Margin="0,33,68,28" Grid.Row="2" Source="\Resources\ButtonItems\Knife.png" Stretch="Fill" RenderTransformOrigin="0.524,0.141"/>
         <Image Grid.Column="6" Margin="95,48,98,2" Grid.Row="3" Source="\Resources\ButtonItems\Scar.png" Stretch="Fill" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5">
@@ -106,5 +105,30 @@
         
         <!--===================Buttons==================-->
 
+        <!--===================Score Popup==================-->
+
+        <Popup x:Name="ScorePopUp" StaysOpen="false" MinHeight="570" MinWidth="970" Placement="Center" AllowsTransparency="false" Focusable="True" Closed="CloseScore">
+            <Grid>
+                <Grid.Background>
+                    <ImageBrush ImageSource="/PracticeAlpha-WPF_Edition;component/Resources/Backgrounds/bgScore.png"/>
+                </Grid.Background>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="7*"/>
+                    <RowDefinition Height="7*"/>
+                </Grid.RowDefinitions>
+                <ListBox x:Name="ScoreList" Grid.Row="2" Grid.Column="1"/>
+                <Button HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="2" Grid.Row="0" Height="40" Width="40" BorderBrush="Black" Style="{StaticResource ScoreCloseBut}" Click="ScoreClose">
+                </Button>
+            </Grid>
+        </Popup>
+
+        <!--===================Score Popup==================-->
+        
     </Grid>
 </Window>

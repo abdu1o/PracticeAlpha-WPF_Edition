@@ -7,6 +7,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
+using System.Collections.Generic;
+using System.Data.SQLite;
 
 namespace PracticeAlpha_WPF_Edition
 {
@@ -92,5 +94,57 @@ namespace PracticeAlpha_WPF_Edition
             level1_Multiplayer.Show();
         }
         //--=========================Click Play===========================--
+
+        //--=========================Score===========================--
+        private void ApplyEffect(Window win)
+        {
+            System.Windows.Media.Effects.BlurEffect objBlur = new System.Windows.Media.Effects.BlurEffect();
+            objBlur.Radius = 10;
+            win.Effect = objBlur;
+        }
+
+        private void ClearEffect(Window win)
+        {
+            win.Effect = null;
+        }
+
+        private void ClickScore(object sender, RoutedEventArgs e)
+        {
+            Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
+
+            string connectionString = "Data Source=Player.db;Version=3;";
+            List<String> arr = null;
+            using (var connection = new SQLiteConnection(connectionString))
+            {
+                using (var command = new SQLiteCommand(connection))
+                {
+                    command.CommandText = "SELECT Login.Name, Score.Points FROM Score LEFT JOIN Login ON Score.Player_ID = Login.ID";
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            arr.Add(reader.GetString(1));
+                        }
+                        ScoreList.ItemsSource = arr;
+                    }
+                }
+            }
+            ScorePopUp.IsOpen = true;
+            ApplyEffect(this);
+        }
+
+        private void CloseScore(object sender, EventArgs e)
+        {
+            Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
+
+            ClearEffect(this);
+        }
+
+        private void ScoreClose(object sender, RoutedEventArgs e)
+        {
+            ScorePopUp.IsOpen = false;
+        }
+
+        //--=========================Score===========================--
     }
 }
