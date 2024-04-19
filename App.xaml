@@ -89,23 +89,6 @@
             <Setter Property="FontSize" Value="35"/>
             <Setter Property="FontFamily" Value="{StaticResource Undertale}"/>
 
-
-            <!--<Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect Color="Transparent" Direction="320" ShadowDepth="0" BlurRadius="0"/>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Effect">
-                        <Setter.Value>
-                            <DropShadowEffect Color="Aqua" Direction="320" ShadowDepth="5" BlurRadius="10"/>
-                        </Setter.Value>
-                    </Setter>
-                </Trigger>
-            </Style.Triggers>
-        </Style>-->
-            
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -193,7 +176,7 @@
 
 
         <Style TargetType="Label" x:Key="DeadLabel">
-            
+
             <Setter Property="Effect">
                 <Setter.Value>
                     <DropShadowEffect ShadowDepth="0" BlurRadius="0" Color="Red" Opacity="0"/>
@@ -206,7 +189,7 @@
                     <ScaleTransform ScaleX="1" ScaleY="1"/>
                 </Setter.Value>
             </Setter>
-            
+
             <Style.Triggers>
                 <EventTrigger RoutedEvent="Label.Loaded">
                     <BeginStoryboard>
@@ -240,6 +223,25 @@
             </Style.Triggers>
         </Style>
 
-    </Application.Resources>
 
+        <!--============Button Music Choose============-->
+        <Style x:Key="MusicButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#0f0f0f"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="10"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="FontFamily" Value="{StaticResource Undertale}"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#0f0f0f"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="Foreground" Value="Red"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Application.Resources>
+    <!--============Button Music Choose============-->
+    
 </Application>

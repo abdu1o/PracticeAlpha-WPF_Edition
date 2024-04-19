@@ -1,5 +1,5 @@
 ﻿using PracticeAlpha_WPF_Edition.SoundControl;
-using PracticeAlpha_WPF_Edition;
+using PracticeAlpha_WPF_Edition.Levels;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,18 +15,11 @@ namespace PracticeAlpha_WPF_Edition
 {
     public partial class MainWindow : Window
     {
-        private SoundController buttonSound;
-
         public MainWindow()
         {
             InitializeComponent();
 
-            
-            //MusicController.Initialize("Sounds\\mainMenu.mp3");
-            //MusicController.Play();
-            //MusicController.SetVolume(0.5);
-
-            //buttonSound = new SoundController("Sounds\\button_click.mp3");
+            //Music.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\mainMenu.mp3");
         }
 
         //--=========================Button Events========================--
@@ -58,14 +51,14 @@ namespace PracticeAlpha_WPF_Edition
 
         private async void CloseClick(object sender, MouseButtonEventArgs e)
         {
-            //buttonSound.PlayAsync();
+            //Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
             await Task.Delay(300);
             this.Close();
         }
 
         private void Exit_MouseEnter(object sender, MouseEventArgs e)
         {
-            Mouse.OverrideCursor = Cursors.Hand;    
+            Mouse.OverrideCursor = Cursors.Hand;
         }
 
         private void Exit_MouseLeave(object sender, MouseEventArgs e)
@@ -78,12 +71,12 @@ namespace PracticeAlpha_WPF_Edition
         //--=========================Click Play===========================--
         private void ClickPlay(object sender, RoutedEventArgs e)
         {
-            //buttonSound.PlayAsync();
+            //Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
             var levelSelector = new LevelSelector();
             Application.Current.MainWindow = levelSelector;
 
-            this.Close();    
+            this.Close();
             levelSelector.Show();
         }
         //--=========================Click Play===========================--
@@ -92,12 +85,13 @@ namespace PracticeAlpha_WPF_Edition
         private void ClickMultiplay(object sender, RoutedEventArgs e)
         {
             //buttonSound.PlayAsync();
+            //Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
-            //var multiplayMenu = new MultiplayMenu();
-            //Application.Current.MainWindow = multiplayMenu;
+            var level1_Multiplayer = new Level1_Multiplayer();
+            Application.Current.MainWindow = level1_Multiplayer;
 
-            //this.Close();
-            //multiplayMenu.Show();
+            this.Close();
+            level1_Multiplayer.Show();
         }
         //--=========================Click Play===========================--
 
@@ -105,7 +99,7 @@ namespace PracticeAlpha_WPF_Edition
         private void ApplyEffect(Window win)
         {
             System.Windows.Media.Effects.BlurEffect objBlur = new System.Windows.Media.Effects.BlurEffect();
-            objBlur.Radius = 10;
+            objBlur.Radius = 15;
             win.Effect = objBlur;
         }
 
@@ -117,8 +111,10 @@ namespace PracticeAlpha_WPF_Edition
         private void ClickScore(object sender, RoutedEventArgs e)
         {
             string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
-            //Вот путь Идира я не знаю, так-что этот путь не перепутаете.
-            //string connectionString = "Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version3;";
+            
+            Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
+
+           // string connectionString = "Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
             List<String> arr = new List<string>();
             using (var connection = new SQLiteConnection(connectionString))
             {
@@ -133,7 +129,8 @@ namespace PracticeAlpha_WPF_Edition
                             string Name = reader.GetString(0);
                             string Points = Convert.ToString(reader.GetValue(1));
                             string Time = reader.GetString(2);
-                            arr.Add(Name + "\t\t" + Points + "\t\t" + Time);
+                            string Score = Convert.ToString(reader.GetValue(1));
+                            arr.Add(Name + "\t\t" + Score);
                         }
                         ScoreList.ItemsSource = arr;
                     }
@@ -146,6 +143,7 @@ namespace PracticeAlpha_WPF_Edition
 
         private void CloseScore(object sender, EventArgs e)
         {
+            //Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
             //buttonSound.PlayAsync();
             ClearEffect(this);
         }
@@ -155,7 +153,6 @@ namespace PracticeAlpha_WPF_Edition
             ScorePopUp.IsOpen = false;
         }
 
-        //--=========================Score===========================--
-
+            //--=========================Score===========================--
     }
 }

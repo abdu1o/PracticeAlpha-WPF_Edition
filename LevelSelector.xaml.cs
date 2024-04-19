@@ -1,4 +1,5 @@
-﻿using PracticeAlpha_WPF_Edition.Levels;
+﻿using Microsoft.Win32;
+using PracticeAlpha_WPF_Edition.Levels;
 using PracticeAlpha_WPF_Edition.SoundControl;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,11 @@ namespace PracticeAlpha_WPF_Edition
 {
     public partial class LevelSelector : Window
     {
-        private SoundController buttonSound;
         private List<string> _levelsPicture = new List<string>();
         private int _countLevel;
         private int _currentLevel;
+
+        private string customMusic = " ";
 
         public LevelSelector()
         {
@@ -42,7 +44,6 @@ namespace PracticeAlpha_WPF_Edition
             _levelsPicture.Add("Resources/LevelsPicture/Level3.png");
         }
 
-
         private void CheckEnable() // Kostili
         {       
             if (_countLevel <= 1)
@@ -61,8 +62,7 @@ namespace PracticeAlpha_WPF_Edition
         
         private void NextLevel(object sender, RoutedEventArgs e)
         {
-            //buttonSound = new SoundController("Sounds\\button_click.mp3");
-            //buttonSound.PlayAsync();
+            Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
             if (_currentLevel + 1 >= _countLevel)
             {
@@ -87,8 +87,7 @@ namespace PracticeAlpha_WPF_Edition
 
         private void PreviousLevel(object sender, RoutedEventArgs e)
         {
-            //buttonSound = new SoundController("Sounds\\button_click.mp3");
-            //buttonSound.PlayAsync();
+            Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
 
             if (_currentLevel - 1 <= 1)
@@ -137,20 +136,28 @@ namespace PracticeAlpha_WPF_Edition
         {
             if(_currentLevel == 1)
             {
-                //buttonSound = new SoundController("Sounds\\button_click.mp3");
-                //buttonSound.PlayAsync();
+                Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
-                var level1 = new Level1();
-                Application.Current.MainWindow = level1;
+                if (customMusic == " ")
+                {
+                    var level1 = new Level1();
+                    Application.Current.MainWindow = level1;
 
-                this.Close();
-                level1.Show();
+                    this.Close();
+                    level1.Show();
+                }
+                else
+                {
+                    var level1 = new Level1(customMusic);
+                    Application.Current.MainWindow = level1;
+
+                    this.Close();
+                    level1.Show();
+                }
             }
         }
 
-
         // --============= Exit ==============--
-
         private void Window_Exit(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape) 
@@ -161,8 +168,56 @@ namespace PracticeAlpha_WPF_Edition
                 mainWindow.Show();
             }
         }
-
         // --============= Exit ==============--
 
+        private void ButtonMusic_MouseEnter(object sender, MouseEventArgs e)
+        {
+            MusicButton.Foreground = new SolidColorBrush(Colors.Red);
+            Mouse.OverrideCursor = Cursors.Hand;
+        }
+
+        private void ButtonMusic_MouseLeave(object sender, MouseEventArgs e)
+        {
+            MusicButton.Foreground = new SolidColorBrush(Colors.White);
+            Mouse.OverrideCursor = null;
+        }
+
+        private void DefaultMusic_MouseEnter(object sender, MouseEventArgs e)
+        {
+            DefaultButton.Foreground = new SolidColorBrush(Colors.Red);
+            Mouse.OverrideCursor = Cursors.Hand;
+        }
+
+        private void DefaultMusic_MouseLeave(object sender, MouseEventArgs e)
+        {
+            DefaultButton.Foreground = new SolidColorBrush(Colors.White);
+            Mouse.OverrideCursor = null;
+        }
+
+        private void SelectMusic_Click(object sender, RoutedEventArgs e)
+        {
+            Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Файлы MP3 (*.mp3)|*.mp3|Все файлы (*.*)|*.*";
+            openFileDialog.FilterIndex = 1;
+            openFileDialog.Multiselect = false;
+
+            bool? result = openFileDialog.ShowDialog();
+
+            if (result == true)
+            {
+                customMusic = openFileDialog.FileName;
+            }
+            InfoText.Text = "Current music: " + customMusic;
+        }
+
+        private void DefaultMusic_Click(object sender, RoutedEventArgs e)
+        {
+            Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
+
+            customMusic = " ";
+            InfoText.Text = "Music restored to default";
+        }
     }
 }

@@ -1,50 +1,55 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using NAudio.Wave;
 using System.Windows.Media;
 
 namespace PracticeAlpha_WPF_Edition.SoundControl
 {
-    public class SoundController
+    static class Sound
     {
-        private IWavePlayer player;
-        private AudioFileReader audioFileReader;
-        private string sound;
-
-        public SoundController(string sound)
+        public static void Play(string path)
         {
-            this.sound = sound;
-            InitializeAudio();
+            SoundController.Initialize(path);
+            SoundController.Play();
+            SoundController.SetVolume(0.5);
         }
 
-        private void InitializeAudio()
+        public static void Play(string path, double volume)
         {
-            player = new WaveOutEvent();
-            player.PlaybackStopped += (sender, args) =>
-            {
-                player.Stop();
-                audioFileReader.Position = 0;
-            };
+            SoundController.Initialize(path);
+            SoundController.Play();
+            SoundController.SetVolume(volume);
+        }
+    }
 
-            audioFileReader = new AudioFileReader(this.sound);
-            player.Init(audioFileReader);
+    static class SoundController
+    {
+        private static MediaPlayer mediaPlayer = new MediaPlayer();
+        private static string sound;
+
+        public static void Initialize(string path)
+        {
+            sound = path;
+            mediaPlayer.Open(new Uri(sound, UriKind.Relative));
         }
 
-        public async Task PlayAsync()
+        public static void Play()
         {
-            await Task.Run(() => player.Play());
+            mediaPlayer.Play();
         }
 
-        public void Stop()
+        public static void Stop()
         {
-            player.Stop();
+            mediaPlayer.Stop();
         }
 
-        public void SetVolume(double volume)
+        public static void SetVolume(double volume)
         {
             if (volume >= 0 && volume <= 1)
             {
-                player.Volume = (float)volume;
+                mediaPlayer.Volume = volume;
             }
         }
     }

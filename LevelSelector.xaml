@@ -38,37 +38,44 @@
             </Button.RenderTransform>
 
             <Image Source="Resources/Icons/switch.png" Stretch="Uniform"/>
-
-            <!--<Grid>
-                <Polygon Points="0,0 80,35 0,80" Fill="Black"  Margin="80, 0, 0 , 0"/>
-                <Rectangle Width="80" Height="30" Fill="Black" Margin="0, -5, 50 , 0"/>
-            </Grid>-->
-        </Button>
-
-        <Button Name="NextButton" Grid.Column="3" Grid.Row="1" Style="{StaticResource SelectLevel}" Click="NextLevel" MouseEnter="Arrow_MouseEnter" MouseLeave="Arrow_MouseLeave">
-
-            <Image Source="Resources/Icons/switch.png" Stretch="Uniform"/>
-
-            <!--<Grid>
-                <Polygon Points="0, 0, 80,35 0,80" Fill="Black"  Margin="80, 0, 0 , 0"/>
-                <Rectangle Width="80" Height="30" Fill="Black" Margin="0, -5, 50 , 0"/>
-            </Grid>-->
-
         </Button>
         <!--============Buttons Select Level============-->
+        
+        <Button Name="NextButton" Grid.Column="3" Grid.Row="1" Style="{StaticResource SelectLevel}" Click="NextLevel" 
+                MouseEnter="Arrow_MouseEnter" MouseLeave="Arrow_MouseLeave">
+            <Image Source="Resources/Icons/switch.png" Stretch="Uniform"/>
+        </Button>
 
+        <Label Content="Choose Music" VerticalAlignment="Center" HorizontalContentAlignment="Center"
+               HorizontalAlignment="Left" MouseLeftButtonDown="SelectMusic_Click"
+               Grid.Column="1" Margin="292,0,0,0" Name = "MusicButton"  
+               FontFamily="{StaticResource Undertale}" Padding="10"
+               FontSize="40" Foreground="White" Background="#0f0f0f" 
+               BorderBrush="Black" BorderThickness="10"
+               MouseEnter="ButtonMusic_MouseEnter"
+               MouseLeave="ButtonMusic_MouseLeave"/>
 
+        <Label Content="Default" VerticalAlignment="Center" HorizontalContentAlignment="Center"
+               HorizontalAlignment="Left" MouseLeftButtonDown="DefaultMusic_Click"
+               Grid.Column="1" Margin="711,0,0,0" Name = "DefaultButton"  
+               FontFamily="{StaticResource Undertale}" Padding="10"
+               FontSize="40" Foreground="White" Background="#0f0f0f" 
+               BorderBrush="Black" BorderThickness="10"
+               MouseEnter="DefaultMusic_MouseEnter"
+               MouseLeave="DefaultMusic_MouseLeave"/>
+
+        <TextBlock Text=" " VerticalAlignment="Bottom" HorizontalAlignment="Center" 
+               Grid.Row="2" Grid.Column="1" Name = "InfoText" Foreground="Red" FontSize="30" 
+               FontFamily="{StaticResource Undertale}" Padding="10"
+               TextTrimming="CharacterEllipsis" Width="700" TextAlignment="Center"/>
 
         <!--================Level Selector===============-->
-
         <Button Name="Selector" Style="{StaticResource SelectLevel}" Grid.Column="1" Grid.Row="1" Margin="0" Click="ChooseLevel" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave">
             <Grid>
                 <Image Name="LevelImage" Source="Resources/LevelsPicture/Level1.png" Width="617" Height="564"/>
                 <TextBlock Name="LevelText" Text="STAGE 1" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="White" FontSize="125" FontWeight="Bold" FontFamily="{StaticResource Undertale}" Margin="0,30,0,0"/>
             </Grid>
         </Button>
-
-
         <!--================Level Selector===============-->
 
     </Grid>

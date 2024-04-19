@@ -7,6 +7,23 @@ using System.Windows.Media;
 
 namespace PracticeAlpha_WPF_Edition.SoundControl
 {
+    static class Music
+    {
+        public static void Play(string path)
+        {
+            MusicController.Initialize(path);
+            MusicController.Play();
+            MusicController.SetVolume(0.5);
+        }
+
+        public static void Play(string path, double volume)
+        {
+            MusicController.Initialize(path);
+            MusicController.Play();
+            MusicController.SetVolume(volume);
+        }
+    }
+
     public static class MusicController
     {
         private static MediaPlayer mediaPlayer = new MediaPlayer();
