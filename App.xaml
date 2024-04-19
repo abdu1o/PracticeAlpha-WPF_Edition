@@ -167,6 +167,30 @@
         
         <!--============Buttons Select Level============-->
 
+        <!--============Button Close Score============-->
+
+
+        <ImageBrush x:Key="stng" ImageSource="/PracticeAlpha-WPF_Edition;component/Resources/Icons/closeV2.png"/>
+
+        <Style x:Key="ScoreCloseBut" TargetType="Button">
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Background" Value="{StaticResource stng}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource stng}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!--============Button Close Score============-->
+
 
         <Style TargetType="Label" x:Key="DeadLabel">
             
