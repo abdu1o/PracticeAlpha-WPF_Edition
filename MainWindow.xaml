@@ -122,9 +122,9 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="7*"/>
-                    <RowDefinition Height="7*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <ListBox x:Name="ScoreList" Grid.Row="2" Grid.Column="1"/>
+                <ListBox x:Name="ScoreList" Grid.Row="1" Grid.Column="1"/>
                 <Button HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="2" Grid.Row="0" Height="40" Width="40" BorderBrush="Black" Style="{StaticResource ScoreCloseBut}" Click="ScoreClose">
                 </Button>
             </Grid>

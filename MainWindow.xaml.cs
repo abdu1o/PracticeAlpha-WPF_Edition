@@ -118,14 +118,14 @@ namespace PracticeAlpha_WPF_Edition
         {
             string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
             //Вот путь Идира я не знаю, так-что этот путь не перепутаете.
-            //string connectionString = "C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version3;";
+            //string connectionString = "Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version3;";
             List<String> arr = new List<string>();
             using (var connection = new SQLiteConnection(connectionString))
             {
                 connection.Open();
                 using (var command = new SQLiteCommand(connection))
                 {
-                    command.CommandText = "SELECT Login.Name, Score.Points FROM Score LEFT JOIN Login ON Score.Player_ID = Login.ID";
+                    command.CommandText = "SELECT Login.Name, Score.Points, Score.Time FROM Score LEFT JOIN Login ON Score.Player_ID = Login.ID";
                     using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
