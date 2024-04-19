@@ -229,5 +229,25 @@ namespace PracticeAlpha_WPF_Edition.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] Player1 {
+            get {
+                object obj = ResourceManager.GetObject("Player1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] Player2 {
+            get {
+                object obj = ResourceManager.GetObject("Player2", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

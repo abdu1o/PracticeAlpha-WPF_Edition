@@ -97,7 +97,7 @@ namespace PracticeAlpha_WPF_Edition
         private void ApplyEffect(Window win)
         {
             System.Windows.Media.Effects.BlurEffect objBlur = new System.Windows.Media.Effects.BlurEffect();
-            objBlur.Radius = 10;
+            objBlur.Radius = 15;
             win.Effect = objBlur;
         }
 
@@ -108,12 +108,16 @@ namespace PracticeAlpha_WPF_Edition
 
         private void ClickScore(object sender, RoutedEventArgs e)
         {
+            //string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
+            //Вот путь Идира я не знаю, так-что этот путь не перепутаете.
+
             Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
-            string connectionString = "Data Source=Player.db;Version=3;";
-            List<String> arr = null;
+            string connectionString = "Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
+            List<String> arr = new List<string>();
             using (var connection = new SQLiteConnection(connectionString))
             {
+                connection.Open();
                 using (var command = new SQLiteCommand(connection))
                 {
                     command.CommandText = "SELECT Login.Name, Score.Points FROM Score LEFT JOIN Login ON Score.Player_ID = Login.ID";
@@ -121,20 +125,22 @@ namespace PracticeAlpha_WPF_Edition
                     {
                         while (reader.Read())
                         {
-                            arr.Add(reader.GetString(1));
+                            string Name = reader.GetString(0);
+                            string Score = Convert.ToString(reader.GetValue(1));
+                            arr.Add(Name + "\t\t" + Score);
                         }
                         ScoreList.ItemsSource = arr;
                     }
                 }
+                connection.Close();
+                ScorePopUp.IsOpen = true;
+                ApplyEffect(this);
             }
-            ScorePopUp.IsOpen = true;
-            ApplyEffect(this);
         }
 
         private void CloseScore(object sender, EventArgs e)
         {
-            Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
-
+            //buttonSound.PlayAsync();
             ClearEffect(this);
         }
 
