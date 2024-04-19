@@ -44,15 +44,27 @@ namespace PracticeAlpha_WPF_Edition.Levels
         public Level1()
         {
             InitializeComponent();
+            GameInitialized();
 
+            Music.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\level1.mp3", 0.4);
+        }
+
+        public Level1(string customMusic)
+        {
+            InitializeComponent();
+            GameInitialized();
+
+            Music.Play(customMusic, 0.4);
+        }
+
+        public void GameInitialized()
+        {
             Uri cursorUri = new Uri("pack://application:,,,/PracticeAlpha-WPF_Edition;component/Resources/Icons/cursor.cur");
             StreamResourceInfo streamInfo = Application.GetResourceStream(cursorUri);
 
             //Custom cursor
             Cursor customCursor = new Cursor(streamInfo.Stream);
             this.Cursor = customCursor;
-
-            Music.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\level1.mp3", 0.4);
 
             levelTimer = new DispatcherTimer();
             levelTimer.Interval = TimeSpan.FromSeconds(1);
