@@ -39,7 +39,8 @@
 
             <Image Source="Resources/Icons/switch.png" Stretch="Uniform"/>
         </Button>
-
+        <!--============Buttons Select Level============-->
+        
         <Button Name="NextButton" Grid.Column="3" Grid.Row="1" Style="{StaticResource SelectLevel}" Click="NextLevel" 
                 MouseEnter="Arrow_MouseEnter" MouseLeave="Arrow_MouseLeave">
             <Image Source="Resources/Icons/switch.png" Stretch="Uniform"/>
@@ -62,9 +63,11 @@
                BorderBrush="Black" BorderThickness="10"
                MouseEnter="DefaultMusic_MouseEnter"
                MouseLeave="DefaultMusic_MouseLeave"/>
-        <!--============Buttons Select Level============-->
 
-
+        <TextBlock Text=" " VerticalAlignment="Bottom" HorizontalAlignment="Center" 
+               Grid.Row="2" Grid.Column="1" Name = "InfoText" Foreground="Red" FontSize="30" 
+               FontFamily="{StaticResource Undertale}" Padding="10"
+               TextTrimming="CharacterEllipsis" Width="700" TextAlignment="Center"/>
 
         <!--================Level Selector===============-->
         <Button Name="Selector" Style="{StaticResource SelectLevel}" Grid.Column="1" Grid.Row="1" Margin="0" Click="ChooseLevel" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave">

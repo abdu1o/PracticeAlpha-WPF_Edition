@@ -208,8 +208,8 @@ namespace PracticeAlpha_WPF_Edition
             if (result == true)
             {
                 customMusic = openFileDialog.FileName;
-                MessageBox.Show("Custom music upload");
             }
+            InfoText.Text = "Current music: " + customMusic;
         }
 
         private void DefaultMusic_Click(object sender, RoutedEventArgs e)
@@ -217,7 +217,7 @@ namespace PracticeAlpha_WPF_Edition
             Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
             customMusic = " ";
-            MessageBox.Show("Level music restored to default");
+            InfoText.Text = "Music restored to default";
         }
     }
 }
