@@ -9,9 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Threading;
-using System.Data.SQLite;
-using System.Collections.Generic;
+
 
 namespace PracticeAlpha_WPF_Edition
 {
