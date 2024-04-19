@@ -155,6 +155,8 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\DataBase\Player.db" />
+    <None Include="Resources\DataBase\Player.sqbpro" />
     <Resource Include="Resources\ButtonItems\Knife.png" />
     <Resource Include="Resources\Fonts\Undertale-Battle-Font.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
