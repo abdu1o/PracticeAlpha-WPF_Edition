@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Controls;
 namespace PracticeAlpha_WPF_Edition.EntitiesController
 {
-    internal class Enemy
+    public class Enemy
     {
         public Image EnemyImage { get; set; }
         public double X { get; set; }

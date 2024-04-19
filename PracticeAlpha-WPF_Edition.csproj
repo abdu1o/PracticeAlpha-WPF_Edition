@@ -85,6 +85,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="EntitiesController\Bullet.cs" />
+    <Compile Include="EntitiesController\Calculator\Calculator.cs" />
     <Compile Include="EntitiesController\Enemy.cs" />
     <Compile Include="EntitiesController\Spawner\Spawn.cs" />
     <Compile Include="LevelSelector.xaml.cs">

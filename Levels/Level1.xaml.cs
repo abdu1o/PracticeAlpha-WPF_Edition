@@ -1,10 +1,8 @@
 ﻿using PracticeAlpha_WPF_Edition.EntitiesController;
+using PracticeAlpha_WPF_Edition.EntitiesController.Calculator;
 using PracticeAlpha_WPF_Edition.SoundControl;
 using System;
 using System.Collections.Generic;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -22,27 +20,26 @@ namespace PracticeAlpha_WPF_Edition.Levels
         private double playerSpeed = 3;
         private double bulletSpeed = 20;
         private double shootSpeed = 350;
+        private bool isMovingUp, isMovingDown, isMovingLeft, isMovingRight;
 
         private double enemySpeed = 0;
         private double spawnTime = 400;
-
-        private Player player;
-        private bool isMovingUp, isMovingDown, isMovingLeft, isMovingRight;
-
-        private List<Enemy> enemies = new List<Enemy>();
-
-        private DispatcherTimer timer;
-        private DispatcherTimer shootingTimer;
-        private DispatcherTimer levelTimer;
-        private DispatcherTimer periodicTimer;
+        
+        private DispatcherTimer timer, shootingTimer, levelTimer, periodicTimer;
 
         private TimeSpan elapsedTime;
 
         private List<Bullet> bullets = new List<Bullet>();
+        private List<Enemy> enemies = new List<Enemy>();
 
         private Spawn spawn;
+        private Player player;
+        private Calculator calculator = new Calculator();  
+
         private int countOfLocation = 8;
         private int timeStart = 0;
+
+        private int scoreValue = 0;
 
         public Level1()
         {
@@ -110,12 +107,12 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
         private void PeriodicTimer_Tick(object sender, EventArgs e)
         {
-            enemySpeed += 0.5;
-            spawnTime -= 20;
+            enemySpeed += 0.8;
+            spawnTime -= 25;
 
-            if (enemySpeed > 12)
+            if (enemySpeed > 14)
             {
-                enemySpeed = 12;
+                enemySpeed = 14;
             }
             if (spawnTime < 100)
             {
@@ -125,7 +122,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if (IsPlayerHit())
+            if (calculator.IsPlayerHit(player, enemies))
             {
                 GameOver();
                 return;
@@ -140,22 +137,6 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
             UpdatePlayerMovement();
             UpdateBullets();
-        }
-
-        private bool IsPlayerHit()
-        {
-            foreach (Enemy enemy in enemies)
-            {
-                Rect playerRect = new Rect(player.X, player.Y, player.Width, player.Height);
-                Rect enemyRect = new Rect(enemy.X, enemy.Y, enemy.Width, enemy.Height);
-
-                if (playerRect.IntersectsWith(enemyRect))
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         private void GameOver()
@@ -240,7 +221,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\shoot.mp3", 0.2);
+                Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\shoot.mp3", 0.1);
             });
 
             Point mousePosition = Mouse.GetPosition(mainCanvas);
@@ -251,7 +232,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
             Bullet bullet = new Bullet(0, 0, 10, 10, bulletSpeed);
             bullet.Angle = angle;
 
-            RotatePoint(player.X + player.Width / 2, player.Y + player.Height / 2, player.X + player.Width / 2, player.Y + player.Height / 2, player.Rotation, out double rotatedX, out double rotatedY);
+            calculator.RotatePoint(player.X + player.Width / 2, player.Y + player.Height / 2, player.X + player.Width / 2, player.Y + player.Height / 2, player.Rotation, out double rotatedX, out double rotatedY);
 
             bullet.X = rotatedX;
             bullet.Y = rotatedY;
@@ -261,15 +242,6 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
             Canvas.SetLeft(bullet.BulletImage, bullet.X);
             Canvas.SetTop(bullet.BulletImage, bullet.Y);
-        }
-
-        private void RotatePoint(double x, double y, double centerX, double centerY, double angle, out double rotatedX, out double rotatedY)
-        {
-            double cos = Math.Cos(angle);
-            double sin = Math.Sin(angle);
-
-            rotatedX = cos * (x - centerX) - sin * (y - centerY) + centerX;
-            rotatedY = sin * (x - centerX) + cos * (y - centerY) + centerY;
         }
 
         private void UpdateBullets()
@@ -285,7 +257,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
                 foreach (Enemy enemy in enemies)
                 {
-                    if (IsCollision(bullet, enemy))
+                    if (calculator.IsCollision(bullet, enemy))
                     {
                         HandleBulletCollision(bullet, enemy);
                         break;
@@ -300,13 +272,12 @@ namespace PracticeAlpha_WPF_Edition.Levels
                 }
             }
         }
-
-        private bool IsCollision(Bullet bullet, Enemy enemy)
+        
+        private void SetEnemyModel(Enemy enemy, int width, int height, string path )
         {
-            Rect rect1 = new Rect(bullet.X, bullet.Y, bullet.Width, bullet.Height);
-            Rect rect2 = new Rect(enemy.X, enemy.Y, enemy.Width, enemy.Height);
-
-            return rect1.IntersectsWith(rect2);
+            enemy.EnemyImage.Width = width;
+            enemy.EnemyImage.Height = height;
+            enemy.EnemyImage.Source = new BitmapImage(new Uri(path, UriKind.Relative));
         }
 
         private void HandleBulletCollision(Bullet bullet, Enemy enemy)
@@ -322,28 +293,25 @@ namespace PracticeAlpha_WPF_Edition.Levels
             switch (randomNumber)
             {
                 case 1:
-                    enemy.EnemyImage.Width = 70;
-                    enemy.EnemyImage.Height = 60;
-                    enemy.EnemyImage.Source = new BitmapImage(new Uri("/PracticeAlpha-WPF_Edition;component/Resources/Entities/dead_enemy1.png", UriKind.Relative));
+                    SetEnemyModel(enemy, 70, 60, "/PracticeAlpha-WPF_Edition;component/Resources/Entities/dead_enemy1.png");
                     break;
 
                 case 2:
-                    enemy.EnemyImage.Width = 80;
-                    enemy.EnemyImage.Height = 50;
-                    enemy.EnemyImage.Source = new BitmapImage(new Uri("/PracticeAlpha-WPF_Edition;component/Resources/Entities/dead_enemy2.png", UriKind.Relative));
+                    SetEnemyModel(enemy, 80, 50, "/PracticeAlpha-WPF_Edition;component/Resources/Entities/dead_enemy2.png");
                     break;
 
                 case 3:
-                    enemy.EnemyImage.Width = 95;
-                    enemy.EnemyImage.Height = 35;
-                    enemy.EnemyImage.Source = new BitmapImage(new Uri("/PracticeAlpha-WPF_Edition;component/Resources/Entities/dead_enemy3.png", UriKind.Relative));
+                    SetEnemyModel(enemy, 95, 35, "/PracticeAlpha-WPF_Edition;component/Resources/Entities/dead_enemy3.png");
                     break;
             }
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\deathSoundEnemy.mp3", 0.2);
+                Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\deathSoundEnemy.mp3", 0.05);
             });
+
+            scoreValue += 30;
+            scoreText.Text = scoreValue.ToString("D5");
         }
 
         //--====Movement====--
@@ -429,24 +397,17 @@ namespace PracticeAlpha_WPF_Edition.Levels
         private void Window_MouseMove(object sender, MouseEventArgs e)
         {
             Point currentPosition = e.GetPosition(mainCanvas);
-            double angle = CalculateAngle(player.X + player.Width / 2, player.Y + player.Height / 2, currentPosition.X, currentPosition.Y);
+            double angle = calculator.CalculateAngle(player.X + player.Width / 2, player.Y + player.Height / 2, currentPosition.X, currentPosition.Y);
 
             RotateTransform rotateTransform = new RotateTransform(angle);
             player.PlayerImage.RenderTransform = rotateTransform;
         }
 
-        private double CalculateAngle(double x1, double y1, double x2, double y2)
-        {
-            double angleRad = Math.Atan2(y2 - y1, x2 - x1);
-            return angleRad * (180 / Math.PI);
-        }
-
-
         // Enemy Methods
         private void UpdateEnemyMovement(Enemy enemy)
         {
             ChangeEnemyPosition(enemy);
-            double angle = CalculateAngle(enemy.X + enemy.Width / 2, enemy.Y + enemy.Height / 2, player.X, player.Y);
+            double angle = calculator.CalculateAngle(enemy.X + enemy.Width / 2, enemy.Y + enemy.Height / 2, player.X, player.Y);
             RotateTransform rotateTransform = new RotateTransform(angle);
             enemy.EnemyImage.RenderTransform = rotateTransform;
 
