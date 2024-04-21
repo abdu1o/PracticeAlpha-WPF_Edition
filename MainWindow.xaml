@@ -132,5 +132,26 @@
 
         <!--===================Score Popup==================-->
 
+        <!--===================Login Popup==================-->
+
+        <Popup x:Name="LoginPopUp" StaysOpen="true" MinHeight="40" MinWidth="400" Placement="Center" AllowsTransparency="false" Focusable="True" Closed="CloseLogin" AllowDrop="False">
+            <Grid>
+                <Grid.Background>
+                    <ImageBrush ImageSource="/PracticeAlpha-WPF_Edition;component/Resources/Backgrounds/bgScore.png"/>
+                </Grid.Background>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBox x:Name="LoginName" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="0" Grid.Row="0" MinHeight="20" MinWidth="280" BorderBrush="Black"/>
+                <Button x:Name="loginOk" Content="OK" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="2" Grid.Row="0" MinHeight="20" MinWidth="40" BorderBrush="Black" Click="LoginSend"/>
+            </Grid>
+        </Popup>
+
+        <!--===================Login Popup==================-->
+
     </Grid>
 </Window>

@@ -18,7 +18,7 @@ namespace PracticeAlpha_WPF_Edition
         public MainWindow()
         {
             InitializeComponent();
-
+            LoginPopUp.IsOpen = true;
             //Music.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\mainMenu.mp3");
         }
 
@@ -127,10 +127,9 @@ namespace PracticeAlpha_WPF_Edition
                         while (reader.Read())
                         {
                             string Name = reader.GetString(0);
-                            string Points = Convert.ToString(reader.GetValue(1));
+                            string Points = reader.GetString(1);
                             string Time = reader.GetString(2);
-                            string Score = Convert.ToString(reader.GetValue(1));
-                            arr.Add(Name + "\t\t" + Score);
+                            arr.Add(Name + "\t\t" + Points + "\t\t" + Time);
                         }
                         ScoreList.ItemsSource = arr;
                     }
@@ -153,6 +152,63 @@ namespace PracticeAlpha_WPF_Edition
             ScorePopUp.IsOpen = false;
         }
 
-            //--=========================Score===========================--
+        //--=========================Score===========================--
+
+        //--=========================Login===========================--
+
+        private void LoginSend(object sender, RoutedEventArgs e)
+        {
+            if (LoginName.Text.Length > 0)
+            {
+                int PID = -1;
+                string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
+                // string connectionString = "Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
+                Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
+                using (var connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+                    using (var command = new SQLiteCommand(connection))
+                    {
+                        command.CommandText = $"SELECT ID FROM Login WHERE Name = '{LoginName.Text}'";
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                PID = reader.GetInt32(0);
+                            }
+                        }
+                        if (PID == -1)
+                        {
+                            command.CommandText = $"INSERT INTO Login (Name) VALUES ('{LoginName.Text}')";
+                            command.ExecuteNonQuery();
+                            command.CommandText = $"SELECT ID FROM Login WHERE Name = '{LoginName.Text}'";
+                            using (var reader = command.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    PID = reader.GetInt32(0);
+                                }
+                            }
+                            command.CommandText = $"INSERT INTO Score (Player_ID, Points, Time) VALUES ({PID}, 0, 0)";
+                            command.ExecuteNonQuery();
+                            LoginPopUp.IsOpen = false;
+                        }
+                        else
+                        {
+                            LoginPopUp.IsOpen = false;
+                        }
+                    }
+                    connection.Close();
+                }
+            }
+        }
+
+        private void CloseLogin(object sender, EventArgs e)
+        {
+
+        }
+
+        //--=========================Login===========================--
+
     }
 }
