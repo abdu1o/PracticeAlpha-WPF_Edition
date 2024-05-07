@@ -23,9 +23,9 @@ namespace PracticeAlpha_WPF_Edition.Levels
         private bool isMovingUp, isMovingDown, isMovingLeft, isMovingRight;
 
         private double enemySpeed = 0;
-        private double spawnTime = 400;
+        private int spawnTime = 4;
         
-        private DispatcherTimer timer, shootingTimer, levelTimer, periodicTimer;
+        private DispatcherTimer timer, shootingTimer, levelTimer, spawnTimer;
 
         private TimeSpan elapsedTime;
 
@@ -33,11 +33,11 @@ namespace PracticeAlpha_WPF_Edition.Levels
         private List<Enemy> enemies = new List<Enemy>();
 
         private Spawn spawn;
-        private Player player;
-        private Calculator calculator = new Calculator();  
+        private Player player; 
+        private Calculator calculator = new Calculator();
+        private Rectangle overlay;
 
         private int countOfLocation = 8;
-        private int timeStart = 0;
 
         private int scoreValue = 0;
 
@@ -71,14 +71,14 @@ namespace PracticeAlpha_WPF_Edition.Levels
             levelTimer.Tick += LevelTimer_Tick;
             levelTimer.Start();
 
-            periodicTimer = new DispatcherTimer();
-            periodicTimer.Interval = TimeSpan.FromSeconds(10);
-            periodicTimer.Tick += PeriodicTimer_Tick;
-            periodicTimer.Start();
-
             shootingTimer = new DispatcherTimer();
             shootingTimer.Interval = TimeSpan.FromMilliseconds(shootSpeed);
             shootingTimer.Tick += ShootingTimer_Tick;
+
+            spawnTimer = new DispatcherTimer();
+            spawnTimer.Interval = TimeSpan.FromSeconds(spawnTime);
+            spawnTimer.Tick += SpawnTimer_Tick;
+            spawnTimer.Start();
 
             //--====Player initialization====--
             player = new Player(925, 500, 48, 36, "/PracticeAlpha-WPF_Edition;component/Resources/Entities/player.png");
@@ -106,6 +106,18 @@ namespace PracticeAlpha_WPF_Edition.Levels
             timer.Start();
         }
 
+        private void SpawnTimer_Tick(object sender, EventArgs e)
+        {
+            SetEnemySpawn();
+
+            enemySpeed += 0.4;
+
+            if (enemySpeed > 12)
+            {
+                enemySpeed = 12;
+            }
+        }
+
         private void LevelTimer_Tick(object sender, EventArgs e)
         {
             elapsedTime = elapsedTime.Add(TimeSpan.FromSeconds(1));
@@ -117,21 +129,6 @@ namespace PracticeAlpha_WPF_Edition.Levels
             timerText.Text = $"{elapsedTime.Minutes:D2}:{elapsedTime.Seconds:D2}";
         }
 
-        private void PeriodicTimer_Tick(object sender, EventArgs e)
-        {
-            enemySpeed += 0.8;
-            spawnTime -= 25;
-
-            if (enemySpeed > 14)
-            {
-                enemySpeed = 14;
-            }
-            if (spawnTime < 100)
-            {
-                spawnTime = 100;
-            }
-        }
-
         private void Timer_Tick(object sender, EventArgs e)
         {
             if (calculator.IsPlayerHit(player, enemies))
@@ -140,8 +137,6 @@ namespace PracticeAlpha_WPF_Edition.Levels
                 return;
             }
 
-            SetSpawnTimer(spawnTime);
-
             foreach (Enemy enemy in enemies)
             {
                 UpdateEnemyMovement(enemy);
@@ -149,6 +144,22 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
             UpdatePlayerMovement();
             UpdateBullets();
+        }
+        
+        private void StopTimers()
+        {
+            timer.Stop();
+            shootingTimer.Stop();
+            levelTimer.Stop();
+            spawnTimer.Stop();
+        }
+
+        public void ContinueTimers()
+        {
+            timer.Start();
+            shootingTimer.Start();
+            levelTimer.Start();
+            spawnTimer.Start();
         }
 
         private void GameOver()
@@ -162,35 +173,21 @@ namespace PracticeAlpha_WPF_Edition.Levels
                     player.PlayerImage.Width = 70;
                     player.PlayerImage.Height = 60;
                     player.PlayerImage.Source = new BitmapImage(new Uri("/PracticeAlpha-WPF_Edition;component/Resources/Entities/player_dead1.png", UriKind.Relative));
-                    MusicController.SetVolume(0.07);
                     break;
 
                 case 2:
                     player.PlayerImage.Width = 80;
                     player.PlayerImage.Height = 50;
                     player.PlayerImage.Source = new BitmapImage(new Uri("/PracticeAlpha-WPF_Edition;component/Resources/Entities/player_dead2.png", UriKind.Relative));
-                    MusicController.SetVolume(0.07);
                     break;
             }
-
-            timer.Stop();
-            shootingTimer.Stop();
-            levelTimer.Stop();
-            periodicTimer.Stop();
-
-            Rectangle overlay = new Rectangle
-            {
-                Fill = new SolidColorBrush(Color.FromArgb(128, 0, 0, 0)),
-                Width = this.ActualWidth,
-                Height = this.ActualHeight
-            };
-
             Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\deathSoundEnemy.mp3", 0.1);
 
-            mainCanvas.Children.Add(overlay);
-            Canvas.SetZIndex(overlay, 101);
+            MusicController.SetVolume(0.07);
+            StopTimers();
+            AddOverlay();
 
-            YouDead youDeadWindow = new YouDead();
+            YouDead youDeadWindow = new YouDead(false);
             youDeadWindow.Owner = this;
             youDeadWindow.ShowDialog();
 
@@ -200,6 +197,19 @@ namespace PracticeAlpha_WPF_Edition.Levels
         private void StartShooting()
         {
             shootingTimer.Start();
+        }
+
+        private void AddOverlay()
+        {
+            overlay = new Rectangle
+            {
+                Fill = new SolidColorBrush(Color.FromArgb(128, 0, 0, 0)),
+                Width = this.ActualWidth,
+                Height = this.ActualHeight
+            };
+
+            mainCanvas.Children.Add(overlay);
+            Canvas.SetZIndex(overlay, 101);
         }
 
         private void StopShooting()
@@ -358,6 +368,19 @@ namespace PracticeAlpha_WPF_Edition.Levels
                 case Key.D:
                     isMovingRight = isPressed;
                     break;
+
+                case Key.Escape:
+                    StopTimers();
+                    MusicController.SetVolume(0.07);
+
+                    AddOverlay();
+                    YouDead pauseWindow = new YouDead(true);
+                    pauseWindow.Owner = this;
+                    pauseWindow.ShowDialog();
+
+                    mainCanvas.Children.Remove(overlay);
+                    ContinueTimers();
+                    break;
             }
         }
 
@@ -514,16 +537,6 @@ namespace PracticeAlpha_WPF_Edition.Levels
             for (int location = 1; location <= countOfLocation; location++)
             {
                 enemies.Add(CreateEnemy(spawn, location));
-            }
-        }
-
-        private void SetSpawnTimer(double timer)
-        {
-            timeStart++;
-            if (timeStart == timer)
-            {
-                SetEnemySpawn();
-                timeStart = 0;
             }
         }
     }

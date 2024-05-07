@@ -55,7 +55,7 @@
     </Window.Resources>
 
     <Grid>
-        <Label Style="{StaticResource DeadLabel}" Content="YOU DEAD" Foreground="Red" FontSize="70" FontWeight="Bold" FontFamily="{StaticResource Undertale}" Margin="75,10,75,235"/>
+        <Label Name="mainLabel" HorizontalAlignment="Center" Style="{StaticResource DeadLabel}" Content="YOU DEAD" Foreground="Red" FontSize="70" FontWeight="Bold" FontFamily="{StaticResource Undertale}" Margin="0,10,0,235"/>
 
         <Border BorderThickness="3" BorderBrush="Black" Margin="150,161,150,119" Background="#303030" Name="BorderTryAgain" Style="{StaticResource HoverBorderStyle}">
             <Label Name="TryAgain" Content="Try again" Foreground="Black" FontSize="30" 

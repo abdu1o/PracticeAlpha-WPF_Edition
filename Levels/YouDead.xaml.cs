@@ -19,9 +19,19 @@ namespace PracticeAlpha_WPF_Edition.Levels
 {
     public partial class YouDead : Window
     {
-        public YouDead()
+        private bool pause;
+
+        public YouDead(bool isPause)
         {
+            pause = isPause;
+
             InitializeComponent();
+
+            if (isPause)
+            {
+                mainLabel.Content = "Pause";
+                TryAgain.Content = "Continue";
+            }
 
             Closing += YouDead_Closing;
         }
@@ -41,11 +51,19 @@ namespace PracticeAlpha_WPF_Edition.Levels
             //buttonSound = new SoundController("Sounds\\button_click.mp3");
             //buttonSound.PlayAsync();
 
-            Level1 new_level = new Level1();
-            new_level.Show();
+            if (pause)
+            {
+                YouDead pauseWindow = Application.Current.Windows.OfType<YouDead>().FirstOrDefault();
+                pauseWindow.Close();
+            }
+            else
+            {
+                Level1 new_level = new Level1();
+                new_level.Show();
 
-            Level1 old_level = Application.Current.Windows.OfType<Level1>().FirstOrDefault();
-            old_level.Close();
+                Level1 old_level = Application.Current.Windows.OfType<Level1>().FirstOrDefault();
+                old_level.Close();
+            }
         }
 
         private void Exit_Click(object sender, MouseButtonEventArgs e)
@@ -62,8 +80,12 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
         private void YouDead_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Level1 old_level = Application.Current.Windows.OfType<Level1>().FirstOrDefault();
-            old_level.Close();
+            if (!pause)
+            {
+                Level1 old_level = Application.Current.Windows.OfType<Level1>().FirstOrDefault();
+                old_level.Close();
+            }
+            
         }
     }
 }

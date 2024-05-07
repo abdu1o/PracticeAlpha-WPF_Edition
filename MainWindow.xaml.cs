@@ -18,7 +18,7 @@ namespace PracticeAlpha_WPF_Edition
         public MainWindow()
         {
             InitializeComponent();
-            LoginPopUp.IsOpen = true;
+            //LoginPopUp.IsOpen = true;
             //Music.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\mainMenu.mp3");
         }
 
@@ -110,11 +110,11 @@ namespace PracticeAlpha_WPF_Edition
 
         private void ClickScore(object sender, RoutedEventArgs e)
         {
-            string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
+            //string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
             
             Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
-           // string connectionString = "Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
+            string connectionString = "Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
             List<String> arr = new List<string>();
             using (var connection = new SQLiteConnection(connectionString))
             {
@@ -161,8 +161,9 @@ namespace PracticeAlpha_WPF_Edition
             if (LoginName.Text.Length > 0)
             {
                 int PID = -1;
-                string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
-                // string connectionString = "Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
+                //string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
+
+                string connectionString = "Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
                 Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
                 using (var connection = new SQLiteConnection(connectionString))
                 {
