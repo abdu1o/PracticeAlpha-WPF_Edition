@@ -10,6 +10,7 @@ using System.Windows.Media.Effects;
 using System.Threading;
 using System.Data.SQLite;
 using System.Collections.Generic;
+using PracticeAlpha_WPF_Edition.PlayerDataSave;
 
 namespace PracticeAlpha_WPF_Edition
 {
@@ -18,8 +19,13 @@ namespace PracticeAlpha_WPF_Edition
         public MainWindow()
         {
             InitializeComponent();
-            //LoginPopUp.IsOpen = true;
-            //Music.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\mainMenu.mp3");
+
+            if(PlayerInfo.isFirstStart) 
+            {
+                LoginPopUp.IsOpen = true;
+            }
+            
+            Music.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\mainMenu.mp3");
         }
 
         //--=========================Button Events========================--
@@ -165,12 +171,16 @@ namespace PracticeAlpha_WPF_Edition
 
                 string connectionString = "Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
                 Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
+
                 using (var connection = new SQLiteConnection(connectionString))
                 {
                     connection.Open();
                     using (var command = new SQLiteCommand(connection))
                     {
                         command.CommandText = $"SELECT ID FROM Login WHERE Name = '{LoginName.Text}'";
+
+                        PlayerInfo.Name = LoginName.Text;
+
                         using (var reader = command.ExecuteReader())
                         {
                             while (reader.Read())
@@ -200,6 +210,8 @@ namespace PracticeAlpha_WPF_Edition
                         }
                     }
                     connection.Close();
+
+                    PlayerInfo.isFirstStart = false;
                 }
             }
         }

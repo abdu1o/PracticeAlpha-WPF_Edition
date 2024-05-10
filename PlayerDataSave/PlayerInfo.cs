@@ -9,13 +9,14 @@ namespace PracticeAlpha_WPF_Edition.PlayerDataSave
 {
     internal class PlayerInfo
     {
-        public string Name {  get; set; }
+        public static string Name {  get; set; }
+        public static bool isFirstStart = true;
 
         static public void PushInfo(string name, string points, string time)
         {
             int PID = 1;
-            string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
-            // string connectionString = "Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
+            //string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
+            string connectionString = "Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
             using (var connection = new SQLiteConnection(connectionString))
             {
                 connection.Open();

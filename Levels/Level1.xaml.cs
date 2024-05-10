@@ -1,5 +1,6 @@
 ﻿using PracticeAlpha_WPF_Edition.EntitiesController;
 using PracticeAlpha_WPF_Edition.EntitiesController.Calculator;
+using PracticeAlpha_WPF_Edition.PlayerDataSave;
 using PracticeAlpha_WPF_Edition.SoundControl;
 using System;
 using System.Collections.Generic;
@@ -186,6 +187,8 @@ namespace PracticeAlpha_WPF_Edition.Levels
             MusicController.SetVolume(0.07);
             StopTimers();
             AddOverlay();
+
+            PlayerInfo.PushInfo(PlayerInfo.Name, scoreValue.ToString(), timerText.Text);
 
             YouDead youDeadWindow = new YouDead(false);
             youDeadWindow.Owner = this;
