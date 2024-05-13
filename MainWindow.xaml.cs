@@ -60,9 +60,12 @@ namespace PracticeAlpha_WPF_Edition
 
         private async void CloseClick(object sender, MouseButtonEventArgs e)
         {
-            //Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
-            await Task.Delay(300);
-            this.Close();
+            if (LoginPopUp.IsOpen == false)
+            {
+                //Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
+                await Task.Delay(300);
+                this.Close();
+            }
         }
 
         private void Exit_MouseEnter(object sender, MouseEventArgs e)
@@ -80,27 +83,33 @@ namespace PracticeAlpha_WPF_Edition
         //--=========================Click Play===========================--
         private void ClickPlay(object sender, RoutedEventArgs e)
         {
-            //Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
+            if (LoginPopUp.IsOpen == false)
+            {
+                //Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
-            var levelSelector = new LevelSelector();
-            Application.Current.MainWindow = levelSelector;
+                var levelSelector = new LevelSelector();
+                Application.Current.MainWindow = levelSelector;
 
-            this.Close();
-            levelSelector.Show();
+                this.Close();
+                levelSelector.Show();
+            }
         }
         //--=========================Click Play===========================--
 
         //--=========================Click Multiplay===========================--
         private void ClickMultiplay(object sender, RoutedEventArgs e)
         {
-            //buttonSound.PlayAsync();
-            //Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
+            if (LoginPopUp.IsOpen == false)
+            {
+                //buttonSound.PlayAsync();
+                //Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
-            var level1_Multiplayer = new Level1_Multiplayer();
-            Application.Current.MainWindow = level1_Multiplayer;
+                var level1_Multiplayer = new Level1_Multiplayer();
+                Application.Current.MainWindow = level1_Multiplayer;
 
-            this.Close();
-            level1_Multiplayer.Show();
+                this.Close();
+                level1_Multiplayer.Show();
+            }
         }
         //--=========================Click Play===========================--
 
@@ -119,39 +128,42 @@ namespace PracticeAlpha_WPF_Edition
 
         private void ClickScore(object sender, RoutedEventArgs e)
         {
-            //string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
-            
-            Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
-
-            string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;"; //"Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
-            List<DBItem> arr = new List<DBItem>();
-            using (var connection = new SQLiteConnection(connectionString))
+            if (LoginPopUp.IsOpen == false)
             {
-                connection.Open();
-                using (var command = new SQLiteCommand(connection))
+                //string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
+
+                Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
+
+                string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;"; //"Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
+                List<DBItem> arr = new List<DBItem>();
+                using (var connection = new SQLiteConnection(connectionString))
                 {
-                    command.CommandText = "SELECT Login.Name, Score.Points, Score.Time FROM Score LEFT JOIN Login ON Score.Player_ID = Login.ID";
-                    using (var reader = command.ExecuteReader())
+                    connection.Open();
+                    using (var command = new SQLiteCommand(connection))
                     {
-                        while (reader.Read())
+                        command.CommandText = "SELECT Login.Name, Score.Points, Score.Time FROM Score LEFT JOIN Login ON Score.Player_ID = Login.ID";
+                        using (var reader = command.ExecuteReader())
                         {
-                            DBItem item = new DBItem();
-                            string Name = reader.GetString(0);
-                            string Points = reader.GetString(1);
-                            string Time = reader.GetString(2);
-                            item.Name = Name;
-                            item.Points = Points;
-                            item.Time = Time;
-                            arr.Add(item);
+                            while (reader.Read())
+                            {
+                                DBItem item = new DBItem();
+                                string Name = reader.GetString(0);
+                                string Points = reader.GetString(1);
+                                string Time = reader.GetString(2);
+                                item.Name = Name;
+                                item.Points = Points;
+                                item.Time = Time;
+                                arr.Add(item);
+                            }
+                            ScoreList.ItemsSource = arr;
+                            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ScoreList.ItemsSource);
+                            view.SortDescriptions.Add(new SortDescription("Points", ListSortDirection.Descending));
                         }
-                        ScoreList.ItemsSource = arr;
-                        CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ScoreList.ItemsSource);
-                        view.SortDescriptions.Add(new SortDescription("Points", ListSortDirection.Descending));
                     }
+                    connection.Close();
+                    ScorePopUp.IsOpen = true;
+                    ApplyEffect(this);
                 }
-                connection.Close();
-                ScorePopUp.IsOpen = true;
-                ApplyEffect(this);
             }
         }
 
