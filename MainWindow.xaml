@@ -124,17 +124,50 @@
                     <RowDefinition Height="7*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <ListView x:Name="ScoreList" Grid.Row="1" Grid.Column="1" Background="Gray" FontFamily="{StaticResource Undertale}" BorderBrush="Black" IsSynchronizedWithCurrentItem="True" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="500">
+                <ListView x:Name="ScoreList" Grid.Row="1" Grid.Column="1" Background="DimGray" Foreground="DarkRed" FontFamily="{StaticResource Undertale}" BorderBrush="Black" BorderThickness="4" IsSynchronizedWithCurrentItem="True" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="500">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Background" Value="Gray"/>
+                                    <Setter Property="BorderBrush" Value="Black"/>
+                                    <Setter Property="Foreground" Value="Red" />
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Foreground" Value="DarkRed" />
+                                    <Setter Property="Background" Value="DimGray" />
+                                    <Setter Property="BorderBrush" Value="Black" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.Resources>
+                        
+                        <Style TargetType="{x:Type Thumb}">
+                            <Setter Property="Background" Value="DarkRed"/>
+                            <Setter Property="Foreground" Value="DarkRed"/>
+                            <Setter Property="BorderBrush" Value="DarkRed"/>
+                        </Style>
+                    </ListView.Resources>
                     <ListView.View>
                         <GridView AllowsColumnReorder="False">
+                            <GridView.ColumnHeaderContainerStyle>
+                                <Style TargetType="{x:Type GridViewColumnHeader}">
+                                    <Setter Property="Background" Value="Black"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                    <Setter Property="BorderBrush" Value="Black"/>
+                                    <Setter Property="Margin" Value="0"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                </Style>
+                            </GridView.ColumnHeaderContainerStyle>
                             <GridViewColumn x:Name="name" DisplayMemberBinding="{Binding Path=Name}" Width="280">
-                                <GridViewColumnHeader Content="Name" Tag="Name"  Click="SortByName" FontFamily="{StaticResource Undertale}" Background="DimGray" BorderBrush="Black"/>
+                                <GridViewColumnHeader Content="Name" Tag="Name"  Click="SortByName" FontFamily="{StaticResource Undertale}" Background="Black" BorderBrush="Black" Foreground="DarkRed" BorderThickness="0"/>
                             </GridViewColumn>
                             <GridViewColumn x:Name="Points" DisplayMemberBinding="{Binding Path=Points}" Width="280">
-                                <GridViewColumnHeader Content="Points" Tag="Points" Click="SortByPoint" FontFamily="{StaticResource Undertale}" Background="DimGray" BorderBrush="Black"/>
+                                <GridViewColumnHeader Content="Points" Tag="Points" Click="SortByPoint" FontFamily="{StaticResource Undertale}" Background="Black" BorderBrush="Black" Foreground="DarkRed" BorderThickness="0"/>
                             </GridViewColumn>
                             <GridViewColumn x:Name="Time" DisplayMemberBinding="{Binding Path=Time}" Width="280">
-                                <GridViewColumnHeader Content="Time" Tag="Time" Click="SortByTime" FontFamily="{StaticResource Undertale}" Background="DimGray" BorderBrush="Black"/>
+                                <GridViewColumnHeader Content="Time" Tag="Time" Click="SortByTime" FontFamily="{StaticResource Undertale}" Background="Black" BorderBrush="Black" Foreground="DarkRed" BorderThickness="0"/>
                             </GridViewColumn>
                         </GridView>
                     </ListView.View>
@@ -148,7 +181,7 @@
 
         <!--===================Login Popup==================-->
 
-        <Popup x:Name="LoginPopUp" StaysOpen="true" MinHeight="300" MinWidth="400" VerticalOffset="480" HorizontalOffset="567" AllowsTransparency="false" Focusable="True" Closed="CloseLogin" AllowDrop="False">
+        <Popup x:Name="LoginPopUp" StaysOpen="true" MinHeight="300" MinWidth="400" Placement="Center" AllowsTransparency="false" Focusable="True" Closed="CloseLogin" AllowDrop="False">
             <Grid>
                 <Grid.Background>
                     <ImageBrush ImageSource="/PracticeAlpha-WPF_Edition;component/Resources/Backgrounds/bgScore.png"/>
@@ -162,8 +195,8 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="LoginName" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="0" Grid.Row="1" MinHeight="70" MinWidth="300" BorderBrush="Black" Background="Gray" Foreground="Black" FontFamily="{StaticResource Undertale}" FontSize="50"/>
-                <Button x:Name="loginOk" Style="{StaticResource MenuBtn}" Content="Confirm" Grid.Column="0" Grid.Row="4" MinHeight="50" MinWidth="100" BorderBrush="Black" Click="LoginSend"/>
+                <TextBox x:Name="LoginName" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="0" Grid.Row="1" MinHeight="70" MinWidth="300" BorderBrush="Black" BorderThickness="0" Background="Gray" Foreground="Black" FontFamily="{StaticResource Undertale}" FontSize="50"/>
+                <Button x:Name="loginOk" Style="{StaticResource MenuBtn}" Content="Confirm" Grid.Column="0" Grid.Row="4" MinHeight="50" MinWidth="100" BorderBrush="Black" Click="LoginSend" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
             </Grid>
         </Popup>
 
