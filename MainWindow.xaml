@@ -148,7 +148,7 @@
 
         <!--===================Login Popup==================-->
 
-        <Popup x:Name="LoginPopUp" StaysOpen="true" MinHeight="300" MinWidth="400" VerticalOffset="480" HorizontalOffset="567" AllowsTransparency="false" Focusable="True" Closed="CloseLogin" AllowDrop="False">
+        <Popup x:Name="LoginPopUp" StaysOpen="true" MinHeight="300" MinWidth="400" Placement="Center" AllowsTransparency="false" Focusable="True" Closed="CloseLogin" AllowDrop="False">
             <Grid>
                 <Grid.Background>
                     <ImageBrush ImageSource="/PracticeAlpha-WPF_Edition;component/Resources/Backgrounds/bgScore.png"/>
