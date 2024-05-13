@@ -11,6 +11,8 @@ using System.Threading;
 using System.Data.SQLite;
 using System.Collections.Generic;
 using PracticeAlpha_WPF_Edition.PlayerDataSave;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace PracticeAlpha_WPF_Edition
 {
@@ -23,8 +25,9 @@ namespace PracticeAlpha_WPF_Edition
             if(PlayerInfo.isFirstStart) 
             {
                 LoginPopUp.IsOpen = true;
+                ApplyEffect(this);
             }
-            
+
             Music.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\mainMenu.mp3");
         }
 
@@ -120,8 +123,8 @@ namespace PracticeAlpha_WPF_Edition
             
             Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
-            string connectionString = "Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
-            List<String> arr = new List<string>();
+            string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;"; //"Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
+            List<DBItem> arr = new List<DBItem>();
             using (var connection = new SQLiteConnection(connectionString))
             {
                 connection.Open();
@@ -132,18 +135,45 @@ namespace PracticeAlpha_WPF_Edition
                     {
                         while (reader.Read())
                         {
+                            DBItem item = new DBItem();
                             string Name = reader.GetString(0);
                             string Points = reader.GetString(1);
                             string Time = reader.GetString(2);
-                            arr.Add(Name + "\t\t" + Points + "\t\t" + Time);
+                            item.Name = Name;
+                            item.Points = Points;
+                            item.Time = Time;
+                            arr.Add(item);
                         }
                         ScoreList.ItemsSource = arr;
+                        CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ScoreList.ItemsSource);
+                        view.SortDescriptions.Add(new SortDescription("Points", ListSortDirection.Descending));
                     }
                 }
                 connection.Close();
                 ScorePopUp.IsOpen = true;
                 ApplyEffect(this);
             }
+        }
+
+        private void SortByName(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ScoreList.ItemsSource);
+            view.SortDescriptions.Clear();
+            view.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Descending));
+        }
+
+        private void SortByPoint(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ScoreList.ItemsSource);
+            view.SortDescriptions.Clear();
+            view.SortDescriptions.Add(new SortDescription("Points", ListSortDirection.Descending));
+        }
+
+        private void SortByTime(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ScoreList.ItemsSource);
+            view.SortDescriptions.Clear();
+            view.SortDescriptions.Add(new SortDescription("Time", ListSortDirection.Descending));
         }
 
         private void CloseScore(object sender, EventArgs e)
@@ -169,7 +199,7 @@ namespace PracticeAlpha_WPF_Edition
                 int PID = -1;
                 //string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
 
-                string connectionString = "Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
+                string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;"; //"Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
                 Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
                 using (var connection = new SQLiteConnection(connectionString))
@@ -210,7 +240,6 @@ namespace PracticeAlpha_WPF_Edition
                         }
                     }
                     connection.Close();
-
                     PlayerInfo.isFirstStart = false;
                 }
             }
@@ -218,7 +247,7 @@ namespace PracticeAlpha_WPF_Edition
 
         private void CloseLogin(object sender, EventArgs e)
         {
-
+            ClearEffect(this);
         }
 
         //--=========================Login===========================--

@@ -84,6 +84,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DBItem.cs" />
     <Compile Include="EntitiesController\Bullet.cs" />
     <Compile Include="EntitiesController\Calculator\Calculator.cs" />
     <Compile Include="EntitiesController\Enemy.cs" />

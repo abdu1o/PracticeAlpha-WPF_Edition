@@ -124,7 +124,21 @@
                     <RowDefinition Height="7*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <ListBox x:Name="ScoreList" Grid.Row="1" Grid.Column="1"/>
+                <ListView x:Name="ScoreList" Grid.Row="1" Grid.Column="1" Background="Gray" FontFamily="{StaticResource Undertale}" BorderBrush="Black" IsSynchronizedWithCurrentItem="True" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="500">
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="False">
+                            <GridViewColumn x:Name="name" DisplayMemberBinding="{Binding Path=Name}" Width="280">
+                                <GridViewColumnHeader Content="Name" Tag="Name"  Click="SortByName" FontFamily="{StaticResource Undertale}" Background="DimGray" BorderBrush="Black"/>
+                            </GridViewColumn>
+                            <GridViewColumn x:Name="Points" DisplayMemberBinding="{Binding Path=Points}" Width="280">
+                                <GridViewColumnHeader Content="Points" Tag="Points" Click="SortByPoint" FontFamily="{StaticResource Undertale}" Background="DimGray" BorderBrush="Black"/>
+                            </GridViewColumn>
+                            <GridViewColumn x:Name="Time" DisplayMemberBinding="{Binding Path=Time}" Width="280">
+                                <GridViewColumnHeader Content="Time" Tag="Time" Click="SortByTime" FontFamily="{StaticResource Undertale}" Background="DimGray" BorderBrush="Black"/>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
                 <Button HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="2" Grid.Row="0" Height="40" Width="40" BorderBrush="Black" Style="{StaticResource ScoreCloseBut}" Click="ScoreClose">
                 </Button>
             </Grid>
@@ -134,20 +148,22 @@
 
         <!--===================Login Popup==================-->
 
-        <Popup x:Name="LoginPopUp" StaysOpen="true" MinHeight="40" MinWidth="400" Placement="Center" AllowsTransparency="false" Focusable="True" Closed="CloseLogin" AllowDrop="False">
+        <Popup x:Name="LoginPopUp" StaysOpen="true" MinHeight="300" MinWidth="400" VerticalOffset="480" HorizontalOffset="567" AllowsTransparency="false" Focusable="True" Closed="CloseLogin" AllowDrop="False">
             <Grid>
                 <Grid.Background>
                     <ImageBrush ImageSource="/PracticeAlpha-WPF_Edition;component/Resources/Backgrounds/bgScore.png"/>
                 </Grid.Background>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="LoginName" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="0" Grid.Row="0" MinHeight="20" MinWidth="280" BorderBrush="Black"/>
-                <Button x:Name="loginOk" Content="OK" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="2" Grid.Row="0" MinHeight="20" MinWidth="40" BorderBrush="Black" Click="LoginSend"/>
+                <TextBox x:Name="LoginName" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="0" Grid.Row="1" MinHeight="70" MinWidth="300" BorderBrush="Black" Background="Gray" Foreground="Black" FontFamily="{StaticResource Undertale}" FontSize="50"/>
+                <Button x:Name="loginOk" Style="{StaticResource MenuBtn}" Content="Confirm" Grid.Column="0" Grid.Row="4" MinHeight="50" MinWidth="100" BorderBrush="Black" Click="LoginSend"/>
             </Grid>
         </Popup>
 
