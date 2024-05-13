@@ -142,7 +142,10 @@
                         </Style>
                     </ListView.ItemContainerStyle>
                     <ListView.Resources>
-                        
+                        <Style TargetType="{x:Type ScrollBar}">
+                            <Setter Property="Background" Value="DimGray"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </Style>
                         <Style TargetType="{x:Type Thumb}">
                             <Setter Property="Background" Value="DarkRed"/>
                             <Setter Property="Foreground" Value="DarkRed"/>
