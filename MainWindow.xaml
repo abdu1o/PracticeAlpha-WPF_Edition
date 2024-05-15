@@ -124,26 +124,30 @@
                     <RowDefinition Height="7*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <ListView x:Name="ScoreList" Grid.Row="1" Grid.Column="1" Background="DimGray" Foreground="DarkRed" FontFamily="{StaticResource Undertale}" BorderBrush="Black" BorderThickness="4" IsSynchronizedWithCurrentItem="True" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="500">
+                <ListView x:Name="ScoreList" Grid.Row="1" Grid.Column="1" Background="#181818" Foreground="DarkRed" FontFamily="{StaticResource Undertale}" BorderBrush="Black" BorderThickness="4" IsSynchronizedWithCurrentItem="True" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="500">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="{x:Type ListViewItem}">
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="true">
-                                    <Setter Property="Background" Value="Gray"/>
-                                    <Setter Property="BorderBrush" Value="Black"/>
-                                    <Setter Property="Foreground" Value="Red" />
-                                </Trigger>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Setter Property="Foreground" Value="DarkRed" />
-                                    <Setter Property="Background" Value="DimGray" />
-                                    <Setter Property="BorderBrush" Value="Black" />
-                                </Trigger>
-                            </Style.Triggers>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                        <Border Padding="{TemplateBinding Padding}"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    SnapsToDevicePixels="true">
+                                            <GridViewRowPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            
                         </Style>
                     </ListView.ItemContainerStyle>
                     <ListView.Resources>
                         <Style TargetType="{x:Type ScrollBar}">
-                            <Setter Property="Background" Value="DimGray"/>
+                            <Setter Property="Background" Value="#181818"/>
                             <Setter Property="BorderThickness" Value="0"/>
                         </Style>
                         <Style TargetType="{x:Type Thumb}">
@@ -161,6 +165,15 @@
                                     <Setter Property="BorderBrush" Value="Black"/>
                                     <Setter Property="Margin" Value="0"/>
                                     <Setter Property="Padding" Value="0"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="DimGray"/>
+                                            <Setter Property="Foreground" Value="Black"/>
+                                            <Setter Property="BorderBrush" Value="Black"/>
+                                            <Setter Property="Margin" Value="0"/>
+                                            <Setter Property="Padding" Value="0"/>
+                                        </Trigger>
+                                    </Style.Triggers>
                                 </Style>
                             </GridView.ColumnHeaderContainerStyle>
                             <GridViewColumn x:Name="name" DisplayMemberBinding="{Binding Path=Name}" Width="280">
@@ -198,7 +211,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="LoginName" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="0" Grid.Row="1" MinHeight="70" MinWidth="300" BorderBrush="Black" BorderThickness="0" Background="Gray" Foreground="Black" FontFamily="{StaticResource Undertale}" FontSize="50"/>
+                <TextBox x:Name="LoginName" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="0" Grid.Row="1" MinHeight="70" MinWidth="300" BorderBrush="Black" BorderThickness="0" Background="DimGray" Foreground="Black" FontFamily="{StaticResource Undertale}" FontSize="50"/>
                 <Button x:Name="loginOk" Style="{StaticResource MenuBtn}" Content="Confirm" Grid.Column="0" Grid.Row="4" MinHeight="50" MinWidth="100" BorderBrush="Black" Click="LoginSend" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
             </Grid>
         </Popup>
