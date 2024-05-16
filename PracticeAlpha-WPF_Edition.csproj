@@ -99,6 +99,9 @@
     <Compile Include="Levels\Level1_Multiplayer.xaml.cs">
       <DependentUpon>Level1_Multiplayer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Levels\Level2.xaml.cs">
+      <DependentUpon>Level2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Levels\YouDead.xaml.cs">
       <DependentUpon>YouDead.xaml</DependentUpon>
     </Compile>
@@ -119,6 +122,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Levels\Level1_Multiplayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Levels\Level2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -207,6 +214,19 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Backgrounds\bgScore.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\level2_bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\level2_fg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Backgrounds\level2_bg.png" />
+    <Resource Include="Resources\Backgrounds\level2_fg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Resource packs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

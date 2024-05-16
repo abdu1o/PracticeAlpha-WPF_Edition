@@ -3,6 +3,7 @@ using PracticeAlpha_WPF_Edition.SoundControl;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,10 +21,12 @@ namespace PracticeAlpha_WPF_Edition.Levels
     public partial class YouDead : Window
     {
         private bool pause;
+        private Type level = null;
 
-        public YouDead(bool isPause)
+        public YouDead(bool isPause, Type level)
         {
             pause = isPause;
+            this.level = level;
 
             InitializeComponent();
 
@@ -48,8 +51,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
         private void TryAgain_Click(object sender, MouseButtonEventArgs e)
         {
-            //buttonSound = new SoundController("Sounds\\button_click.mp3");
-            //buttonSound.PlayAsync();
+            Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
             if (pause)
             {
@@ -58,34 +60,42 @@ namespace PracticeAlpha_WPF_Edition.Levels
             }
             else
             {
-                Level1 new_level = new Level1();
-                new_level.Show();
+                object new_level = Activator.CreateInstance(level);
+                
+                if (new_level is Window)
+                {
+                    ((Window)new_level).Show();
+                }
 
-                Level1 old_level = Application.Current.Windows.OfType<Level1>().FirstOrDefault();
-                old_level.Close();
+                CurrentLevelClose();
             }
         }
 
         private void Exit_Click(object sender, MouseButtonEventArgs e)
         {
-            //buttonSound = new SoundController("Sounds\\button_click.mp3");
-            //buttonSound.PlayAsync();
+            Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
             MainWindow menu = new MainWindow();
             menu.Show();
 
-            Level1 old_level = Application.Current.Windows.OfType<Level1>().FirstOrDefault();
-            old_level.Close();
+            CurrentLevelClose();
         }
 
         private void YouDead_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (!pause)
             {
-                Level1 old_level = Application.Current.Windows.OfType<Level1>().FirstOrDefault();
-                old_level.Close();
+                CurrentLevelClose();
             }
-            
+        }
+
+        private void CurrentLevelClose()
+        {
+            Window oldLevel = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.GetType() == level);
+            if (oldLevel != null)
+            {
+                oldLevel.Close();
+            }
         }
     }
 }

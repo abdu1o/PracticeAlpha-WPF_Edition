@@ -1,21 +1,28 @@
-﻿using PracticeAlpha_WPF_Edition.EntitiesController;
-using PracticeAlpha_WPF_Edition.EntitiesController.Calculator;
+﻿using PracticeAlpha_WPF_Edition.EntitiesController.Calculator;
+using PracticeAlpha_WPF_Edition.EntitiesController;
 using PracticeAlpha_WPF_Edition.PlayerDataSave;
 using PracticeAlpha_WPF_Edition.SoundControl;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Resources;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Windows.Media.Media3D;
 
 namespace PracticeAlpha_WPF_Edition.Levels
 {
-    public partial class Level1 : Window
+
+    public partial class Level2 : Window
     {
         //Stats
         private double playerSpeed = 3;
@@ -25,7 +32,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
         private double enemySpeed = 0;
         private int spawnTime = 4;
-        
+
         private DispatcherTimer timer, shootingTimer, levelTimer, spawnTimer;
 
         private TimeSpan elapsedTime;
@@ -34,15 +41,15 @@ namespace PracticeAlpha_WPF_Edition.Levels
         private List<Enemy> enemies = new List<Enemy>();
 
         private Spawn spawn;
-        private Player player; 
+        private Player player;
         private Calculator calculator = new Calculator();
         private Rectangle overlay;
 
         private int countOfLocation = 8;
 
-        private int scoreValue = 0, pointsPerKill = 30;
+        private int scoreValue = 0, pointsPerKill = 50;
 
-        public Level1()
+        public Level2()
         {
             InitializeComponent();
             GameInitialized();
@@ -50,7 +57,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
             Music.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\level1.mp3", 0.1);
         }
 
-        public Level1(string customMusic)
+        public Level2(string customMusic)
         {
             InitializeComponent();
             GameInitialized();
@@ -82,7 +89,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
             spawnTimer.Start();
 
             //--====Player initialization====--
-            player = new Player(925, 500, 48, 36, "/PracticeAlpha-WPF_Edition;component/Resources/Entities/player.png");
+            player = new Player(925, 500, 48, 36, "/PracticeAlpha-WPF_Edition;component/Resources/Entities/player2.png");
             mainCanvas.Children.Add(player.PlayerImage);
             Canvas.SetZIndex(player.PlayerImage, 100);
 
@@ -146,7 +153,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
             UpdatePlayerMovement();
             UpdateBullets();
         }
-        
+
         private void StopTimers()
         {
             timer.Stop();
@@ -190,7 +197,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
 
             PlayerInfo.PushInfo(PlayerInfo.Name, scoreValue.ToString(), timerText.Text);
 
-            YouDead youDeadWindow = new YouDead(false, typeof(Level1));
+            YouDead youDeadWindow = new YouDead(false, typeof(Level2));
             youDeadWindow.Owner = this;
             youDeadWindow.ShowDialog();
 
@@ -212,7 +219,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
             };
 
             mainCanvas.Children.Add(overlay);
-            Canvas.SetZIndex(overlay, 101);
+            Canvas.SetZIndex(overlay, 105);
         }
 
         private void StopShooting()
@@ -297,8 +304,8 @@ namespace PracticeAlpha_WPF_Edition.Levels
                 }
             }
         }
-        
-        private void SetEnemyModel(Enemy enemy, int width, int height, string path )
+
+        private void SetEnemyModel(Enemy enemy, int width, int height, string path)
         {
             enemy.EnemyImage.Width = width;
             enemy.EnemyImage.Height = height;
@@ -377,7 +384,7 @@ namespace PracticeAlpha_WPF_Edition.Levels
                     MusicController.SetVolume(0.07);
 
                     AddOverlay();
-                    YouDead pauseWindow = new YouDead(true, typeof(Level1));
+                    YouDead pauseWindow = new YouDead(true, typeof(Level2));
                     pauseWindow.Owner = this;
                     pauseWindow.ShowDialog();
 
@@ -544,3 +551,4 @@ namespace PracticeAlpha_WPF_Edition.Levels
         }
     }
 }
+

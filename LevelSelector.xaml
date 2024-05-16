@@ -25,6 +25,17 @@
             <RowDefinition Height="0.6*"/>
         </Grid.RowDefinitions>
 
+        <TextBox Name="UrlTextBox" Margin="20,40,0,40" MaxLength="20" Background="Transparent"
+                 BorderBrush="Red" BorderThickness="4" FontSize="40" 
+                 FontFamily="{StaticResource Undertale}" Foreground="White"/>
+
+        <Label Content="Save" VerticalAlignment="Center" HorizontalContentAlignment="Center"
+                HorizontalAlignment="Left" MouseLeftButtonDown="Save_Click"
+                Grid.Column="1" Margin="10,0,0,0" x:Name = "MusicButton_Copy"  
+                FontFamily="{StaticResource Undertale}" Padding="10"
+                FontSize="40" Foreground="White" Background="#0f0f0f" 
+                BorderBrush="Red" BorderThickness="4" Width="120" Height="89"/>
+
         <!--============Buttons Select Level============-->
         <Button Name="PreviousButton" Grid.Column="0" Grid.Row="1" Style="{StaticResource SelectLevel}" RenderTransformOrigin="0.5,0.5" Click="PreviousLevel" MouseEnter="Arrow_MouseEnter" MouseLeave="Arrow_MouseLeave">
 
@@ -40,7 +51,7 @@
             <Image Source="Resources/Icons/switch.png" Stretch="Uniform"/>
         </Button>
         <!--============Buttons Select Level============-->
-        
+
         <Button Name="NextButton" Grid.Column="3" Grid.Row="1" Style="{StaticResource SelectLevel}" Click="NextLevel" 
                 MouseEnter="Arrow_MouseEnter" MouseLeave="Arrow_MouseLeave">
             <Image Source="Resources/Icons/switch.png" Stretch="Uniform"/>

@@ -211,7 +211,11 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="LoginName" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="0" Grid.Row="1" MinHeight="70" MinWidth="300" BorderBrush="Black" BorderThickness="0" Background="DimGray" Foreground="Black" FontFamily="{StaticResource Undertale}" FontSize="50"/>
+                <TextBox x:Name="LoginName" HorizontalAlignment="Center" VerticalAlignment="Center"  
+                         Grid.Column="0" Grid.Row="1" MinHeight="70" 
+                         MinWidth="300" BorderBrush="Black" BorderThickness="3" 
+                         Background="#181818" Foreground="White" MaxLength="12"
+                         FontFamily="{StaticResource Undertale}" FontSize="50"/>
                 <Button x:Name="loginOk" Style="{StaticResource MenuBtn}" Content="Confirm" Grid.Column="0" Grid.Row="4" MinHeight="50" MinWidth="100" BorderBrush="Black" Click="LoginSend" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
             </Grid>
         </Popup>

@@ -28,7 +28,7 @@ namespace PracticeAlpha_WPF_Edition
                 ApplyEffect(this);
             }
 
-            Music.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\mainMenu.mp3");
+            Music.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\mainMenu.mp3", 0.07);
         }
 
         //--=========================Button Events========================--
@@ -62,7 +62,7 @@ namespace PracticeAlpha_WPF_Edition
         {
             if (LoginPopUp.IsOpen == false)
             {
-                //Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
+                Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3", 0.2);
                 await Task.Delay(300);
                 this.Close();
             }
@@ -85,7 +85,7 @@ namespace PracticeAlpha_WPF_Edition
         {
             if (LoginPopUp.IsOpen == false)
             {
-                //Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
+                Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3", 0.2);
 
                 var levelSelector = new LevelSelector();
                 Application.Current.MainWindow = levelSelector;
@@ -101,8 +101,7 @@ namespace PracticeAlpha_WPF_Edition
         {
             if (LoginPopUp.IsOpen == false)
             {
-                //buttonSound.PlayAsync();
-                //Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
+                Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3", 0.2);
 
                 var level1_Multiplayer = new Level1_Multiplayer();
                 Application.Current.MainWindow = level1_Multiplayer;
@@ -134,7 +133,7 @@ namespace PracticeAlpha_WPF_Edition
 
                 Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
-                string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;"; //"Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
+                string connectionString = "Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;"; //"Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
                 List<DBItem> arr = new List<DBItem>();
                 using (var connection = new SQLiteConnection(connectionString))
                 {
@@ -211,7 +210,8 @@ namespace PracticeAlpha_WPF_Edition
                 int PID = -1;
                 //string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
 
-                string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;"; //"Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
+                //"Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
+                string connectionString = "Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;"; 
                 Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
                 using (var connection = new SQLiteConnection(connectionString))
