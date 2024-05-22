@@ -70,8 +70,7 @@
         <Button Name="Play" Style="{StaticResource MenuBtn}" Content="Single" Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" BorderBrush="Black" Click="ClickPlay"/>
         <Button Name="Multiplay" Style="{StaticResource MenuBtn}" Content="Co-op" Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" BorderBrush="Black" Click="ClickMultiplay"/>
         <Button Name="Score" Style="{StaticResource MenuBtn}" Content="Score" Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" BorderBrush="Black" Click="ClickScore"/>
-        <Button Name="Hide" Style="{StaticResource HideBut}" Grid.Row="0" Grid.Column="13" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" BorderBrush="Black" Click="Hide_Click"/>
-
+        
         <!--====================Items===================-->
         <!--<Image Grid.Column="8" Margin="0,33,68,28" Grid.Row="2" Source="\Resources\ButtonItems\Knife.png" Stretch="Fill" RenderTransformOrigin="0.524,0.141"/>
         <Image Grid.Column="6" Margin="95,48,98,2" Grid.Row="3" Source="\Resources\ButtonItems\Scar.png" Stretch="Fill" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5">
@@ -98,6 +97,23 @@
                     <ToolTip Background="Black" BorderBrush="Red">
                         <StackPanel>
                             <TextBlock Margin="3" FontFamily="{StaticResource Undertale}" Foreground="#6e0000">Exit to main window</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Image.ToolTip>
+
+            </Image>
+        </Grid>
+        
+        <Grid Grid.Column="13">
+            <Image Source="/PracticeAlpha-WPF_Edition;component/Resources/Icons/hide.png"
+           Width="90" Height="90" Margin="0,0,0,8" MouseUp="HideClick" 
+           MouseEnter="Exit_MouseEnter"
+           MouseLeave="Exit_MouseLeave">
+
+                <Image.ToolTip>
+                    <ToolTip Background="Black" BorderBrush="Red">
+                        <StackPanel>
+                            <TextBlock Margin="3" FontFamily="{StaticResource Undertale}" Foreground="#6e0000">Hide windiw</TextBlock>
                         </StackPanel>
                     </ToolTip>
                 </Image.ToolTip>
@@ -165,7 +181,7 @@
                         <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
                             <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
                             <Setter Property="Foreground" Value="DarkRed" />
-                            <Setter Property="Background" Value="#181818" />
+                            <Setter Property="Background" Value="Transparent" />
                             <Setter Property="BorderThickness" Value="0"/>
                             <Setter Property="Width" Value="10" />
                             <Setter Property="Template">
@@ -227,30 +243,30 @@
                         <GridView AllowsColumnReorder="False">
                             <GridView.ColumnHeaderContainerStyle>
                                 <Style TargetType="{x:Type GridViewColumnHeader}">
-                                    <Setter Property="Background" Value="Black"/>
-                                    <Setter Property="Foreground" Value="Black"/>
-                                    <Setter Property="BorderBrush" Value="Black"/>
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="Foreground" Value="Transparent"/>
+                                    <Setter Property="BorderBrush" Value="Transparent"/>
                                     <Setter Property="Margin" Value="0"/>
                                     <Setter Property="Padding" Value="0"/>
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter Property="Background" Value="DimGray"/>
-                                            <Setter Property="Foreground" Value="Black"/>
-                                            <Setter Property="BorderBrush" Value="Black"/>
+                                            <Setter Property="Foreground" Value="Transparent"/>
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
                                             <Setter Property="Margin" Value="0"/>
                                             <Setter Property="Padding" Value="0"/>
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
                             </GridView.ColumnHeaderContainerStyle>
-                            <GridViewColumn x:Name="name" DisplayMemberBinding="{Binding Path=Name}" Width="280">
-                                <GridViewColumnHeader Content="Name" Tag="Name"  Click="SortByName" FontFamily="{StaticResource Undertale}" Background="Black" BorderBrush="Black" Foreground="DarkRed" BorderThickness="0"/>
+                            <GridViewColumn x:Name="Name" DisplayMemberBinding="{Binding Path=Name}" Width="280">
+                                <GridViewColumnHeader Content="Name" x:Name="NameC"  Click="SortByName" FontFamily="{StaticResource Undertale}" Background="Black" BorderBrush="Black" Foreground="DarkRed" BorderThickness="0"/>
                             </GridViewColumn>
                             <GridViewColumn x:Name="Points" DisplayMemberBinding="{Binding Path=Points}" Width="280">
-                                <GridViewColumnHeader Content="Points" Tag="Points" Click="SortByPoint" FontFamily="{StaticResource Undertale}" Background="Black" BorderBrush="Black" Foreground="DarkRed" BorderThickness="0"/>
+                                <GridViewColumnHeader Content="Points" x:Name="PointsC" Click="SortByPoint" FontFamily="{StaticResource Undertale}" Background="Black" BorderBrush="Black" Foreground="DarkRed" BorderThickness="0"/>
                             </GridViewColumn>
                             <GridViewColumn x:Name="Time" DisplayMemberBinding="{Binding Path=Time}" Width="280">
-                                <GridViewColumnHeader Content="Time" Tag="Time" Click="SortByTime" FontFamily="{StaticResource Undertale}" Background="Black" BorderBrush="Black" Foreground="DarkRed" BorderThickness="0"/>
+                                <GridViewColumnHeader Content="Time" x:Name="TimeC" Click="SortByTime" FontFamily="{StaticResource Undertale}" Background="Black" BorderBrush="Black" Foreground="DarkRed" BorderThickness="0"/>
                             </GridViewColumn>
                         </GridView>
                     </ListView.View>
