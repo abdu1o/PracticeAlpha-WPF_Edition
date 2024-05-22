@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PracticeAlpha_WPF_Edition"
         mc:Ignorable="d"
         Title="MainWindow" Height="1080" Width="1920"
-        WindowStyle="None" WindowState="Maximized" Name="MainMenu">
+        WindowStyle="None" WindowState="Maximized" Name="MainMenu" ShowInTaskbar="True">
 
     <Grid>
         <Grid.Background>
@@ -70,6 +70,7 @@
         <Button Name="Play" Style="{StaticResource MenuBtn}" Content="Single" Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" BorderBrush="Black" Click="ClickPlay"/>
         <Button Name="Multiplay" Style="{StaticResource MenuBtn}" Content="Co-op" Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" BorderBrush="Black" Click="ClickMultiplay"/>
         <Button Name="Score" Style="{StaticResource MenuBtn}" Content="Score" Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="3" Grid.RowSpan="2" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" BorderBrush="Black" Click="ClickScore"/>
+        <Button Name="Hide" Style="{StaticResource HideBut}" Grid.Row="0" Grid.Column="13" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" BorderBrush="Black" Click="Hide_Click"/>
 
         <!--====================Items===================-->
         <!--<Image Grid.Column="8" Margin="0,33,68,28" Grid.Row="2" Source="\Resources\ButtonItems\Knife.png" Stretch="Fill" RenderTransformOrigin="0.524,0.141"/>
@@ -103,13 +104,13 @@
 
             </Image>
         </Grid>
-        
+
         <!--===================Buttons==================-->
 
 
         <!--===================Score Popup==================-->
 
-        <Popup x:Name="ScorePopUp" StaysOpen="false" MinHeight="570" MinWidth="970" Placement="Center" AllowsTransparency="false" Focusable="True" Closed="CloseScore">
+        <Popup x:Name="ScorePopUp" StaysOpen="false"  Height="800" Width="1190"  Placement="Center" AllowsTransparency="false" Focusable="True" Closed="CloseScore">
             <Grid>
                 <Grid.Background>
                     <ImageBrush ImageSource="/PracticeAlpha-WPF_Edition;component/Resources/Backgrounds/bgScore.png"/>
@@ -124,17 +125,17 @@
                     <RowDefinition Height="7*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <ListView x:Name="ScoreList" Grid.Row="1" Grid.Column="1" Background="#181818" Foreground="DarkRed" FontFamily="{StaticResource Undertale}" BorderBrush="Black" BorderThickness="4" IsSynchronizedWithCurrentItem="True" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="500">
+                <ListView x:Name="ScoreList" Grid.Row="1" Grid.Column="1" Background="#181818" Foreground="DarkRed" FontFamily="{StaticResource Undertale}" FontSize="20" BorderBrush="Black" BorderThickness="4" IsSynchronizedWithCurrentItem="True" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="700">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="{x:Type ListViewItem}">
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type ListViewItem}">
                                         <Border Padding="{TemplateBinding Padding}"
-                    Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    SnapsToDevicePixels="true">
+                                                 Background="{TemplateBinding Background}"
+                                                 BorderBrush="{TemplateBinding BorderBrush}"
+                                                 BorderThickness="{TemplateBinding BorderThickness}"
+                                                 SnapsToDevicePixels="true">
                                             <GridViewRowPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
@@ -146,14 +147,80 @@
                         </Style>
                     </ListView.ItemContainerStyle>
                     <ListView.Resources>
-                        <Style TargetType="{x:Type ScrollBar}">
-                            <Setter Property="Background" Value="#181818"/>
-                            <Setter Property="BorderThickness" Value="0"/>
+                        <Style x:Key="ScrollThumb" TargetType="{x:Type Thumb}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Thumb}">
+                                        <Rectangle x:Name="Rectangle1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="Transparent" SnapsToDevicePixels="True" />
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="Tag" Value="Horizontal">
+                                                <Setter TargetName="Rectangle1" Property="Width" Value="Auto" />
+                                                <Setter TargetName="Rectangle1" Property="Height" Value="7" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
                         </Style>
-                        <Style TargetType="{x:Type Thumb}">
-                            <Setter Property="Background" Value="DarkRed"/>
-                            <Setter Property="Foreground" Value="DarkRed"/>
-                            <Setter Property="BorderBrush" Value="DarkRed"/>
+                        <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
+                            <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
+                            <Setter Property="Foreground" Value="DarkRed" />
+                            <Setter Property="Background" Value="#181818" />
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Width" Value="10" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                                        <Grid x:Name="GridRoot" Width="19" Background="{TemplateBinding Background}">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.00001*" />
+                                            </Grid.RowDefinitions>
+
+                                            <Track x:Name="PART_Track" Grid.Row="0" IsDirectionReversed="true" Focusable="false">
+                                                <Track.Thumb>
+                                                    <Thumb x:Name="Thumb" Background="{TemplateBinding Foreground}" Style="{DynamicResource ScrollThumbs}"/>
+                                                </Track.Thumb>
+                                                <Track.IncreaseRepeatButton>
+                                                    <RepeatButton x:Name="PageUp" Command="ScrollBar.PageDownCommand" Opacity="0" Focusable="false" />
+                                                </Track.IncreaseRepeatButton>
+                                                <Track.DecreaseRepeatButton>
+                                                    <RepeatButton x:Name="PageDown" Command="ScrollBar.PageUpCommand" Opacity="0" Focusable="false" />
+                                                </Track.DecreaseRepeatButton>
+                                            </Track>
+                                        </Grid>
+
+                                        <ControlTemplate.Triggers>
+                                            <Trigger SourceName="Thumb" Property="IsMouseOver" Value="true">
+                                                <Setter Value="{DynamicResource ButtonSelectBrush}" TargetName="Thumb" Property="Background" />
+                                            </Trigger>
+                                            <Trigger SourceName="Thumb" Property="IsDragging" Value="true">
+                                                <Setter Value="{DynamicResource DarkBrush}" TargetName="Thumb" Property="Background" />
+                                            </Trigger>
+
+                                            <Trigger Property="IsEnabled" Value="false">
+                                                <Setter TargetName="Thumb" Property="Visibility" Value="Collapsed" />
+                                            </Trigger>
+                                            <Trigger Property="Orientation" Value="Horizontal">
+                                                <Setter TargetName="GridRoot" Property="LayoutTransform">
+                                                    <Setter.Value>
+                                                        <RotateTransform Angle="-90" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter TargetName="PART_Track" Property="LayoutTransform">
+                                                    <Setter.Value>
+                                                        <RotateTransform Angle="-90" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="Width" Value="Auto" />
+                                                <Setter Property="Height" Value="12" />
+                                                <Setter TargetName="Thumb" Property="Tag" Value="Horizontal" />
+                                                <Setter TargetName="PageDown" Property="Command" Value="ScrollBar.PageLeftCommand" />
+                                                <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
                         </Style>
                     </ListView.Resources>
                     <ListView.View>
@@ -190,6 +257,10 @@
                 </ListView>
                 <Button HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="2" Grid.Row="0" Height="40" Width="40" BorderBrush="Black" Style="{StaticResource ScoreCloseBut}" Click="ScoreClose">
                 </Button>
+                <Label HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Grid.Row="0" Content="Light Theme" FontFamily="{StaticResource Undertale}" FontSize="20" Foreground="DarkRed">
+                </Label>
+                <CheckBox x:Name="ScoreTheme" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Grid.Row="0" Margin="10" Padding="80" Background="#181818" BorderBrush="DarkRed" Foreground="DarkRed" Checked="LightThemeEnable" Unchecked="LightThemeDisable">
+                </CheckBox>
             </Grid>
         </Popup>
 
