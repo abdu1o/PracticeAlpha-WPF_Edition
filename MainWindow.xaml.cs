@@ -78,6 +78,17 @@ namespace PracticeAlpha_WPF_Edition
             Mouse.OverrideCursor = null;
             ToolTip = null;
         }
+
+        private async void Hide_Click(object sender, RoutedEventArgs e)
+        {
+            if (LoginPopUp.IsOpen == false)
+            {
+                Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3", 0.2);
+                await Task.Delay(300);
+                this.WindowState = WindowState.Minimized;
+            }
+        }
+
         //--=========================Button Events========================--
 
         //--=========================Click Play===========================--
@@ -133,7 +144,7 @@ namespace PracticeAlpha_WPF_Edition
 
                 Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
-                string connectionString = "Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;"; //"Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
+                string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;"; //"Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
                 List<DBItem> arr = new List<DBItem>();
                 using (var connection = new SQLiteConnection(connectionString))
                 {
@@ -199,6 +210,25 @@ namespace PracticeAlpha_WPF_Edition
             ScorePopUp.IsOpen = false;
         }
 
+        private void LightThemeEnable(object sender, RoutedEventArgs e)
+        {
+            SolidColorBrush sb = new SolidColorBrush(Colors.White);
+            ScoreList.Background = sb;
+            ScoreTheme.Background = sb;
+            sb = new SolidColorBrush(Colors.Black);
+            ScoreList.Foreground = sb;
+        }
+
+        private void LightThemeDisable(object sender, RoutedEventArgs e)
+        {
+            Color color = new Color(); color.R = 18; color.G = 18; color.B = 18;
+            SolidColorBrush sb = new SolidColorBrush(color);
+            ScoreList.Background = sb;
+            ScoreTheme.Background = sb;
+            sb = new SolidColorBrush(Colors.DarkRed);
+            ScoreList.Foreground = sb;
+        }
+
         //--=========================Score===========================--
 
         //--=========================Login===========================--
@@ -211,7 +241,7 @@ namespace PracticeAlpha_WPF_Edition
                 //string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
 
                 //"Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
-                string connectionString = "Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;"; 
+                string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
                 Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
                 using (var connection = new SQLiteConnection(connectionString))
@@ -261,6 +291,7 @@ namespace PracticeAlpha_WPF_Edition
         {
             ClearEffect(this);
         }
+
 
         //--=========================Login===========================--
 
