@@ -3,6 +3,7 @@ using PracticeAlpha_WPF_Edition.Levels;
 using PracticeAlpha_WPF_Edition.SoundControl;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -89,7 +90,6 @@ namespace PracticeAlpha_WPF_Edition
         {
             Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
-
             if (_currentLevel - 1 <= 1)
             {
                 var button = (Button)sender;
@@ -155,6 +155,27 @@ namespace PracticeAlpha_WPF_Edition
                     level1.Show();
                 }
             }
+            else if (_currentLevel == 2)
+            {
+                Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
+
+                if (customMusic == " ")
+                {
+                    var level2 = new Level2();
+                    Application.Current.MainWindow = level2;
+
+                    this.Close();
+                    level2.Show();
+                }
+                else
+                {
+                    var level2 = new Level2(customMusic);
+                    Application.Current.MainWindow = level2;
+
+                    this.Close();
+                    level2.Show();
+                }
+            }
         }
 
         // --============= Exit ==============--
@@ -218,6 +239,30 @@ namespace PracticeAlpha_WPF_Edition
 
             customMusic = " ";
             InfoText.Text = "Music restored to default";
+        }
+
+        private void DownloadFile(string url, string savePath)
+        {
+            using (var client = new WebClient())
+            {
+                try
+                {
+                    client.DownloadFile(url, savePath);
+                    MessageBox.Show($"File successfully downloaded");
+                }
+                catch (WebException ex)
+                {
+                    MessageBox.Show($"Error saving file: {ex.Message}");
+                }
+            }
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            string url = UrlTextBox.Text;
+            string savePath = "C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Resource packs\\";
+
+            DownloadFile(url, savePath);
         }
     }
 }

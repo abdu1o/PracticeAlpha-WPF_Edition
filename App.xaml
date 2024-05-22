@@ -241,6 +241,15 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <Style x:Key="TextBoxSelected" TargetType="TextBox">
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="BorderBrush" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
     </Application.Resources>
     <!--============Button Music Choose============-->
 
