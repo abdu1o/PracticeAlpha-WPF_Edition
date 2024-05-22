@@ -79,7 +79,7 @@ namespace PracticeAlpha_WPF_Edition
             ToolTip = null;
         }
 
-        private async void Hide_Click(object sender, RoutedEventArgs e)
+        private async void HideClick(object sender, MouseButtonEventArgs e)
         {
             if (LoginPopUp.IsOpen == false)
             {
@@ -215,8 +215,14 @@ namespace PracticeAlpha_WPF_Edition
             SolidColorBrush sb = new SolidColorBrush(Colors.White);
             ScoreList.Background = sb;
             ScoreTheme.Background = sb;
+            NameC.Background = sb;
+            PointsC.Background = sb;
+            TimeC.Background = sb;
             sb = new SolidColorBrush(Colors.Black);
             ScoreList.Foreground = sb;
+            NameC.Foreground = sb;
+            PointsC.Foreground = sb;
+            TimeC.Foreground = sb;
         }
 
         private void LightThemeDisable(object sender, RoutedEventArgs e)
@@ -225,8 +231,14 @@ namespace PracticeAlpha_WPF_Edition
             SolidColorBrush sb = new SolidColorBrush(color);
             ScoreList.Background = sb;
             ScoreTheme.Background = sb;
+            NameC.Background = sb;
+            PointsC.Background = sb;
+            TimeC.Background = sb;
             sb = new SolidColorBrush(Colors.DarkRed);
             ScoreList.Foreground = sb;
+            NameC.Foreground = sb;
+            PointsC.Foreground = sb;
+            TimeC.Foreground = sb;
         }
 
         //--=========================Score===========================--
