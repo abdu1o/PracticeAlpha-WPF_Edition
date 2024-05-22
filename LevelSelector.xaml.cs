@@ -215,6 +215,18 @@ namespace PracticeAlpha_WPF_Edition
             Mouse.OverrideCursor = null;
         }
 
+        private void Skin_MouseEnter(object sender, MouseEventArgs e)
+        {
+            SkinButton.Foreground = new SolidColorBrush(Colors.Red);
+            Mouse.OverrideCursor = Cursors.Hand;
+        }
+
+        private void Skin_MouseLeave(object sender, MouseEventArgs e)
+        {
+            SkinButton.Foreground = new SolidColorBrush(Colors.White);
+            Mouse.OverrideCursor = null;
+        }
+
         private void SelectMusic_Click(object sender, RoutedEventArgs e)
         {
             Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
@@ -241,28 +253,24 @@ namespace PracticeAlpha_WPF_Edition
             InfoText.Text = "Music restored to default";
         }
 
-        private void DownloadFile(string url, string savePath)
+        private void Skin_Click(object sender, RoutedEventArgs e)
         {
-            using (var client = new WebClient())
-            {
-                try
-                {
-                    client.DownloadFile(url, savePath);
-                    MessageBox.Show($"File successfully downloaded");
-                }
-                catch (WebException ex)
-                {
-                    MessageBox.Show($"Error saving file: {ex.Message}");
-                }
-            }
+            TextInputPopup.IsOpen = true;
+            ApplyEffect(this);
         }
 
-        private void Save_Click(object sender, RoutedEventArgs e)
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            string url = UrlTextBox.Text;
-            string savePath = "C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Resource packs\\";
+            string enteredText = UrlTextBox.Text;
+            MessageBox.Show($"You entered: {enteredText}");
+            TextInputPopup.IsOpen = false;
+        }
 
-            DownloadFile(url, savePath);
+        private void ApplyEffect(Window win)
+        {
+            System.Windows.Media.Effects.BlurEffect objBlur = new System.Windows.Media.Effects.BlurEffect();
+            objBlur.Radius = 20;
+            win.Effect = objBlur;
         }
     }
 }

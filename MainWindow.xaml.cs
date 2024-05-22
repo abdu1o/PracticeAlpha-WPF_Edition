@@ -144,7 +144,7 @@ namespace PracticeAlpha_WPF_Edition
 
                 Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
-                string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;"; //"Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
+                string connectionString = "Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;"; //"Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
                 List<DBItem> arr = new List<DBItem>();
                 using (var connection = new SQLiteConnection(connectionString))
                 {
@@ -241,7 +241,7 @@ namespace PracticeAlpha_WPF_Edition
                 //string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
 
                 //"Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
-                string connectionString = "Data Source=D:\\TEST\\PA\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
+                string connectionString = "Data Source=C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\DataBase\\Player.db;Version=3;";
                 Sound.Play("C:\\Users\\akapa\\source\\repos\\PracticeAlpha-WPF_Edition\\Resources\\Sounds\\button_click.mp3");
 
                 using (var connection = new SQLiteConnection(connectionString))

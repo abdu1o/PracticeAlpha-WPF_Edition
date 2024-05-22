@@ -25,17 +25,6 @@
             <RowDefinition Height="0.6*"/>
         </Grid.RowDefinitions>
 
-        <TextBox Name="UrlTextBox" Margin="20,40,0,40" MaxLength="20" Background="Transparent"
-                 BorderBrush="Red" BorderThickness="4" FontSize="40" 
-                 FontFamily="{StaticResource Undertale}" Foreground="White"/>
-
-        <Label Content="Save" VerticalAlignment="Center" HorizontalContentAlignment="Center"
-                HorizontalAlignment="Left" MouseLeftButtonDown="Save_Click"
-                Grid.Column="1" Margin="10,0,0,0" x:Name = "MusicButton_Copy"  
-                FontFamily="{StaticResource Undertale}" Padding="10"
-                FontSize="40" Foreground="White" Background="#0f0f0f" 
-                BorderBrush="Red" BorderThickness="4" Width="120" Height="89"/>
-
         <!--============Buttons Select Level============-->
         <Button Name="PreviousButton" Grid.Column="0" Grid.Row="1" Style="{StaticResource SelectLevel}" RenderTransformOrigin="0.5,0.5" Click="PreviousLevel" MouseEnter="Arrow_MouseEnter" MouseLeave="Arrow_MouseLeave">
 
@@ -57,20 +46,30 @@
             <Image Source="Resources/Icons/switch.png" Stretch="Uniform"/>
         </Button>
 
-        <Label Content="Choose Music" VerticalAlignment="Center" HorizontalContentAlignment="Center"
+        <Label Content="Choose Music" HorizontalContentAlignment="Center"
                HorizontalAlignment="Left" MouseLeftButtonDown="SelectMusic_Click"
-               Grid.Column="1" Margin="292,0,0,0" Name = "MusicButton"  
+               Grid.Column="1" Margin="292,65,0,30" Name = "MusicButton"  
                FontFamily="{StaticResource Undertale}" Padding="10"
-               FontSize="40" Foreground="White" Background="#0f0f0f" 
+               FontSize="30
+               " Foreground="White" Background="#0f0f0f" 
                BorderBrush="Black" BorderThickness="10"
                MouseEnter="ButtonMusic_MouseEnter"
                MouseLeave="ButtonMusic_MouseLeave"/>
 
-        <Label Content="Default" VerticalAlignment="Center" HorizontalContentAlignment="Center"
-               HorizontalAlignment="Left" MouseLeftButtonDown="DefaultMusic_Click"
-               Grid.Column="1" Margin="711,0,0,0" Name = "DefaultButton"  
+        <Label Content="Set skin" HorizontalContentAlignment="Center"
+               HorizontalAlignment="Left" MouseLeftButtonDown="Skin_Click"
+               Grid.Column="1" Margin="556,65,0,30" Name = "SkinButton"  
                FontFamily="{StaticResource Undertale}" Padding="10"
-               FontSize="40" Foreground="White" Background="#0f0f0f" 
+               FontSize="30
+               " Foreground="White" Background="#0f0f0f" 
+               BorderBrush="Black" BorderThickness="10"
+               MouseEnter="Skin_MouseEnter"
+               MouseLeave="Skin_MouseLeave"/>
+
+        <Label Content="Default" HorizontalContentAlignment="Center" MouseLeftButtonDown="DefaultMusic_Click"
+               Grid.Column="1" Margin="750,65,292,30" Name = "DefaultButton"  
+               FontFamily="{StaticResource Undertale}" Padding="10"
+               FontSize="30" Foreground="White" Background="#0f0f0f" 
                BorderBrush="Black" BorderThickness="10"
                MouseEnter="DefaultMusic_MouseEnter"
                MouseLeave="DefaultMusic_MouseLeave"/>
@@ -88,6 +87,29 @@
             </Grid>
         </Button>
         <!--================Level Selector===============-->
+
+        <Popup x:Name="TextInputPopup" StaysOpen="true" MinHeight="300" MinWidth="600" Placement="Center" AllowsTransparency="false" Focusable="True" AllowDrop="False">
+            <Grid>
+                <Grid.Background>
+                    <ImageBrush ImageSource="/PracticeAlpha-WPF_Edition;component/Resources/Backgrounds/bgScore.png"/>
+                </Grid.Background>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBox x:Name="UrlTextBox" HorizontalAlignment="Center" VerticalAlignment="Center"  
+                           Grid.Column="0" Grid.Row="1" MinHeight="70" 
+                           MinWidth="450" BorderBrush="Black" BorderThickness="3" 
+                           Background="#181818" Foreground="White"
+                           FontFamily="{StaticResource Undertale}" FontSize="50"/>
+                <Button x:Name="loginOk" Style="{StaticResource MenuBtn}" Content="Save" Grid.Column="0" Grid.Row="4" MinHeight="50" MinWidth="100" BorderBrush="Black" Click="SaveButton_Click"/>
+            </Grid>
+        </Popup>
 
     </Grid>
 </Window>
